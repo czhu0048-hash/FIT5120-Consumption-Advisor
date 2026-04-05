@@ -28,7 +28,7 @@
                    transform: translate(-50%, -50%);
                     z-index: 1;
                     border-color: black;
-                    background-color: black;" @click="toFoodOne">
+                    background-color: black;" @click="toFoodTwo">
                 Explore
             </button>
         </div>
@@ -42,7 +42,11 @@ const router = useRouter();
 
 const toFoodOne = () => {
     router.push("/food1")
-} 
+}
+
+const toFoodTwo = () => {
+    router.push("/food2")
+}
 </script>
 
 <style>

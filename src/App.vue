@@ -19,10 +19,10 @@
           <router-link to="/" class="nav_item_custom text-black d-block p-2">Dashboard</router-link>
         </li>
         <li>
-          <router-link to="/food" class="nav_item_custom text-black d-block p-2">Food Guidance</router-link>
+          <router-link to="/food" class="nav_item_custom d-block p-2">Food Guidance</router-link>
         </li>
         <li>
-          <router-link to="/household" class="nav_item_custom text-black d-block p-2">Household</router-link>
+          <router-link to="/household" class="nav_item_custom d-block p-2">Household</router-link>
         </li>
       </ul>
     </nav>
@@ -36,7 +36,19 @@
 <style scoped>
 .nav_item_custom {
   text-decoration: none;
+  color: black;
+  transition: background-color 0.3s ease-out, color 0.3s ease-out;
 }
+
+.nav_item_custom:hover {
+  background-color: white;
+}
+
+.nav_item_custom.router-link-active {
+  background-color: white;
+  font-weight: bold;
+}
+
 
 ul {
   list-style: none;

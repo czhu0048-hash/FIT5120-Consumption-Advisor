@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
 import FoodMainView from '@/views/FoodMainView.vue'
 import LeftoverRecipeView from '@/views/LeftoverRecipeView.vue'
+import FoodDisposalView from '@/views/FoodDisposalView.vue'
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
         path: '/food1',
         name: 'Leftover Recipe',
         component: LeftoverRecipeView
+    },
+    {
+        path: '/food2',
+        name: 'Leftover Disposal',
+        component: FoodDisposalView
     }
 ]
 
