@@ -16,13 +16,16 @@
       </div>
       <ul class="col-5 d-flex flex-column flex-md-row p-2 m-0">
         <li>
-          <router-link to="/" class="nav_item_custom text-black d-block p-2">Dashboard</router-link>
+          <router-link to="/FIT5120-Consumption-Advisor/"
+            class="nav_item_custom text-black d-block p-2">Dashboard</router-link>
         </li>
         <li>
-          <router-link to="/food" class="nav_item_custom d-block p-2">Food Guidance</router-link>
+          <router-link to="/FIT5120-Consumption-Advisor/food" class="nav_item_custom d-block p-2">Food
+            Guidance</router-link>
         </li>
         <li>
-          <router-link to="/household" class="nav_item_custom d-block p-2">Household</router-link>
+          <router-link to="/FIT5120-Consumption-Advisor/household"
+            class="nav_item_custom d-block p-2">Household</router-link>
         </li>
       </ul>
     </nav>

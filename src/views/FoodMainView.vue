@@ -36,16 +36,17 @@
 </template>
 
 <script setup>
+import { routerPushWithBase } from '@/utils/utils';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 const toFoodOne = () => {
-    router.push("/food1")
+    router.push(routerPushWithBase("/food1"))
 }
 
 const toFoodTwo = () => {
-    router.push("/food2")
+    router.push(routerPushWithBase("/food2"))
 }
 </script>
 

@@ -4,24 +4,26 @@ import FoodMainView from '@/views/FoodMainView.vue'
 import LeftoverRecipeView from '@/views/LeftoverRecipeView.vue'
 import FoodDisposalView from '@/views/FoodDisposalView.vue'
 
+const base = "/FIT5120-Consumption-Advisor";
+
 const routes = [
     {
-        path: '/',
+        path: base + '/',
         name: 'Home',
         component: DashboardView
     },
     {
-        path: '/food',
+        path: base + '/food',
         name: 'Food',
         component: FoodMainView
     },
     {
-        path: '/food1',
+        path: base + '/food1',
         name: 'Leftover Recipe',
         component: LeftoverRecipeView
     },
     {
-        path: '/food2',
+        path: base + '/food2',
         name: 'Leftover Disposal',
         component: FoodDisposalView
     }
