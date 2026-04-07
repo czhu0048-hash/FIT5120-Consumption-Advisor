@@ -43,7 +43,18 @@ const currentRecipe = ref({
     difficulty: "",
     steps: []
 });
-const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+
+let ai = null;
+const getAI = () => {
+    if (!ai) {
+        const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+        if (!apiKey) {
+            throw new Error("Gemini API key is not configured.");
+        }
+        ai = new GoogleGenAI({ apiKey });
+    }
+    return ai;
+};
 
 // Template for the AI response structure
 const templateJson = {
@@ -104,36 +115,40 @@ const generateRecipe = async () => {
         return;
     }
     generating.value = true
-    let ingrediants = leftoverList.value.toString()
-    console.log("Ingrediants: " + leftoverList.value.toString())
+    try {
+        let ingrediants = leftoverList.value.toString()
+        console.log("Ingrediants: " + leftoverList.value.toString())
 
-    // Call gemini 2.5 API
-    const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: `Your job is to create a recipe based on a list of leftover ingredients.
-        Respond ONLY with a JSON object wrapped in <Json></Json> tags, matching this template exactly:
-        ${JSON.stringify(templateJson, null, 2)}
-        Where:
-        - title: name of the recipe (string)
-        - time: estimated cooking time e.g. "30 minutes" (string)
-        - difficulty: one of "Easy", "Medium", or "Hard" (string)
-        - steps: ordered list of cooking instructions, including time (array of strings)
-          Return "Invalid Input" for every field if you encounter any empty or invalid words;
-        Return "Improper ingrediant" for every field if you encounter ingrediant that cannot be used for cooking;
-        Ingredients list: ${ingrediants}.`,
-    });
+        // Call gemini 2.5 API
+        const response = await getAI().models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: `Your job is to create a recipe based on a list of leftover ingredients.
+            Respond ONLY with a JSON object wrapped in <Json></Json> tags, matching this template exactly:
+            ${JSON.stringify(templateJson, null, 2)}
+            Where:
+            - title: name of the recipe (string)
+            - time: estimated cooking time e.g. "30 minutes" (string)
+            - difficulty: one of "Easy", "Medium", or "Hard" (string)
+            - steps: ordered list of cooking instructions, including time (array of strings)
+              Return "Invalid Input" for every field if you encounter any empty or invalid words;
+            Return "Improper ingrediant" for every field if you encounter ingrediant that cannot be used for cooking;
+            Ingredients list: ${ingrediants}.`,
+        });
 
-    // Extract JSON from between <Json></Json> tags
-    const raw = response.text;
-    const match = raw.match(/<Json>([\s\S]*?)<\/Json>/i);
-    if (match) {
-        // Strip markdown code fences if present
-        const cleaned = match[1].trim().replace(/^```[\w]*\n?/, "").replace(/```$/, "").trim();
-        const recipe = JSON.parse(cleaned);
-        currentRecipe.value = recipe;
-        console.log("Recipe JSON:", recipe);
-    } else {
-        console.warn("No <Json> block found in response:", raw);
+        // Extract JSON from between <Json></Json> tags
+        const raw = response.text;
+        const match = raw.match(/<Json>([\s\S]*?)<\/Json>/i);
+        if (match) {
+            // Strip markdown code fences if present
+            const cleaned = match[1].trim().replace(/^```[\w]*\n?/, "").replace(/```$/, "").trim();
+            const recipe = JSON.parse(cleaned);
+            currentRecipe.value = recipe;
+            console.log("Recipe JSON:", recipe);
+        } else {
+            console.warn("No <Json> block found in response:", raw);
+        }
+    } catch (e) {
+        errormsg.value = e.message || "Failed to generate recipe.";
     }
     generating.value = false
 }
