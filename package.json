@@ -15,6 +15,7 @@
   "dependencies": {
     "@google/genai": "^1.48.0",
     "bootstrap": "^5.3.8",
+    "papaparse": "^5.5.3",
     "primeicons": "^7.0.0",
     "router": "^2.2.0",
     "vue": "^3.5.30",

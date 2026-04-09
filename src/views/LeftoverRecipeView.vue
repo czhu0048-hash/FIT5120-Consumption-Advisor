@@ -31,7 +31,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { GoogleGenAI } from "@google/genai";
-import RecipeCard from '@/components/RecipeCard.vue';
+// import RecipeCard from '@/components/RecipeCard.vue';
 
 
 const leftoverList = ref([]);
