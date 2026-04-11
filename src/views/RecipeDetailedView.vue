@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="basic">
         <RecipeCardDetailed :recipe-json="selectedRecipe"></RecipeCardDetailed>
     </div>
 </template>

@@ -10,25 +10,25 @@
 
 <template>
   <div class="app-wrapper d-flex flex-row flex-md-column min-vh-100">
-    <nav class="nav-sidebar flex-shrink-0" style="background-color:darkgrey;">
+    <nav class="nav-sidebar flex-shrink-0 bg_main">
       <div class="row align-items-center justify-content-center">
-        <label style="font-size: 150%; text-align: center;">Consumption Advisor</label>
+        <label class="font_main" style="font-size: 150%; text-align: center;">Consumption Advisor</label>
       </div>
       <ul class="col-5 d-flex flex-column flex-md-row p-2 m-0">
-        <li>
-          <router-link to="/" class="nav_item_custom text-black d-block p-2">Dashboard</router-link>
+        <li class="m-2">
+          <router-link to="/" class="nav_item_custom text-black d-block p-2 button_sub">Dashboard</router-link>
         </li>
-        <li>
-          <router-link to="/food" class="nav_item_custom d-block p-2">Food
+        <li class="m-2">
+          <router-link to="/food" class="nav_item_custom d-block p-2 button_sub">Food
             Guidance</router-link>
         </li>
-        <li>
-          <router-link to="/household" class="nav_item_custom d-block p-2">Household</router-link>
+        <li class="m-2">
+          <router-link to="/household" class="nav_item_custom d-block p-2 button_sub">Household</router-link>
         </li>
       </ul>
     </nav>
 
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 basic">
       <router-view></router-view>
     </main>
   </div>
