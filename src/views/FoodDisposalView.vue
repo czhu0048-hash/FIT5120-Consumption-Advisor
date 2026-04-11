@@ -1,10 +1,10 @@
 <template>
-    <div style="font-size: 150%; text-align: center; justify-content: center; margin-bottom: 5%;">
+    <div class="font_sub" style="font-size: 150%; text-align: center; justify-content: center; margin-bottom: 5%;">
         <label>What type of food
             waste do you want to
             dispose of?</label>
     </div>
-    <div class="container col-12 col-md-6 offset-md-3">
+    <div class="container col-12 col-md-6 offset-md-3 basic">
         <select class="form-select" id="wastetype">
             <option value="dry">Dry</option>
             <option value="wet">Wet</option>

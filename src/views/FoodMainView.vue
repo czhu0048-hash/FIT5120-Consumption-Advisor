@@ -2,10 +2,10 @@
 
     <!-- Recipe portal -->
     <div class="col-6 offset-3 mb-5" style="text-align: center;">
-        <label class="col-12" style="font-size: 150%;">Leftover Recipes</label>
+        <label class="col-12 font_sub" style="font-size: 150%;">Leftover Recipes</label>
         <div style="position: relative; display: inline-block;">
             <img src="../assets/FoodMainOne.png" alt="image" class="img-fluid food_main_bg" style="display: block;">
-            <button class="btn btn-primary" style="position: absolute;
+            <button class="btn btn-primary button_main" style="position: absolute;
                  top: 50%;
                   left: 50%;
                    transform: translate(-50%, -50%);
@@ -19,10 +19,10 @@
 
     <!-- Disposal portal -->
     <div class="col-6 offset-3" style="text-align: center;">
-        <label class="col-12" style="font-size: 150%;">Food Disposal</label>
+        <label class="col-12 font_sub" style="font-size: 150%;">Food Disposal</label>
         <div style="position: relative; display: inline-block;">
             <img src="../assets/FoodMainTwo.png" alt="image" class="img-fluid food_main_bg" style="display: block;">
-            <button class="btn btn-primary" style="position: absolute;
+            <button class="btn btn-primary button_main" style="position: absolute;
                  top: 50%;
                   left: 50%;
                    transform: translate(-50%, -50%);
@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { routerPushWithBase } from '@/utils/utils';
+import { routerPushWithBase } from '@/utils/routerManipulation';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();

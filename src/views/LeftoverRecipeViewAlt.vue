@@ -44,7 +44,7 @@
 import { onMounted, ref } from 'vue';
 import Papa from 'papaparse';
 import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
-import { routerPushWithBase } from '@/utils/utils';
+import { routerPushWithBase } from '@/utils/routerManipulation';
 import { useRouter } from 'vue-router';
 import { selectedRecipe } from '@/utils/recipeSelector';
 
