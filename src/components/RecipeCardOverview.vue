@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex flex-wrap justify-content-center">
-        <div class="card m-2" style="width: 10rem;">
+        <div class="card m-2" style="width: 20rem;">
             <img v-if="recipeJson.img_src" :src="recipeJson.img_src" class="card-img-top"
                 :alt="recipeJson.recipe_name" />
             <div class="card-header">
@@ -30,12 +30,14 @@ defineProps({
 .card {
     border: 1px solid #ccc;
     border-radius: 10px;
-    height: auto;
+    width: 8rem;
+    height: 20rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-img-top {
-    max-height: 300px;
+    min-height: 200px;
+    max-height: 200px;
     object-fit: cover;
 }
 

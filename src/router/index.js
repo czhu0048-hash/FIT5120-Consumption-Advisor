@@ -6,6 +6,8 @@ import FoodDisposalView from '@/views/FoodDisposalView.vue'
 import LeftoverRecipeViewAlt from '@/views/LeftoverRecipeViewAlt.vue'
 import RecipeDetailedView from '@/views/RecipeDetailedView.vue'
 import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
+import TestDetailedRecipeCardView from '@/views/TestDetailedRecipeCardView.vue'
+import TestOverviewRecipeCardView from '@/views/TestOverviewRecipeCardView.vue'
 
 const routes = [
     {

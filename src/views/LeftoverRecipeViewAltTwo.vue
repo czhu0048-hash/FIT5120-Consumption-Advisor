@@ -6,25 +6,17 @@
                     <i class="pi pi-filter me-1"></i>Filters
                     <span v-if="activeFilterCount > 0" class="badge bg-primary ms-1">{{ activeFilterCount }}</span>
                 </button>
-                <button class="btn btn-primary flex-fill button_main" @click="applyFilters"
-                    :disabled="searching">Search</button>
+                <button class="btn btn-primary flex-fill button_main" @click="applyFilters" :disabled="searching">Apply
+                    Filters</button>
             </div>
         </div>
+
+        <input class="col-12" type="text" placeholder="Enter ingrediants, seperate with comma"
+            v-model="ingrediantInputString" @input="onInputStringChanged">
 
         <!-- Filter Panel -->
         <div v-if="showFilters" class="row mb-4">
             <div class="col-12 col-md-10 offset-md-1 border rounded p-3 bg-light">
-                <div class="mb-3">
-                    <h6 class="fw-bold mb-2">Ingredients</h6>
-                    <div class="d-flex flex-wrap gap-2">
-                        <span v-for="item in ingredientFilters" :key="item.value" class="badge rounded-pill px-3 py-2"
-                            :class="selectedIngredients.includes(item.value) ? 'bg-primary' : 'bg-secondary'"
-                            style="cursor: pointer; user-select: none; font-size: 0.85rem;"
-                            @click="toggleIngredient(item.value)">
-                            {{ item.label }}
-                        </span>
-                    </div>
-                </div>
                 <div>
                     <h6 class="fw-bold mb-2">Category</h6>
                     <div class="d-flex flex-wrap gap-2">
@@ -48,10 +40,24 @@
         <div style="text-align: center; justify-content: center;">
             <label v-if="errormsg" style="color: crimson;">{{ errormsg }}</label>
         </div>
+
+        <Teleport to="body">
+            <div v-if="modalRecipe" class="recipe-modal-backdrop" @click.self="modalRecipe = null">
+                <div class="recipe-modal-dialog">
+                    <button class="recipe-modal-close btn btn-sm btn-light" @click="modalRecipe = null">
+                        <i class="pi pi-times"></i>
+                    </button>
+                    <div class="recipe-modal-body">
+                        <RecipeCardDetailed :recipe-json="modalRecipe" />
+                    </div>
+                </div>
+            </div>
+        </Teleport>
+
         <div>
             <div v-if="recipeSearchResults.length > 0" class="row">
                 <div v-for="(result, index) in paginatedResults" :key="index" class="col-12 col-md-3"
-                    @click="toRecipeDetailed(result)">
+                    @click="openModal(result)" style="cursor: pointer;">
                     <RecipeCardOverview :recipe-json="result"></RecipeCardOverview>
                 </div>
             </div>
@@ -82,10 +88,8 @@
 import { onMounted, ref, computed } from 'vue';
 import Papa from 'papaparse';
 import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
-import { routerPushWithBase } from '@/utils/routerManipulation';
-import { useRouter } from 'vue-router';
-import { selectedRecipe } from '@/utils/recipeSelector';
-import { ingredientFilter as ingredientFilters, dietaryFilter as categoryFilters } from '@/utils/recipeFilters';
+import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
+import { dietaryFilter as categoryFilters } from '@/utils/recipeFilters';
 
 const errormsg = ref("");
 const searching = ref(false);
@@ -96,6 +100,8 @@ const selectedIngredients = ref([]);
 const selectedCategories = ref([]);
 const currentPage = ref(1);
 const pageSize = 20;
+const modalRecipe = ref(null);
+const ingrediantInputString = ref("");
 
 const activeFilterCount = computed(() => selectedIngredients.value.length + selectedCategories.value.length);
 
@@ -122,15 +128,33 @@ const pageRange = computed(() => {
     return pages;
 });
 
+const onInputStringChanged = () => {
+    const raw = ingrediantInputString.value.trim();
+    if (!raw) {
+        errormsg.value = "";
+        selectedIngredients.value = [];
+        return;
+    }
+
+    // Input validation
+    if (!raw.includes(',') && raw.includes(' ')) {
+        errormsg.value = "Please separate ingredients with a comma";
+        return;
+    }
+
+    // Pass input to ingredients
+    errormsg.value = "";
+    selectedIngredients.value = raw
+        .split(',')
+        .map(s => s.trim().toLowerCase())
+        .filter(s => s.length > 0);
+
+    applyFilters();
+}
+
 const goToPage = (page) => {
     currentPage.value = page;
     window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-const toggleIngredient = (value) => {
-    const idx = selectedIngredients.value.indexOf(value);
-    if (idx === -1) selectedIngredients.value.push(value);
-    else selectedIngredients.value.splice(idx, 1);
 };
 
 const toggleCategory = (value) => {
@@ -159,11 +183,8 @@ onMounted(async () => {
     }
 });
 
-const router = useRouter();
-
-const toRecipeDetailed = (recipeObject) => {
-    router.push(routerPushWithBase("/recipeDetailed"));
-    selectedRecipe.value = recipeObject;
+const openModal = (recipeObject) => {
+    modalRecipe.value = recipeObject;
 };
 
 function applyFilters() {
@@ -210,3 +231,39 @@ function applyFilters() {
     }
 }
 </script>
+
+<style scoped>
+.recipe-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+    padding: 1rem;
+}
+
+.recipe-modal-dialog {
+    position: relative;
+    max-width: 56rem;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+.recipe-modal-close {
+    position: sticky;
+    top: 0.5rem;
+    float: right;
+    margin: 0.5rem 0.5rem 0 0;
+    z-index: 10;
+}
+
+.recipe-modal-body {
+    padding: 0.5rem 0 1rem;
+}
+</style>

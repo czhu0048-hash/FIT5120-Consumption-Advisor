@@ -1,52 +1,7 @@
-// Each entry: { label: string, value: string }
-// `value` is the substring matched against the recipe's `ingredients` field
+/**
+ * Hardcoded recipe filters, might be added to backend later
+ */
 
-export const ingredientFilter = [
-    // Produce & Fruit
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-    { label: "Strawberry", value: "strawberr" },
-    { label: "Cranberry", value: "cranberr" },
-    { label: "Cherry", value: "cherr" },
-    { label: "Watermelon", value: "watermelon" },
-    { label: "Coconut", value: "coconut" },
-    { label: "Lemon", value: "lemon" },
-    { label: "Onion", value: "onion" },
-    { label: "Garlic", value: "garlic" },
-    // Dairy & Eggs
-    { label: "Butter", value: "butter" },
-    { label: "Milk", value: "milk" },
-    { label: "Cream", value: "cream" },
-    { label: "Cheese", value: "cheese" },
-    { label: "Egg", value: "egg" },
-    // Pantry
-    { label: "Sugar", value: "sugar" },
-    { label: "Flour", value: "flour" },
-    { label: "Salt", value: "salt" },
-    { label: "Cinnamon", value: "cinnamon" },
-    { label: "Nutmeg", value: "nutmeg" },
-    { label: "Ginger", value: "ginger" },
-    { label: "Honey", value: "honey" },
-    { label: "Oats", value: "oats" },
-    { label: "Olive Oil", value: "olive oil" },
-    { label: "Vinegar", value: "vinegar" },
-    { label: "Cornstarch", value: "cornstarch" },
-    // Nuts & Dried Fruit
-    { label: "Walnuts", value: "walnut" },
-    { label: "Almonds", value: "almond" },
-    { label: "Pecans", value: "pecan" },
-    { label: "Raisins", value: "raisin" },
-    // Proteins
-    { label: "Chicken", value: "chicken" },
-    { label: "Beef", value: "beef" },
-    { label: "Pork", value: "pork" },
-    { label: "Salmon", value: "salmon" },
-    { label: "Shrimp", value: "shrimp" },
-    { label: "Tofu", value: "tofu" },
-]
-
-// Each entry: { label: string, value: string }
-// `value` is the substring matched against the recipe's `cuisine_path` field
 
 export const dietaryFilter = [
     { label: "Appetizers & Snacks", value: "Appetizers and Snacks" },
