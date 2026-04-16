@@ -17,7 +17,7 @@ export const resetFilters = () => {
 export const passesFilters = (recipe) => {
     const { minTime, maxTime, difficulty } = recipeFilters.value
     if (minTime != null && recipe.total_time_mins != null && recipe.total_time_mins < minTime) return false
-    if (maxTime != null && recipe.total_time_mins != null && recipe.total_time_mins > maxTime) return false
+    if (maxTime != null && maxTime != 0 && recipe.total_time_mins != null && recipe.total_time_mins > maxTime) return false
     if (difficulty && recipe.difficulty && recipe.difficulty !== difficulty) return false
     return true
 }

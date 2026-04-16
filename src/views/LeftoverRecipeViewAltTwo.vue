@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
 import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
 import RecipeFilterSidebar from '@/components/RecipeFilterSidebar.vue';
@@ -93,6 +93,14 @@ const ingrediantInputStringExclusive = ref("");
 const totalPages = computed(() => Math.ceil(filteredResults.value.length / pageSize));
 
 const filteredResults = computed(() => recipeSearchResults.value.filter(passesFilters))
+
+watch(filteredResults, (filtered) => {
+    if (recipeSearchResults.value.length > 0 && filtered.length === 0) {
+        errormsg.value = "No recipes found for the given ingredients and filters."
+    } else if (filtered.length > 0) {
+        errormsg.value = ""
+    }
+})
 
 const normalizedResults = computed(() => {
     const start = (currentPage.value - 1) * pageSize;
@@ -169,8 +177,8 @@ async function applyFilters() {
     recipeSearchResults.value = results;
     currentPage.value = 1;
     searching.value = false;
-    if (results.length === 0) {
-        errormsg.value = "No recipes found for the given ingredients.";
+    if (results.length <= 0) {
+        errormsg.value = "No recipes found for the given ingredients and filters.";
     }
 }
 </script>
