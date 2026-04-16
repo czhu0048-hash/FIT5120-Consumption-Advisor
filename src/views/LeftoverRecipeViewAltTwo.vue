@@ -1,5 +1,5 @@
 <template>
-    <FilterSidebar />
+    <RecipeFilterSidebar />
     <div class="d-flex" style="min-height: 100vh;">
         <div class="flex-grow-1 container" style="justify-content: center; align-items: center;">
             <div class="row mt-5">
@@ -78,7 +78,7 @@
 import { ref, computed } from 'vue';
 import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
 import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
-import FilterSidebar from '@/components/FilterSidebar.vue';
+import RecipeFilterSidebar from '@/components/RecipeFilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
 import { passesFilters } from '@/utils/recipeFilterInstance';
 
