@@ -1,14 +1,14 @@
 <template>
-    <RecipeFilterSidebar />
     <div class="d-flex" style="min-height: 100vh;">
-        <div class="flex-grow-1 container" style="justify-content: center; align-items: center;">
-            <div class="row mt-5">
+        <div class="flex-grow-1 container mt-5" style="justify-content: center; align-items: center;">
+            <div class="row">
                 <div class="col-8 offset-2 col-md-4 offset-md-4 d-flex gap-2 mb-3">
                     <button class="btn btn-primary flex-fill button_main" style="background-color: darkgreen;"
                         @click="applyFilters" :disabled="searching">
                         Search Recipes</button>
                 </div>
             </div>
+            <RecipeFilterSidebar />
 
             <div class="row g-3 justify-content-center">
                 <div class="col-12 col-md-5">

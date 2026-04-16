@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!show" class="d-flex justify-content-center mt-5">
+    <div v-if="!show" class="d-flex justify-content-center mt-2">
         <button class="btn btn-link" style="color: black;
         border-radius: 5%;
         border-width: 0;

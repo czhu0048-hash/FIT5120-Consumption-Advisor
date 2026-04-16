@@ -1,9 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardView from '@/views/DashboardView.vue'
 import FoodMainView from '@/views/FoodMainView.vue'
-import LeftoverRecipeView from '@/views/LeftoverRecipeView.vue'
 import FoodDisposalView from '@/views/FoodDisposalView.vue'
-import LeftoverRecipeViewAlt from '@/views/LeftoverRecipeViewAlt.vue'
 import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 
