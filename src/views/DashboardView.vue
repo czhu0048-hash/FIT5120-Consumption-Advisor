@@ -1,3 +1,30 @@
+<script setup>
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const toFoodDashboard = () => {
+    router.push("/food")
+}
+
+const BASE_URL = import.meta.env.DEV
+    ? ''
+    : 'https://reduse-api-ddfkdgengccka5fz.australiaeast-01.azurewebsites.net'
+
+async function testFoodDisposalApi() {
+    try {
+        const res = await fetch(`${BASE_URL}/api/food-disposal/`)
+        const data = await res.json()
+        console.log('[API Test] GET /api/food-disposal/', data)
+    } catch (e) {
+        console.error('[API Test] food-disposal error:', e)
+    }
+}
+
+onMounted(testFoodDisposalApi)
+</script>
+
 <template>
     <div class="basic" style="text-align: center;">
         <h1>Manage your everyday consumption: Why It Matters</h1>
@@ -38,11 +65,10 @@
                 </div>
             </div>
 
-            <!-- A gap used to separate the cards from the main buttons -->
             <div class="mt-5"></div>
             <label style="font-size: 150%;">Get Your Consumption Advices For</label>
             <div class="flex-row justify-content-center">
-                <button class="button_main">Food -></button>
+                <button class="button_main" @click="toFoodDashboard">Food -></button>
                 <button class="button_main">Household -></button>
             </div>
         </div>

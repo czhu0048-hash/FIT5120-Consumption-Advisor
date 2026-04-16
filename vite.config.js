@@ -16,4 +16,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://reduse-api-ddfkdgengccka5fz.australiaeast-01.azurewebsites.net',
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
 })
