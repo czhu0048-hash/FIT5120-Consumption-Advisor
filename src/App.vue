@@ -10,7 +10,7 @@
       </div>
       <ul class="col-5 d-flex flex-column flex-md-row p-2 m-0">
         <li class="m-2">
-          <router-link to="/" class="nav_item_custom text-black d-block p-2 button_sub">Dashboard</router-link>
+          <router-link to="/" class="nav_item_custom text-black d-block p-2 button_sub">Awareness</router-link>
         </li>
         <li class="m-2">
           <router-link to="/food" class="nav_item_custom d-block p-2 button_sub">Food
@@ -21,17 +21,25 @@
     </nav>
 
     <main class="flex-grow-1 basic main-content">
-      <router-view></router-view>
+      <div class="content-layer">
+        <router-view></router-view>
+      </div>
     </main>
   </div>
 </template>
 
 <style scoped>
 .main-content {
-  background-image: url('./assets/Background.png');
+  position: relative;
+  background-image: url('./assets/BackgroundBlurred.png');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 1;
 }
 
 .nav_item_custom {
