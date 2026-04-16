@@ -56,10 +56,8 @@
                         @click="goToPage(currentPage - 1)">&laquo; Prev</button>
                     <template v-for="page in pageRange" :key="page">
                         <span v-if="page === '...'" class="px-2">…</span>
-                        <button v-else class="btn btn-sm button_main"
-                            :class="page === currentPage ? 'btn-primary' : 'btn-outline-primary'"
-                            @click="goToPage(page)">{{
-                                page }}</button>
+                        <button v-else class="btn btn-sm" @click="goToPage(page)">{{
+                            page }}</button>
                     </template>
                     <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === totalPages"
                         @click="goToPage(currentPage + 1)">Next &raquo;</button>
