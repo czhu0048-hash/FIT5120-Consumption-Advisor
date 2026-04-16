@@ -5,13 +5,14 @@ import LeftoverRecipeView from '@/views/LeftoverRecipeView.vue'
 import FoodDisposalView from '@/views/FoodDisposalView.vue'
 import LeftoverRecipeViewAlt from '@/views/LeftoverRecipeViewAlt.vue'
 import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
+import WelcomeView from '@/views/WelcomeView.vue'
 
 
 const routes = [
     {
         path: '/',
         name: 'Home',
-        component: DashboardView
+        component: WelcomeView
     },
     {
         path: '/food',
