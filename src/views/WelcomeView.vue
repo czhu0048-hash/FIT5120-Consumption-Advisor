@@ -9,7 +9,7 @@
 								<img :class="$style.divIcon" src="@/assets/Wel_hand.jpg" alt="Hand holding plant" />
 							</div>
 							<div :class="$style.div4">
-								<div :class="$style.divwNode4810adefDd5f5229">
+								<div :class="$style.divNode00">
 									<div :class="$style.heroTitle">
 										<span :class="$style.heroTitleTxtContainer">
 											<b>Buy </b>
@@ -46,24 +46,24 @@
 								</div>
 							</div>
 							<div :class="$style.div10">
-								<div :class="$style.divwNode4810adefDd5f52292">
-									<img :class="$style.kitchen60dp000000Fill0WghtIcon" src="@/assets/Wel_fridge.png" alt="Fridge Icon" />
+								<div :class="$style.divNode002">
+									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_fridge.png" alt="Fridge Icon" />
 									<div :class="$style.div11">
 										<b :class="$style.sectionTitle">Food Wisdom</b>
 										<div :class="$style.sectionDescription">Explore recipes, professional storage
 											and disposal tips for common food categories.</div>
 									</div>
 								</div>
-								<div :class="$style.divwNode4810adefDd5f52293">
-									<img :class="$style.kitchen60dp000000Fill0WghtIcon" src="@/assets/Wel_closet.png" alt="Closet Icon" />
+								<div :class="$style.divNode003">
+									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_closet.png" alt="Closet Icon" />
 									<div :class="$style.div12">
 										<b :class="$style.sectionTitle2">Conscious Clothing</b>
 										<div :class="$style.sectionDescription2">Find ethical donation points or second
 											hands shops, learn how to repair it and browse sustainable washing guides.</div>
 									</div>
 								</div>
-								<div :class="$style.divwNode4810adefDd5f52294">
-									<img :class="$style.devicesOther60dp000000FillIcon" src="@/assets/Wel_device.png" alt="Devices Icon" />
+								<div :class="$style.divNode004">
+									<img :class="$style.WelHouseholdIcon" src="@/assets/Wel_device.png" alt="Devices Icon" />
 									<div :class="$style.div13">
 										<b :class="$style.sectionTitle3">Smart Households</b>
 										<div :class="$style.sectionDescription3">Locate E-waste recycling bins, battery
@@ -81,21 +81,21 @@
 								<span :class="$style.works">Works</span>
 							</div>
 							<div :class="$style.div15">
-								<div :class="$style.divwNode70aa64328fd81a66">
+								<div :class="$style.divNode011">
 									<div :class="$style.stepNumber">01</div>
 									<div :class="$style.div21">
 										<b :class="$style.stepTitle">Explore</b>
 										<div :class="$style.stepDescription">Surf in this All-In-One Info Hubs for Food, Textiles and Household goods.</div>
 									</div>
 								</div>
-								<div :class="$style.divwNode70aa64328fd81a662">
+								<div :class="$style.divNode012">
 									<div :class="$style.stepNumber">02</div>
 									<div :class="$style.div21">
 										<b :class="$style.stepTitle">Learn & Act</b>
 										<div :class="$style.stepDescription">Follow step-by-step guides on daily life hacks, storage repair and ethical disposal</div>
 									</div>
 								</div>
-								<div :class="$style.divwNode70aa64328fd81a663">
+								<div :class="$style.divNode013">
 									<div :class="$style.stepNumber">03</div>
 									<div :class="$style.div33">
 										<b :class="$style.stepTitle">Connect & Share</b>
@@ -120,21 +120,44 @@
 							</div> 
 						</div>
 
-						<div :class="$style.div37">
-							<div :class="$style.divwNode4810adefDd5f52295">
-								<b :class="$style.statNumber">7.6 M tonnes</b>
-								<b :class="$style.statTitle">Annual Food Waste</b>
-								<div :class="$style.sourceDcceewNational">Source: DCCEEW National Waste Strategy</div>
-							</div>
-							<div :class="$style.divwNode4810adefDd5f52296">
-								<b :class="$style.statNumber">&gt; 200, 000 tonnes</b>
-								<b :class="$style.statTitle">Clothing to Landfill</b>
-								<div :class="$style.sourceDcceewNational">Source: Australian Fashion Council</div>
-							</div>
-							<div :class="$style.divwNode4810adefDd5f52297">
-								<b :class="$style.statNumber">~ 540, 000 tonnes</b>
-								<b :class="$style.statTitle">E-Waste Produced</b>
-								<div :class="$style.sourceDcceewNational">Source: National Waste Report 2022</div>
+                            <div :class="$style.div37">
+                            <div :class="$style.divNode005">
+                                <b :class="$style.statNumber">7.6 M tonnes</b>
+                                <b :class="$style.statTitle">Annual Food Waste</b>
+                                <a 
+                                href="https://www.dcceew.gov.au/environment/protection/waste/national-waste-reports" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                :class="$style.sourceExt"
+                                >
+                                Source: DCCEEW National Waste Strategy
+                                </a>
+                            </div>
+
+                            <div :class="$style.divNode006">
+                                <b :class="$style.statNumber">&gt; 200, 000 tonnes</b>
+                                <b :class="$style.statTitle">Clothing to Landfill</b>
+                                <a 
+                                href="https://ausfashioncouncil.com/program/seamless/" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                :class="$style.sourceExt"
+                                >
+                                Source: Australian Fashion Council
+                                </a>
+                            </div>
+
+                            <div :class="$style.divNode007">
+                                <b :class="$style.statNumber">~ 540, 000 tonnes</b>
+                                <b :class="$style.statTitle">E-Waste Produced</b>
+                                <a 
+                                href="https://www.dcceew.gov.au/environment/protection/waste/publications/national-waste-resource-recovery-reporting" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                :class="$style.sourceExt"
+                                >
+                                Source: National waste and resource recovery report 2024
+                                </a>
 							</div>
 						</div>
 					</div>
@@ -250,7 +273,7 @@
 	align-items: center;
 }
 
-/* Grids */
+/* grids */
 .div10, .div15, .div37 {
 	display: flex;
 	flex-wrap: wrap;
@@ -260,7 +283,7 @@
 	margin-top: 40px;
 }
 
-/* Typography Scaling */
+/* scaling */
 .sectionHeader, .slogan, .sectionTitle4 {
 	font-size: clamp(32px, 4vw, 64px);
 	margin-bottom: 10px;
@@ -274,8 +297,8 @@
 }
 
 /* what cards */
-.divwNode4810adefDd5f52292, .divwNode4810adefDd5f52293, .divwNode4810adefDd5f52294,
-.divwNode4810adefDd5f52295, .divwNode4810adefDd5f52296, .divwNode4810adefDd5f52297 {
+.divNode002, .divNode003, .divNode004,
+.divNode005, .divNode006, .divNode007 {
 	flex: 1 1 320px;
 	max-width: 410px;
 	padding: 40px 25px;
@@ -287,9 +310,9 @@
 }
 
 /* what cards bkgd */
-.divwNode4810adefDd5f52292, .divwNode4810adefDd5f52295 { background-color: #fdf3ea; }
-.divwNode4810adefDd5f52293, .divwNode4810adefDd5f52296 { background-color: #e0f8f2; }
-.divwNode4810adefDd5f52294, .divwNode4810adefDd5f52297 { background-color: #eeecff; }
+.divNode002, .divNode005 { background-color: #fdf3ea; }
+.divNode003, .divNode006 { background-color: #e0f8f2; }
+.divNode004, .divNode007 { background-color: #eeecff; }
 
 /* what cards bkgd styling */
 .sectionTitle, .sectionTitle2, .sectionTitle3, .statTitle {
@@ -313,7 +336,7 @@
 	flex-grow: 1;
 }
 
-.kitchen60dp000000Fill0WghtIcon, .devicesOther60dp000000FillIcon {
+.WelFridgeIcon, .WelHouseholdIcon {
 	width: 60px;
 	height: auto;
 }
@@ -332,7 +355,7 @@
 }
 
 /* steps - how */
-.divwNode70aa64328fd81a66, .divwNode70aa64328fd81a662, .divwNode70aa64328fd81a663 {
+.divNode011, .divNode012, .divNode013 {
 	flex: 1 1 300px;
 	display: flex;
 	gap: 20px;
