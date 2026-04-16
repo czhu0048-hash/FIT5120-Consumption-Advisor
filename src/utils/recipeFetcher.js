@@ -25,9 +25,11 @@ const normalizeDetailed = (item) => ({
 })
 
 // Raw Overview data
-export const fetchRecipeOverview = async (userInput) => {
+export const fetchRecipeOverview = async (userInput, userExcludeInput) => {
     try {
-        const listRes = await fetch(`${BASE_URL}/api/recipes/?q=${userInput}`)
+        const params = new URLSearchParams({ q: userInput })
+        if (userExcludeInput) params.set('exclude', userExcludeInput)
+        const listRes = await fetch(`${BASE_URL}/api/recipes/?${params}`)
         const listData = await listRes.json()
         return listData.map(normalizeOverview)
     } catch (e) {

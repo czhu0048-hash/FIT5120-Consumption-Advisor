@@ -20,13 +20,20 @@
       </ul>
     </nav>
 
-    <main class="flex-grow-1 basic">
+    <main class="flex-grow-1 basic main-content">
       <router-view></router-view>
     </main>
   </div>
 </template>
 
 <style scoped>
+.main-content {
+  background-image: url('./assets/Background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .nav_item_custom {
   text-decoration: none;
   color: black;

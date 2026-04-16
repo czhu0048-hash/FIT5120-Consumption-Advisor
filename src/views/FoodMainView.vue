@@ -3,12 +3,11 @@
         <div class="row g-4 justify-content-center">
 
             <!-- Recipe portal -->
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-6 col-lg-5">
                 <div class="card border-0 shadow-sm overflow-hidden h-100">
                     <div class="position-relative">
                         <img src="../assets/FoodMainOne.png" alt="Leftover Recipes"
                             class="card-img-top object-fit-cover" style="height: 260px;">
-                        <div class="position-absolute top-0 start-0 w-100 h-100"></div>
                     </div>
                     <div class="card-body d-flex flex-column gap-2">
                         <h5 class="card-title fw-bold font_sub mb-0">Leftover Recipes</h5>
@@ -23,12 +22,11 @@
             </div>
 
             <!-- Disposal portal -->
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-md-6 col-lg-5">
                 <div class="card border-0 shadow-sm overflow-hidden h-100">
                     <div class="position-relative">
                         <img src="../assets/FoodMainTwo.png" alt="Food Disposal" class="card-img-top object-fit-cover"
                             style="height: 260px;">
-                        <div class="position-absolute top-0 start-0 w-100 h-100"></div>
                     </div>
                     <div class="card-body d-flex flex-column gap-2">
                         <h5 class="card-title fw-bold font_sub mb-0">Food Disposal</h5>
