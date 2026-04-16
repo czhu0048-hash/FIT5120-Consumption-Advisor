@@ -1,18 +1,12 @@
 <script setup>
-// import { useRouter } from 'vue-router';
 
-// const router = useRouter();
-
-// const toHome = () => {
-//   router.push("/")
-// }
 </script>
 
 <template>
   <div class="app-wrapper d-flex flex-row flex-md-column min-vh-100">
     <nav class="nav-sidebar flex-shrink-0 bg_main">
       <div class="row align-items-center justify-content-center">
-        <label class="font_main" style="font-size: 150%; text-align: center;">Consumption Advisor</label>
+        <label class="font_main" style="font-size: 150%; text-align: center;">RedUse</label>
       </div>
       <ul class="col-5 d-flex flex-column flex-md-row p-2 m-0">
         <li class="m-2">
@@ -22,9 +16,7 @@
           <router-link to="/food" class="nav_item_custom d-block p-2 button_sub">Food
             Guidance</router-link>
         </li>
-        <li class="m-2">
-          <router-link to="/household" class="nav_item_custom d-block p-2 button_sub">Household</router-link>
-        </li>
+
       </ul>
     </nav>
 
@@ -47,7 +39,6 @@
 
 .nav_item_custom.router-link-active {
   background-color: white;
-  font-weight: bold;
 }
 
 
@@ -66,6 +57,10 @@ ul {
   .nav-sidebar {
     width: 100%;
     min-height: auto;
+  }
+
+  .nav-item-custom {
+    width: 100%;
   }
 
 }
