@@ -8,11 +8,11 @@
       <div class="row align-items-center justify-content-center">
         <label class="font_main" style="font-size: 150%; text-align: center;">RedUse</label>
       </div>
-      <ul class="col-5 d-flex flex-column flex-md-row p-2 m-0">
-        <li class="m-2">
+      <ul class="w-100 d-flex flex-column flex-md-row p-2 m-0" style="align-items: center;">
+        <li class="m-2 col-12 col-md-auto" style="text-align: center;">
           <router-link to="/" class="nav_item_custom text-black d-block p-2 button_sub">Awareness</router-link>
         </li>
-        <li class="m-2">
+        <li class="m-2 col-12 col-md-auto" style="text-align: center;">
           <router-link to="/food" class="nav_item_custom d-block p-2 button_sub">Food
             Guidance</router-link>
         </li>
@@ -68,7 +68,7 @@ ul {
 }
 
 /* Desktop nav bar */
-@media (min-width: 768px) {
+@media (min-width: 800px) {
   .nav-sidebar {
     width: 100%;
     min-height: auto;

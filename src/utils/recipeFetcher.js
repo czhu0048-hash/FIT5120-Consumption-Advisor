@@ -34,12 +34,13 @@ const normalizeDetailed = (item) => ({
 // Raw Overview data
 export const fetchRecipeOverview = async (userInput, userExcludeInput) => {
     try {
-        const params = new URLSearchParams({ q: userInput })
+        const params = new URLSearchParams({ include: userInput })
         if (userExcludeInput) params.set('exclude', userExcludeInput)
         const listRes = await fetch(`${BASE_URL}/api/recipes/?${params}`)
         const listData = await listRes.json()
         const normalized = listData.map(normalizeOverview)
         const seen = new Set()
+        console.log(`include: ${userInput}, exclude: ${userExcludeInput}`)
         // Remove all duplications
         return normalized.filter((r) => {
             if (seen.has(r.recipe_name)) return false
