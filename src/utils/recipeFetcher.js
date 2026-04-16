@@ -44,6 +44,8 @@ export const fetchRecipeDetailed = async (id) => {
     try {
         const res = await fetch(`${BASE_URL}/api/recipes/${id}/`)
         const data = await res.json()
+        console.log(data)
+
         return normalizeDetailed(data)
     } catch (e) {
         console.error(`Failed to fetch detailed recipe: ${e}`)

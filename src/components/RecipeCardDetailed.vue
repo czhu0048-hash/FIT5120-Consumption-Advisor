@@ -9,6 +9,7 @@
             <div class="card-header d-flex justify-content-between">
                 <span v-if="recipeJson.total_time">{{ recipeJson.total_time }}</span>
                 <span v-if="recipeJson.rating">⭐ {{ recipeJson.rating }}</span>
+                <span v-if="recipeJson.difficulty">Difficulty: {{ recipeJson.difficulty }}</span>
             </div>
             <div class="card-body" v-if="recipeJson.matchedIngredients && recipeJson.matchedIngredients.length">
                 <strong>Matched:</strong> {{ recipeJson.matchedIngredients.join(', ') }}

@@ -1,69 +1,74 @@
 <template>
-    <div class="container" style="justify-content: center; align-items: center;">
-        <div class="row mt-5">
-            <div class="col-8 offset-2 col-md-4 offset-md-4 d-flex gap-2 mb-3">
-                <button class="btn btn-primary flex-fill button_main" style="background-color: darkgreen;"
-                    @click="applyFilters" :disabled="searching">
-                    Search Recipes</button>
+    <FilterSidebar />
+    <div class="d-flex" style="min-height: 100vh;">
+        <div class="flex-grow-1 container" style="justify-content: center; align-items: center;">
+            <div class="row mt-5">
+                <div class="col-8 offset-2 col-md-4 offset-md-4 d-flex gap-2 mb-3">
+                    <button class="btn btn-primary flex-fill button_main" style="background-color: darkgreen;"
+                        @click="applyFilters" :disabled="searching">
+                        Search Recipes</button>
+                </div>
             </div>
-        </div>
 
-        <div class="row g-3 justify-content-center">
-            <div class="col-12 col-md-5">
-                <input class="form-control" type="text" placeholder="*Enter ingredients, separate with comma"
-                    v-model="ingredientInputString" @input="onInputStringChanged">
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-5">
+                    <input class="form-control" type="text" placeholder="*Enter ingredients, separate with comma"
+                        v-model="ingredientInputString" @input="onInputStringChanged">
+                </div>
+                <div class="col-12 col-md-5">
+                    <input class="form-control" type="text"
+                        placeholder="Enter ingredients to exclude, separate with comma"
+                        v-model="ingrediantInputStringExclusive" @input="onInputStringExclusiveChanged">
+                </div>
             </div>
-            <div class="col-12 col-md-5">
-                <input class="form-control" type="text" placeholder="Enter ingredients to exclude, separate with comma"
-                    v-model="ingrediantInputStringExclusive" @input="onInputStringExclusiveChanged">
+            <div class="text-center">
+                <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
             </div>
-        </div>
-        <div class="text-center">
-            <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-        </div>
-        <div style="text-align: center; justify-content: center;">
-            <label v-if="errormsg" style="color: crimson;">{{ errormsg }}</label>
-        </div>
+            <div style="text-align: center; justify-content: center;">
+                <label v-if="errormsg" style="color: crimson;">{{ errormsg }}</label>
+            </div>
 
-        <!-- Popup recipe card -->
-        <Teleport to="body">
-            <div v-if="modalRecipe" class="recipe-modal-backdrop" @click.self="modalRecipe = null">
-                <div class="recipe-modal-dialog">
-                    <button class="recipe-modal-close btn btn-sm btn-light" @click="modalRecipe = null">
-                        <i class="pi pi-times"></i>
-                    </button>
-                    <div class="recipe-modal-body">
-                        <RecipeCardDetailed :recipe-json="modalRecipe" />
+            <!-- Popup recipe card -->
+            <Teleport to="body">
+                <div v-if="modalRecipe" class="recipe-modal-backdrop" @click.self="modalRecipe = null">
+                    <div class="recipe-modal-dialog">
+                        <button class="recipe-modal-close btn btn-sm btn-light" @click="modalRecipe = null">
+                            <i class="pi pi-times"></i>
+                        </button>
+                        <div class="recipe-modal-body">
+                            <RecipeCardDetailed :recipe-json="modalRecipe" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Teleport>
+            </Teleport>
 
-        <div>
-            <div v-if="recipeSearchResults.length > 0" class="row">
-                <div v-for="(result, index) in normalizedResults" :key="index" class="col-12 col-md-3"
-                    @click="openModal(result)" style="cursor: pointer;">
-                    <RecipeCardOverview :recipe-json="result"></RecipeCardOverview>
+            <div>
+                <div v-if="recipeSearchResults.length > 0" class="row">
+                    <div v-for="(result, index) in normalizedResults" :key="index" class="col-12 col-md-3 g-2"
+                        @click="openModal(result)" style="cursor: pointer;">
+                        <RecipeCardOverview :recipe-json="result"></RecipeCardOverview>
+                    </div>
                 </div>
-            </div>
-            <!-- Pagination controls -->
-            <div v-if="totalPages > 1"
-                class="d-flex justify-content-center align-items-center gap-2 mt-4 mb-4 flex-wrap">
-                <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === 1"
-                    @click="goToPage(currentPage - 1)">&laquo; Prev</button>
-                <template v-for="page in pageRange" :key="page">
-                    <span v-if="page === '...'" class="px-2">…</span>
-                    <button v-else class="btn btn-sm button_main"
-                        :class="page === currentPage ? 'btn-primary' : 'btn-outline-primary'" @click="goToPage(page)">{{
-                            page }}</button>
-                </template>
-                <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === totalPages"
-                    @click="goToPage(currentPage + 1)">Next &raquo;</button>
-            </div>
-            <div v-if="recipeSearchResults.length > 0" class="text-center text-muted mb-3" style="font-size:0.9rem;">
-                Showing {{ (currentPage - 1) * pageSize + 1 }}–{{ Math.min(currentPage * pageSize,
-                    recipeSearchResults.length) }} of
-                {{ recipeSearchResults.length }} results
+                <!-- Pagination controls -->
+                <div v-if="totalPages > 1"
+                    class="d-flex justify-content-center align-items-center gap-2 mt-4 mb-4 flex-wrap">
+                    <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === 1"
+                        @click="goToPage(currentPage - 1)">&laquo; Prev</button>
+                    <template v-for="page in pageRange" :key="page">
+                        <span v-if="page === '...'" class="px-2">…</span>
+                        <button v-else class="btn btn-sm button_main"
+                            :class="page === currentPage ? 'btn-primary' : 'btn-outline-primary'"
+                            @click="goToPage(page)">{{
+                                page }}</button>
+                    </template>
+                    <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === totalPages"
+                        @click="goToPage(currentPage + 1)">Next &raquo;</button>
+                </div>
+                <div v-if="filteredResults.length > 0" class="text-center text-muted mb-3" style="font-size:0.9rem;">
+                    Showing {{ (currentPage - 1) * pageSize + 1 }}–{{ Math.min(currentPage * pageSize,
+                        filteredResults.length) }} of
+                    {{ filteredResults.length }} results
+                </div>
             </div>
         </div>
     </div>
@@ -73,7 +78,9 @@
 import { ref, computed } from 'vue';
 import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
 import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
+import FilterSidebar from '@/components/FilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
+import { passesFilters } from '@/utils/recipeFilterInstance';
 
 const errormsg = ref("");
 const searching = ref(false);
@@ -85,11 +92,13 @@ const modalLoading = ref(false);
 const ingredientInputString = ref("");
 const ingrediantInputStringExclusive = ref("");
 
-const totalPages = computed(() => Math.ceil(recipeSearchResults.value.length / pageSize));
+const totalPages = computed(() => Math.ceil(filteredResults.value.length / pageSize));
+
+const filteredResults = computed(() => recipeSearchResults.value.filter(passesFilters))
 
 const normalizedResults = computed(() => {
     const start = (currentPage.value - 1) * pageSize;
-    return recipeSearchResults.value.slice(start, start + pageSize);
+    return filteredResults.value.slice(start, start + pageSize);
 });
 
 const pageRange = computed(() => {
