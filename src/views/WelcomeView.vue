@@ -26,7 +26,7 @@
 										</div>
 										<div :class="$style.div6">
 											<div :class="$style.a">
-												<b :class="$style.heroButton">Learn More Below</b>
+												<b :class="$style.heroButton">Learn More Below ↓</b>
 											</div>
 										</div>
 									</div>
