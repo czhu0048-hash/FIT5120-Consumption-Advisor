@@ -15,7 +15,7 @@
 											<b>Buy </b>
 											<span :class="$style.less">Less, </span>
 											<b>Use </b>
-											<span :class="$style.less">Again<br /></span>
+											<span :class="$style.less">Again, </span>
 											<b>Live </b>
 											<span :class="$style.less">Wisely</span>
 										</span>
@@ -49,7 +49,7 @@
 								<div :class="$style.divNode002">
 									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_fridge.png" alt="Fridge Icon" />
 									<div :class="$style.div11">
-										<b :class="$style.sectionTitle">Food Wisdom</b>
+										<b :class="$style.sectionTitle1">Food Wisdom</b>
 										<div :class="$style.sectionDescription">Explore recipes, professional storage
 											and disposal tips for common food categories.</div>
 									</div>
@@ -315,7 +315,7 @@
 .divNode004, .divNode007 { background-color: #eeecff; }
 
 /* what cards bkgd styling */
-.sectionTitle, .sectionTitle2, .sectionTitle3, .statTitle {
+.sectionTitle1, .sectionTitle2, .sectionTitle3, .statTitle {
 	font-size: 28px;
 	margin-bottom: 15px;
 	display: block;
