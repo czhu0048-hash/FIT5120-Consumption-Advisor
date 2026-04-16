@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+label {
+  font-family: 'Nunito', sans-serif;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+
+}
+
 .basic {
   background-color: white
 }
