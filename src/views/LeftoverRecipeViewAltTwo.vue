@@ -1,5 +1,5 @@
 <template>
-    <div class="container basic" style="justify-content: center; align-items: center;">
+    <div class="container" style="justify-content: center; align-items: center;">
         <div class="row mt-5">
             <div class="col-8 offset-2 col-md-4 offset-md-4 d-flex gap-2 mb-3">
                 <button class="btn btn-primary flex-fill button_main" style="background-color: darkgreen;"
@@ -8,9 +8,16 @@
             </div>
         </div>
 
-        <input class="col-12" type="text" placeholder="Enter ingredients, separate with comma"
-            v-model="ingrediantInputString" @input="onInputStringChanged">
-
+        <div class="row g-3 justify-content-center">
+            <div class="col-12 col-md-5">
+                <input class="form-control" type="text" placeholder="*Enter ingredients, separate with comma"
+                    v-model="ingredientInputString" @input="onInputStringChanged">
+            </div>
+            <div class="col-12 col-md-5">
+                <input class="form-control" type="text" placeholder="Enter ingredients to exclude, separate with comma"
+                    v-model="ingrediantInputStringExclusive" @input="onInputStringExclusiveChanged">
+            </div>
+        </div>
         <div class="text-center">
             <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
         </div>
@@ -34,7 +41,7 @@
 
         <div>
             <div v-if="recipeSearchResults.length > 0" class="row">
-                <div v-for="(result, index) in paginatedResults" :key="index" class="col-12 col-md-3"
+                <div v-for="(result, index) in normalizedResults" :key="index" class="col-12 col-md-3"
                     @click="openModal(result)" style="cursor: pointer;">
                     <RecipeCardOverview :recipe-json="result"></RecipeCardOverview>
                 </div>
@@ -75,11 +82,12 @@ const currentPage = ref(1);
 const pageSize = 20;
 const modalRecipe = ref(null);
 const modalLoading = ref(false);
-const ingrediantInputString = ref("");
+const ingredientInputString = ref("");
+const ingrediantInputStringExclusive = ref("");
 
 const totalPages = computed(() => Math.ceil(recipeSearchResults.value.length / pageSize));
 
-const paginatedResults = computed(() => {
+const normalizedResults = computed(() => {
     const start = (currentPage.value - 1) * pageSize;
     return recipeSearchResults.value.slice(start, start + pageSize);
 });
@@ -101,7 +109,7 @@ const pageRange = computed(() => {
 });
 
 const onInputStringChanged = () => {
-    const raw = ingrediantInputString.value.trim();
+    const raw = ingredientInputString.value.trim();
     if (!raw) {
         errormsg.value = "";
         recipeSearchResults.value = [];
@@ -113,6 +121,21 @@ const onInputStringChanged = () => {
     }
     errormsg.value = "";
 };
+
+const onInputStringExclusiveChanged = () => {
+    const raw = ingrediantInputStringExclusive.value.trim();
+    if (!raw) {
+        errormsg.value = "";
+        ingrediantInputStringExclusive.value = "";
+        return;
+    }
+    if (!raw.includes(',') && raw.includes(' ')) {
+        errormsg.value = "Please separate ingredients with a comma";
+        return;
+    }
+    errormsg.value = "";
+};
+
 
 const goToPage = (page) => {
     currentPage.value = page;
@@ -127,14 +150,15 @@ const openModal = async (recipeObject) => {
 };
 
 async function applyFilters() {
-    const raw = ingrediantInputString.value.trim();
-    if (!raw) {
+    const ingredientToIncludeRaw = ingredientInputString.value.trim();
+    if (!ingredientToIncludeRaw) {
         errormsg.value = "Please enter at least one ingredient.";
         return;
     }
+    const ingredientToExcludeRaw = ingrediantInputStringExclusive.value.trim();
     errormsg.value = "";
     searching.value = true;
-    const results = await fetchRecipeOverview(raw);
+    const results = await fetchRecipeOverview(ingredientToIncludeRaw, ingredientToExcludeRaw);
     recipeSearchResults.value = results;
     currentPage.value = 1;
     searching.value = false;

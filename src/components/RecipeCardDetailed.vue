@@ -49,7 +49,14 @@ const ingredientList = computed(() => {
 
 const directionSteps = computed(() => {
     if (!props.recipeJson.directions) return []
-    return props.recipeJson.directions.split('\n').map(s => s.trim()).filter(Boolean)
+    const steps = props.recipeJson.directions.split('\n').map(s => s.trim()).filter(Boolean)
+    // Remove extra lines
+    if (steps.length > 0) {
+        const last = steps[steps.length - 1]
+        const isByline = !last.endsWith('.') && last.split(' ').length <= 6
+        if (isByline) steps.pop()
+    }
+    return steps
 })
 </script>
 

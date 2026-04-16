@@ -26,7 +26,7 @@ onMounted(testFoodDisposalApi)
 </script>
 
 <template>
-    <div class="basic" style="text-align: center;">
+    <div style="text-align: center;">
         <h1>Manage your everyday consumption: Why It Matters</h1>
     </div>
     <div class="row">
