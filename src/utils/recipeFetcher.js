@@ -8,18 +8,25 @@ const BASE_URL = import.meta.env.DEV
 
 // Normalized Overview data 
 const normalizeOverview = (item) => ({
-    ...item,
+    id: item.id ?? item.recipe_id,
     recipe_name: item.title,
     img_src: item.image_url,
     total_time: item.total_time_mins != null ? `${item.total_time_mins} mins` : '',
+    difficulty: item.difficulty ?? null,
+    rating: item.rating ?? null,
+    matchedIngredients: item.matchedIngredients ?? [],
 })
 
 // Normalized Detailed data
 const normalizeDetailed = (item) => ({
-    ...item,
+    id: item.id ?? item.recipe_id,
     recipe_name: item.title,
     img_src: item.image_url,
     total_time: item.total_time_mins != null ? `${item.total_time_mins} mins` : '',
+    difficulty: item.difficulty ?? null,
+    rating: item.rating ?? null,
+    url: item.url ?? null,
+    matchedIngredients: item.matchedIngredients ?? [],
     ingredients: item.ingredients_clean ?? '',
     directions: item.instructions ?? '',
 })
@@ -31,7 +38,14 @@ export const fetchRecipeOverview = async (userInput, userExcludeInput) => {
         if (userExcludeInput) params.set('exclude', userExcludeInput)
         const listRes = await fetch(`${BASE_URL}/api/recipes/?${params}`)
         const listData = await listRes.json()
-        return listData.map(normalizeOverview)
+        const normalized = listData.map(normalizeOverview)
+        const seen = new Set()
+        // Remove all duplications
+        return normalized.filter((r) => {
+            if (seen.has(r.recipe_name)) return false
+            seen.add(r.recipe_name)
+            return true
+        })
     } catch (e) {
         console.error(`Failed to fetch overview recipe: ${e}`)
         return []
