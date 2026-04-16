@@ -24,11 +24,11 @@
 										<div :class="$style.heroDescription">A platform built for Australian shared
 											communities to manage consumption responsibility and connect with others.
 										</div>
-										<div :class="$style.div6">
+										<!-- <div :class="$style.div6">
 											<div :class="$style.a">
-												<b :class="$style.heroButton">Learn More Below ↓</b>
+												<div>Learn More Below ↓</div>
 											</div>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
@@ -47,7 +47,8 @@
 							</div>
 							<div :class="$style.div10">
 								<div :class="$style.divNode002">
-									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_fridge.png" alt="Fridge Icon" />
+									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_fridge.png"
+										alt="Fridge Icon" />
 									<div :class="$style.div11">
 										<b :class="$style.sectionTitle1">Food Wisdom</b>
 										<div :class="$style.sectionDescription">Explore recipes, professional storage
@@ -55,19 +56,23 @@
 									</div>
 								</div>
 								<div :class="$style.divNode003">
-									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_closet.png" alt="Closet Icon" />
+									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_closet.png"
+										alt="Closet Icon" />
 									<div :class="$style.div12">
 										<b :class="$style.sectionTitle2">Conscious Clothing</b>
 										<div :class="$style.sectionDescription2">Find ethical donation points or second
-											hands shops, learn how to repair it and browse sustainable washing guides.</div>
+											hands shops, learn how to repair it and browse sustainable washing guides.
+										</div>
 									</div>
 								</div>
 								<div :class="$style.divNode004">
-									<img :class="$style.WelHouseholdIcon" src="@/assets/Wel_device.png" alt="Devices Icon" />
+									<img :class="$style.WelHouseholdIcon" src="@/assets/Wel_device.png"
+										alt="Devices Icon" />
 									<div :class="$style.div13">
 										<b :class="$style.sectionTitle3">Smart Households</b>
 										<div :class="$style.sectionDescription3">Locate E-waste recycling bins, battery
-											disposal points, local tool libraries for shared equipment info and donation site.</div>
+											disposal points, local tool libraries for shared equipment info and donation
+											site.</div>
 									</div>
 								</div>
 							</div>
@@ -85,21 +90,24 @@
 									<div :class="$style.stepNumber">01</div>
 									<div :class="$style.div21">
 										<b :class="$style.stepTitle">Explore</b>
-										<div :class="$style.stepDescription">Surf in this All-In-One Info Hubs for Food, Textiles and Household goods.</div>
+										<div :class="$style.stepDescription">Surf in this All-In-One Info Hubs for Food,
+											Textiles and Household goods.</div>
 									</div>
 								</div>
 								<div :class="$style.divNode012">
 									<div :class="$style.stepNumber">02</div>
 									<div :class="$style.div21">
 										<b :class="$style.stepTitle">Learn & Act</b>
-										<div :class="$style.stepDescription">Follow step-by-step guides on daily life hacks, storage repair and ethical disposal</div>
+										<div :class="$style.stepDescription">Follow step-by-step guides on daily life
+											hacks, storage repair and ethical disposal</div>
 									</div>
 								</div>
 								<div :class="$style.divNode013">
 									<div :class="$style.stepNumber">03</div>
 									<div :class="$style.div33">
 										<b :class="$style.stepTitle">Connect & Share</b>
-										<div :class="$style.stepDescription3">Find verified links to recycling hubs & community services</div>
+										<div :class="$style.stepDescription3">Find verified links to recycling hubs &
+											community services</div>
 									</div>
 								</div>
 							</div>
@@ -117,47 +125,35 @@
 								<b>The </b>
 								<span :class="$style.less">Real and Massive Impact</span>
 								<span :class="$style.less"> :(</span>
-							</div> 
+							</div>
 						</div>
 
-                            <div :class="$style.div37">
-                            <div :class="$style.divNode005">
-                                <b :class="$style.statNumber">7.6 M tonnes</b>
-                                <b :class="$style.statTitle">Annual Food Waste</b>
-                                <a 
-                                href="https://www.dcceew.gov.au/environment/protection/waste/national-waste-reports" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                :class="$style.sourceExt"
-                                >
-                                Source: DCCEEW National Waste Strategy
-                                </a>
-                            </div>
+						<div :class="$style.div37">
+							<div :class="$style.divNode005">
+								<b :class="$style.statNumber">7.6 M tonnes</b>
+								<b :class="$style.statTitle">Annual Food Waste</b>
+								<a href="https://www.dcceew.gov.au/environment/protection/waste/national-waste-reports"
+									target="_blank" rel="noopener noreferrer" :class="$style.sourceExt">
+									Source: DCCEEW National Waste Strategy
+								</a>
+							</div>
 
-                            <div :class="$style.divNode006">
-                                <b :class="$style.statNumber">&gt; 200, 000 tonnes</b>
-                                <b :class="$style.statTitle">Clothing to Landfill</b>
-                                <a 
-                                href="https://ausfashioncouncil.com/program/seamless/" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                :class="$style.sourceExt"
-                                >
-                                Source: Australian Fashion Council
-                                </a>
-                            </div>
+							<div :class="$style.divNode006">
+								<b :class="$style.statNumber">&gt; 200, 000 tonnes</b>
+								<b :class="$style.statTitle">Clothing to Landfill</b>
+								<a href="https://ausfashioncouncil.com/program/seamless/" target="_blank"
+									rel="noopener noreferrer" :class="$style.sourceExt">
+									Source: Australian Fashion Council
+								</a>
+							</div>
 
-                            <div :class="$style.divNode007">
-                                <b :class="$style.statNumber">~ 540, 000 tonnes</b>
-                                <b :class="$style.statTitle">E-Waste Produced</b>
-                                <a 
-                                href="https://www.dcceew.gov.au/environment/protection/waste/publications/national-waste-resource-recovery-reporting" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                :class="$style.sourceExt"
-                                >
-                                Source: National waste and resource recovery report 2024
-                                </a>
+							<div :class="$style.divNode007">
+								<b :class="$style.statNumber">~ 540, 000 tonnes</b>
+								<b :class="$style.statTitle">E-Waste Produced</b>
+								<a href="https://www.dcceew.gov.au/environment/protection/waste/publications/national-waste-resource-recovery-reporting"
+									target="_blank" rel="noopener noreferrer" :class="$style.sourceExt">
+									Source: National waste and resource recovery report 2024
+								</a>
 							</div>
 						</div>
 					</div>
@@ -252,7 +248,9 @@
 }
 
 /* Common Section Styling */
-.section, .section2, .section3 {
+.section,
+.section2,
+.section3 {
 	width: 100%;
 	padding: clamp(40px, 6vw, 80px) 5%;
 	box-sizing: border-box;
@@ -261,11 +259,21 @@
 	align-items: center;
 }
 
-.section { background-color: #fff; }
-.section2 { background-color: #e3f8f8; }
-.section3 { background-color: #fff; }
+.section {
+	background-color: #fff;
+}
 
-.div7, .div14, .div34 {
+.section2 {
+	background-color: #e3f8f8;
+}
+
+.section3 {
+	background-color: #fff;
+}
+
+.div7,
+.div14,
+.div34 {
 	width: 100%;
 	max-width: 1300px;
 	display: flex;
@@ -274,7 +282,9 @@
 }
 
 /* grids */
-.div10, .div15, .div37 {
+.div10,
+.div15,
+.div37 {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -284,7 +294,9 @@
 }
 
 /* scaling */
-.sectionHeader, .slogan, .sectionTitle4 {
+.sectionHeader,
+.slogan,
+.sectionTitle4 {
 	font-size: clamp(32px, 4vw, 64px);
 	margin-bottom: 10px;
 }
@@ -297,8 +309,12 @@
 }
 
 /* what cards */
-.divNode002, .divNode003, .divNode004,
-.divNode005, .divNode006, .divNode007 {
+.divNode002,
+.divNode003,
+.divNode004,
+.divNode005,
+.divNode006,
+.divNode007 {
 	flex: 1 1 320px;
 	max-width: 410px;
 	padding: 40px 25px;
@@ -310,12 +326,26 @@
 }
 
 /* what cards bkgd */
-.divNode002, .divNode005 { background-color: #fdf3ea; }
-.divNode003, .divNode006 { background-color: #e0f8f2; }
-.divNode004, .divNode007 { background-color: #eeecff; }
+.divNode002,
+.divNode005 {
+	background-color: #fdf3ea;
+}
+
+.divNode003,
+.divNode006 {
+	background-color: #e0f8f2;
+}
+
+.divNode004,
+.divNode007 {
+	background-color: #eeecff;
+}
 
 /* what cards bkgd styling */
-.sectionTitle1, .sectionTitle2, .sectionTitle3, .statTitle {
+.sectionTitle1,
+.sectionTitle2,
+.sectionTitle3,
+.statTitle {
 	font-size: 28px;
 	margin-bottom: 15px;
 	display: block;
@@ -328,7 +358,9 @@
 	color: #009387;
 }
 
-.sectionDescription, .sectionDescription2, .sectionDescription3 {
+.sectionDescription,
+.sectionDescription2,
+.sectionDescription3 {
 	font-size: 16px;
 	line-height: 1.5;
 	color: #58595d;
@@ -336,7 +368,8 @@
 	flex-grow: 1;
 }
 
-.WelFridgeIcon, .WelHouseholdIcon {
+.WelFridgeIcon,
+.WelHouseholdIcon {
 	width: 60px;
 	height: auto;
 }
@@ -355,7 +388,9 @@
 }
 
 /* steps - how */
-.divNode011, .divNode012, .divNode013 {
+.divNode011,
+.divNode012,
+.divNode013 {
 	flex: 1 1 300px;
 	display: flex;
 	gap: 20px;
