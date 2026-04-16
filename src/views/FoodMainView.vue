@@ -10,8 +10,8 @@
                             class="card-img-top object-fit-cover" style="height: 260px;">
                     </div>
                     <div class="card-body d-flex flex-column gap-2">
-                        <h5 class="card-title fw-bold font_sub mb-0">Leftover Recipes</h5>
-                        <p class="card-text text-muted small">Turn what's already in your fridge into a proper meal.
+                        <h5 class="card-title fw-bold font_sub mb-0">Kitchen-raid Recipes</h5>
+                        <p class="card-text text-muted small">Turn what's already in your home into a proper meal.
                             Search by ingredients you have on hand.</p>
                         <button class="btn mt-auto align-self-start px-4 fw-semibold"
                             style="background-color: darkgreen; color: white; border-radius: 2rem;" @click="toFoodOne">
