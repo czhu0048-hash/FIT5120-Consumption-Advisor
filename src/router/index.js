@@ -3,6 +3,7 @@ import FoodMainView from '@/views/FoodMainView.vue'
 import FoodDisposalView from '@/views/FoodDisposalView.vue'
 import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
+import ClothingMainView from '@/views/ClothingMainView.vue'
 
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
         path: '/food2',
         name: 'Leftover Disposal',
         component: FoodDisposalView
+    },
+    {
+        path: '/clothing',
+        name: 'Clothing',
+        component: ClothingMainView
     }
 ]
 
