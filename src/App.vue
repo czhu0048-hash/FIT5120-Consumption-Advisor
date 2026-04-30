@@ -88,7 +88,8 @@ const navItems = [
   color: #2f2f31;
   font-family: 'Nunito', sans-serif;
   white-space: nowrap;
-  letter-spacing: -0.2px; /* spacing for logos */
+  letter-spacing: -0.2px;
+  /* spacing for logos */
   margin-left: 0.5rem;
 }
 
@@ -101,17 +102,23 @@ const navItems = [
 /* Color for "Use" */
 .brand-use {
   color: #009387;
-  font-weight: 550; /* comment out if no need */
-  font-family: 'Covered By Your Grace'; /* comment out if no need */
-  font-size: 28px; /* comment out if no need */
+  font-weight: 550;
+  /* comment out if no need */
+  font-family: 'Covered By Your Grace';
+  /* comment out if no need */
+  font-size: 28px;
+  /* comment out if no need */
 }
 </style>
 
 <style>
 .app-menubar.p-menubar {
-  position: sticky; /* make the navbar stick to the top (remove if no need) */
-  top: 0;           /* make the navbar stick to the top (remove if no need) */
-  z-index: 1000;    /* make the navbar stick to the top (remove if no need) */
+  position: sticky;
+  /* make the navbar stick to the top (remove if no need) */
+  top: 0;
+  /* make the navbar stick to the top (remove if no need) */
+  z-index: 1000;
+  /* make the navbar stick to the top (remove if no need) */
 
   background: white;
   border: none;
