@@ -122,8 +122,7 @@
 						</div>
 						<div :class="$style.div35">
 							<div :class="$style.subheader">
-								<b>The </b>
-								<span :class="$style.less">Real and Massive Impact</span>
+								<span :class="$style.less">The Real and Massive Impact</span>
 								<span :class="$style.less"> :(</span>
 							</div>
 						</div>
