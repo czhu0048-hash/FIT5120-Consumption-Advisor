@@ -1,8 +1,8 @@
 <template>
-    <div class="font_sub" style="font-size: 150%; text-align: center; margin-bottom: 5%;">
-        <label>What type of food waste do you want to dispose of?</label>
+    <div class="font_sub" style="font-size: 150%; text-align: center; margin-bottom: 40px; padding-top: 50px;">
+        <label>What type of food waste are you looking to dispose of?</label>
     </div>
-    <div class="container col-12 col-md-6 offset-md-3 basic">
+    <div class="category-wrapper">
         <select class="form-select" v-model="selectedCategory">
             <option value="">All categories</option>
             <option v-for="method in allMethods" :key="method.id" :value="method.food_category">
@@ -39,3 +39,11 @@ onMounted(async () => {
     loading.value = false;
 });
 </script>
+
+<style scoped>
+.category-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0;
+}
+</style>
