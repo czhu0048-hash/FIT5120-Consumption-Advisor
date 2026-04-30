@@ -1,34 +1,50 @@
 <template>
     <div class="d-flex" style="min-height: 100vh;">
-        <div class="flex-grow-1 container mt-5" style="justify-content: center; align-items: center;">
-            <div class="row">
-                <div class="col-8 offset-2 col-md-4 offset-md-4 d-flex gap-2 mb-3">
-                    <button class="btn btn-primary flex-fill button_main" style="background-color: darkgreen;"
-                        @click="applyFilters" :disabled="searching">
-                        Search Recipes</button>
+        <div class="flex-grow-1 container mt-5">
+            <div class="search-bar-container p-4 rounded shadow-sm bg-white mb-4">
+                <div class="row g-2 align-items-end">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label fw-bold small">Ingredients to Include</label>
+                        <input class="form-control" type="text" placeholder="e.g. Tomato, Pasta"
+                            v-model="ingredientInputString" @input="onInputStringChanged">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label class="form-label fw-bold small">Ingredients to Exclude</label>
+                        <input class="form-control" type="text" placeholder="e.g. Nuts, Dairy"
+                            v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged">
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
+                            <i class="pi pi-search me-2"></i>Search
+                        </button>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <button class="btn btn-outline-secondary w-100 fw-bold" @click="resetSearch">
+                            <i class="pi pi-refresh me-2"></i>Reset
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <RecipeFilterSidebar />
 
-            <div class="row g-3 justify-content-center">
-                <div class="col-12 col-md-5">
-                    <input class="form-control" type="text" placeholder="*Enter ingredients, separate with comma"
-                        v-model="ingredientInputString" @input="onInputStringChanged">
+                <div class="mt-3">
+                    <a href="javascript:void(0)" class="text-decoration-none small fw-bold text-success"
+                        @click="showFilters = !showFilters">
+                        {{ showFilters ? 'Show Fewer Options ▲' : 'Show More Options ▼' }}
+                    </a>
                 </div>
-                <div class="col-12 col-md-5">
-                    <input class="form-control" type="text"
-                        placeholder="Enter ingredients to exclude, separate with comma"
-                        v-model="ingrediantInputStringExclusive" @input="onInputStringExclusiveChanged">
+
+                <div v-show="showFilters" class="mt-4 pt-3 border-top">
+                    <RecipeFilterSidebar />
                 </div>
-            </div>
-            <div class="text-center">
-                <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-            </div>
-            <div style="text-align: center; justify-content: center;">
-                <label v-if="errormsg" style="color: crimson;">{{ errormsg }}</label>
             </div>
 
-            <!-- Popup recipe card -->
+            <div class="text-center my-3">
+                <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner"
+                    style="font-size: 2rem; color: green;"></i>
+                <div v-if="errormsg" class="alert alert-danger d-inline-block py-2 px-4 mt-2">
+                    {{ errormsg }}
+                </div>
+            </div>
+
             <Teleport to="body">
                 <div v-if="modalRecipe" class="recipe-modal-backdrop" @click.self="modalRecipe = null">
                     <div class="recipe-modal-dialog">
@@ -44,28 +60,30 @@
 
             <div>
                 <div v-if="recipeSearchResults.length > 0" class="row">
-                    <div v-for="(result, index) in normalizedResults" :key="index" class="col-12 col-md-3 g-2"
+                    <div v-for="(result, index) in normalizedResults" :key="index" class="col-12 col-md-3 g-3"
                         @click="openModal(result)" style="cursor: pointer;">
                         <RecipeCardOverview :recipe-json="result"></RecipeCardOverview>
                     </div>
                 </div>
-                <!-- Pagination controls -->
+
                 <div v-if="totalPages > 1"
-                    class="d-flex justify-content-center align-items-center gap-2 mt-4 mb-4 flex-wrap">
-                    <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === 1"
+                    class="d-flex justify-content-center align-items-center gap-2 mt-5 mb-4 flex-wrap">
+                    <button class="btn btn-outline-success btn-sm" :disabled="currentPage === 1"
                         @click="goToPage(currentPage - 1)">&laquo; Prev</button>
                     <template v-for="page in pageRange" :key="page">
                         <span v-if="page === '...'" class="px-2">…</span>
-                        <button v-else class="btn btn-sm" @click="goToPage(page)">{{
-                            page }}</button>
+                        <button v-else class="btn btn-sm"
+                            :class="currentPage === page ? 'btn-success' : 'btn-outline-success'"
+                            @click="goToPage(page)">{{ page }}</button>
                     </template>
-                    <button class="btn btn-outline-primary btn-sm button_sub" :disabled="currentPage === totalPages"
+                    <button class="btn btn-outline-success btn-sm" :disabled="currentPage === totalPages"
                         @click="goToPage(currentPage + 1)">Next &raquo;</button>
                 </div>
-                <div v-if="filteredResults.length > 0" class="text-center text-muted mb-3" style="font-size:0.9rem;">
+
+                <div v-if="filteredResults.length > 0" class="text-center text-muted mb-5" style="font-size:0.9rem;">
                     Showing {{ (currentPage - 1) * pageSize + 1 }}–{{ Math.min(currentPage * pageSize,
-                        filteredResults.length) }} of
-                    {{ filteredResults.length }} results
+                    filteredResults.length) }} of {{
+                    filteredResults.length }} results
                 </div>
             </div>
         </div>
@@ -88,11 +106,20 @@ const pageSize = 20;
 const modalRecipe = ref(null);
 const modalLoading = ref(false);
 const ingredientInputString = ref("");
-const ingrediantInputStringExclusive = ref("");
+const ingredientInputStringExclusive = ref("");
+
+const showFilters = ref(false);
 
 const totalPages = computed(() => Math.ceil(filteredResults.value.length / pageSize));
+const filteredResults = computed(() => recipeSearchResults.value.filter(passesFilters));
 
-const filteredResults = computed(() => recipeSearchResults.value.filter(passesFilters))
+// reset logic
+const resetSearch = () => {
+    ingredientInputString.value = "";
+    ingredientInputStringExclusive.value = "";
+    recipeSearchResults.value = [];
+    errormsg.value = "";
+};
 
 watch(filteredResults, (filtered) => {
     if (recipeSearchResults.value.length > 0 && filtered.length === 0) {
@@ -125,11 +152,7 @@ const pageRange = computed(() => {
 
 const onInputStringChanged = () => {
     const raw = ingredientInputString.value.trim();
-    if (!raw) {
-        errormsg.value = "";
-        recipeSearchResults.value = [];
-        return;
-    }
+    if (!raw) { errormsg.value = ""; recipeSearchResults.value = []; return; }
     if (!raw.includes(',') && raw.includes(' ')) {
         errormsg.value = "Please separate ingredients with a comma";
         return;
@@ -138,19 +161,14 @@ const onInputStringChanged = () => {
 };
 
 const onInputStringExclusiveChanged = () => {
-    const raw = ingrediantInputStringExclusive.value.trim();
-    if (!raw) {
-        errormsg.value = "";
-        ingrediantInputStringExclusive.value = "";
-        return;
-    }
+    const raw = ingredientInputStringExclusive.value.trim();
+    if (!raw) { errormsg.value = ""; return; }
     if (!raw.includes(',') && raw.includes(' ')) {
         errormsg.value = "Please separate ingredients with a comma";
         return;
     }
     errormsg.value = "";
 };
-
 
 const goToPage = (page) => {
     currentPage.value = page;
@@ -170,10 +188,9 @@ async function applyFilters() {
         errormsg.value = "Please enter at least one ingredient.";
         return;
     }
-    const ingredientToExcludeRaw = ingrediantInputStringExclusive.value.trim();
     errormsg.value = "";
     searching.value = true;
-    const results = await fetchRecipeOverview(ingredientToIncludeRaw, ingredientToExcludeRaw);
+    const results = await fetchRecipeOverview(ingredientToIncludeRaw, ingredientInputStringExclusive.value.trim());
     recipeSearchResults.value = results;
     currentPage.value = 1;
     searching.value = false;
@@ -184,10 +201,34 @@ async function applyFilters() {
 </script>
 
 <style scoped>
+
+/*search bar*/
+.search-bar-container {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border-radius: 15px;
+    border: 1px solid #e0e0e0;
+}
+
+.form-label {
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.btn-success {
+    background-color: #2e7d32 !important;
+    border: none;
+    height: 38px;
+}
+
+.btn-success:hover {
+    background-color: #1b5e20 !important;
+}
+
+
 .recipe-modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.55);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -212,9 +253,5 @@ async function applyFilters() {
     float: right;
     margin: 0.5rem 0.5rem 0 0;
     z-index: 10;
-}
-
-.recipe-modal-body {
-    padding: 0.5rem 0 1rem;
 }
 </style>
