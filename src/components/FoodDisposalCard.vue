@@ -7,7 +7,7 @@
         </div>
         <div class="card-body d-flex flex-column gap-2">
             <div>
-                <span class="bg-success">{{ method.stream }}</span>
+                <span class="text-success fw-bold">{{ method.stream }}</span>
             </div>
             <p class="small mb-0">{{ method.steps }}</p>
             <p v-if="method.notes" class="small text-muted fst-italic mb-0">{{ method.notes }}</p>

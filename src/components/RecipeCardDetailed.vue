@@ -45,7 +45,7 @@ const props = defineProps({
 
 const ingredientList = computed(() => {
     if (!props.recipeJson.ingredients) return []
-    return props.recipeJson.ingredients.split(',').map(s => s.trim()).filter(Boolean)
+    return props.recipeJson.ingredients.split('||').map(s => s.trim()).filter(Boolean)
 })
 
 const directionSteps = computed(() => {
@@ -75,7 +75,7 @@ const directionSteps = computed(() => {
 }
 
 .card-header {
-    background-color: #275FDA;
+    background-color: darkgreen;
     color: white;
     padding: 10px;
 }
@@ -87,7 +87,7 @@ const directionSteps = computed(() => {
 }
 
 .card-footer a {
-    color: #275FDA;
+    color: darkgreen;
     text-decoration: none;
     font-weight: bold;
 }
