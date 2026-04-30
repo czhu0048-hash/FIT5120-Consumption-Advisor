@@ -1,17 +1,30 @@
 <template>
     <aside class="filter-sidebar">
         <div class="row">
-
-            <!-- Duration -->
             <div class="col-12 col-md-6 mb-4">
                 <label class="filter-label fw-bold small">Duration (mins)</label>
                 <div class="d-flex gap-2 mt-1">
-                    <input type="number" class="form-control form-control-sm" placeholder="Min" min="0"
-                        :value="recipeFilters.minTime ?? ''"
-                        @change="recipeFilters.minTime = toNum($event.target.value)" />
-                    <input type="number" class="form-control form-control-sm" placeholder="Max" min="0"
-                        :value="recipeFilters.maxTime ?? ''"
-                        @change="recipeFilters.maxTime = toNum($event.target.value)" />
+
+                    <!-- Duration -->
+                    <div class="flex-grow-1">
+                        <input type="number" class="form-control form-control-sm" placeholder="Min" min="0"
+                            :value="recipeFilters.minTime ?? ''"
+                            @input="recipeFilters.minTime = toNum($event.target.value)" />
+                        <div v-if="recipeFilters.minTime !== null && recipeFilters.minTime !== ''"
+                            class="text-muted extra-small-duration mt-1 px-1">
+                            Min
+                        </div>
+                    </div>
+
+                    <div class="flex-grow-1">
+                        <input type="number" class="form-control form-control-sm" placeholder="Max" min="0"
+                            :value="recipeFilters.maxTime ?? ''"
+                            @input="recipeFilters.maxTime = toNum($event.target.value)" />
+                        <div v-if="recipeFilters.maxTime !== null && recipeFilters.maxTime !== ''"
+                            class="text-muted extra-small-duration mt-1 px-1">
+                            Max
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -51,6 +64,12 @@ const toggleDifficulty = (level) => {
     display: block;
 }
 
+.extra-small-duration {
+    font-size: 0.7rem;
+    line-height: 1;
+    font-weight: 500;
+}
+
 .difficulty-btn {
     background: white;
     border: 1px solid #dddddd;
@@ -63,9 +82,5 @@ const toggleDifficulty = (level) => {
     background-color: #2e7d32;
     border-color: #2e7d32;
     color: white;
-}
-
-.difficulty-btn:hover:not(.active) {
-    background-color: #eee;
 }
 </style>
