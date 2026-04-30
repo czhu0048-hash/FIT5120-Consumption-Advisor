@@ -13,6 +13,9 @@
                         <input class="form-control" type="text" placeholder="e.g. Nuts, Milk"
                             v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged"
                             @keyup.enter="applyFilters">
+                        <input class="form-control" type="text" placeholder="e.g. Nuts, Dairy"
+                            v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged"
+                            @keyup.enter="applyFilters">
                     </div>
                     <div class="col-12 col-md-2">
                         <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
@@ -122,6 +125,7 @@ const isInvalidFormat = (val) => {
     // check common wrong delimiters: ; / | : + & or multiple words without a comma ","
     const hasWrongSymbols = /[;/|:+&>."']/.test(raw);
     const hasMultipleWordsNoComma = !raw.includes(',') && raw.split(/\s+/).length > 1;
+
 
     return hasWrongSymbols || hasMultipleWordsNoComma;
 };

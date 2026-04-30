@@ -10,6 +10,8 @@
                 <span v-if="recipeJson.total_time">{{ recipeJson.total_time }}</span>
                 <span v-if="recipeJson.rating">⭐ {{ recipeJson.rating }}</span>
                 <span v-if="recipeJson.difficulty">Difficulty: {{ recipeJson.difficulty }}</span>
+                <span v-if="recipeJson.protein_class"> {{ recipeJson.protein_class }}</span>
+                <span v-if="recipeJson.fat_class"> {{ recipeJson.fat_class }}</span>
             </div>
             <div class="card-body" v-if="recipeJson.matchedIngredients && recipeJson.matchedIngredients.length">
                 <strong>Matched:</strong> {{ recipeJson.matchedIngredients.join(', ') }}
