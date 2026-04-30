@@ -4,7 +4,7 @@ import FoodDisposalView from '@/views/FoodDisposalView.vue'
 import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import ClothingMainView from '@/views/ClothingMainView.vue'
-import TestRecipeCardDetailedView from '@/views/TestRecipeCardDetailedView.vue'
+import ClothingAwarenessView from '@/views/ClothingAwarenessView.vue'
 
 const routes = [
     {
@@ -35,7 +35,7 @@ const routes = [
     {
         path: '/clothing/awareness',
         name: 'Clothing Awareness',
-        component: ClothingMainView
+        component: ClothingAwarenessView
     },
     {
         path: '/clothing/decision',

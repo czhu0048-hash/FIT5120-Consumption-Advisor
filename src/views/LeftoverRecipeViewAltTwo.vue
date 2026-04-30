@@ -11,7 +11,8 @@
                     <div class="col-12 col-md-4">
                         <label class="form-label fw-bold small">Ingredients to Exclude</label>
                         <input class="form-control" type="text" placeholder="e.g. Nuts, Dairy"
-                            v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged" @keyup.enter="applyFilters">
+                            v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged"
+                            @keyup.enter="applyFilters">
                     </div>
                     <div class="col-12 col-md-2">
                         <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
@@ -82,8 +83,8 @@
 
                 <div v-if="filteredResults.length > 0" class="text-center text-muted mb-5" style="font-size:0.9rem;">
                     Showing {{ (currentPage - 1) * pageSize + 1 }}–{{ Math.min(currentPage * pageSize,
-                    filteredResults.length) }} of {{
-                    filteredResults.length }} results
+                        filteredResults.length) }} of {{
+                        filteredResults.length }} results
                 </div>
             </div>
         </div>
@@ -117,11 +118,11 @@ const filteredResults = computed(() => recipeSearchResults.value.filter(passesFi
 const isInvalidFormat = (val) => {
     const raw = val.trim();
     if (!raw) return false;
-    
+
     // check common wrong delimiters: ; / | : + & or multiple words without a comma ","
     const hasWrongSymbols = /[;/|:+&>."']/.test(raw);
     const hasMultipleWordsNoComma = !raw.includes(',') && raw.split(/\s+/).length > 1;
-    
+
     return hasWrongSymbols || hasMultipleWordsNoComma;
 };
 
@@ -210,7 +211,7 @@ async function applyFilters() {
     recipeSearchResults.value = results;
     currentPage.value = 1;
     searching.value = false;
-    
+
     if (results.length <= 0) {
         errormsg.value = "No recipes found for the given ingredients and filters.";
     }
