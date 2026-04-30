@@ -113,7 +113,18 @@ const showFilters = ref(false);
 const totalPages = computed(() => Math.ceil(filteredResults.value.length / pageSize));
 const filteredResults = computed(() => recipeSearchResults.value.filter(passesFilters));
 
-// reset logic
+// text-input validation (incorrect format)
+const isInvalidFormat = (val) => {
+    const raw = val.trim();
+    if (!raw) return false;
+    
+    // check common wrong delimiters: ; / | : + & or multiple words without a comma ","
+    const hasWrongSymbols = /[;/|:+&>."']/.test(raw);
+    const hasMultipleWordsNoComma = !raw.includes(',') && raw.split(/\s+/).length > 1;
+    
+    return hasWrongSymbols || hasMultipleWordsNoComma;
+};
+
 const resetSearch = () => {
     ingredientInputString.value = "";
     ingredientInputStringExclusive.value = "";
@@ -151,23 +162,19 @@ const pageRange = computed(() => {
 });
 
 const onInputStringChanged = () => {
-    const raw = ingredientInputString.value.trim();
-    if (!raw) { errormsg.value = ""; recipeSearchResults.value = []; return; }
-    if (!raw.includes(',') && raw.includes(' ')) {
+    if (isInvalidFormat(ingredientInputString.value)) {
         errormsg.value = "Please separate ingredients with a comma";
-        return;
+    } else {
+        errormsg.value = "";
     }
-    errormsg.value = "";
 };
 
 const onInputStringExclusiveChanged = () => {
-    const raw = ingredientInputStringExclusive.value.trim();
-    if (!raw) { errormsg.value = ""; return; }
-    if (!raw.includes(',') && raw.includes(' ')) {
+    if (isInvalidFormat(ingredientInputStringExclusive.value)) {
         errormsg.value = "Please separate ingredients with a comma";
-        return;
+    } else {
+        errormsg.value = "";
     }
-    errormsg.value = "";
 };
 
 const goToPage = (page) => {
@@ -183,17 +190,27 @@ const openModal = async (recipeObject) => {
 };
 
 async function applyFilters() {
-    const ingredientToIncludeRaw = ingredientInputString.value.trim();
-    if (!ingredientToIncludeRaw) {
-        errormsg.value = "Please enter at least one ingredient.";
+    const includeRaw = ingredientInputString.value.trim();
+    const excludeRaw = ingredientInputStringExclusive.value.trim();
+
+    if (!includeRaw) {
+        errormsg.value = "Please enter at least one ingredient to include.";
         return;
     }
+
+    // HIGHLIGHT: Block search if format is invalid in either field
+    if (isInvalidFormat(includeRaw) || isInvalidFormat(excludeRaw)) {
+        errormsg.value = "Please separate ingredients with a comma";
+        return;
+    }
+
     errormsg.value = "";
     searching.value = true;
-    const results = await fetchRecipeOverview(ingredientToIncludeRaw, ingredientInputStringExclusive.value.trim());
+    const results = await fetchRecipeOverview(includeRaw, excludeRaw);
     recipeSearchResults.value = results;
     currentPage.value = 1;
     searching.value = false;
+    
     if (results.length <= 0) {
         errormsg.value = "No recipes found for the given ingredients and filters.";
     }
@@ -201,8 +218,6 @@ async function applyFilters() {
 </script>
 
 <style scoped>
-
-/*search bar*/
 .search-bar-container {
     background: rgba(255, 255, 255, 0.9) !important;
     border-radius: 15px;
@@ -223,7 +238,6 @@ async function applyFilters() {
 .btn-success:hover {
     background-color: #1b5e20 !important;
 }
-
 
 .recipe-modal-backdrop {
     position: fixed;
