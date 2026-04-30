@@ -48,7 +48,10 @@ const navItems = [
     <Menubar :model="navItems" class="app-menubar">
       <template #start>
         <img src="@/assets/Icon_reduse.png" alt="RedUse Logo" class="nav-logo" />
-        <span class="logo-text">RedUse</span>
+        <span class="logo-text">
+          <span class="brand-red">Red</span>
+          <span class="brand-use">Use</span>
+        </span>
       </template>
     </Menubar>
 
@@ -75,16 +78,32 @@ const navItems = [
 }
 
 .nav-logo {
-  height: 2em;
+  height: 1.5em;
   width: auto;
 }
 
 .logo-text {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: black;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2f2f31;
   font-family: 'Nunito', sans-serif;
   white-space: nowrap;
+  letter-spacing: -0.2px; /* spacing for logos */
+  margin-left: 0.5rem;
+}
+
+/* Color for "Red" */
+.brand-red {
+  color: #2f2f31;
+  font-weight: 700;
+}
+
+/* Color for "Use" */
+.brand-use {
+  color: #009387;
+  font-weight: 550; /* comment out if no need */
+  font-family: 'Covered By Your Grace'; /* comment out if no need */
+  font-size: 28px; /* comment out if no need */
 }
 </style>
 
@@ -107,14 +126,14 @@ const navItems = [
 
 /* All item links: base state */
 .app-menubar .p-menubar-item-link {
-  color: black;
+  color: #2f2f31;
   border-radius: 5rem;
   transition: background-color 0.25s ease-out, color 0.25s ease-out;
   gap: 0.4rem;
 }
 
 .app-menubar .p-menubar-item :hover {
-  color: black;
+  color: #2f2f31;
 }
 
 .app-menubar .p-menubar-submenu {
@@ -135,7 +154,7 @@ const navItems = [
 .app-menubar .p-menubar-button {
   order: 99;
   margin-left: auto;
-  color: aliceblue;
+  color: #2f2f31;
   background: transparent;
   border: none;
 }
