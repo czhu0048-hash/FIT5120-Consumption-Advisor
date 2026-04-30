@@ -38,6 +38,29 @@
                     </button>
                 </div>
             </div>
+
+            <!-- Protein Selection -->
+            <div class="col-12 col-md-6 mb-2">
+                <label class="filter-label fw-bold small">Protein Level</label>
+                <div class="d-flex gap-2 mt-1">
+                    <button v-for="level in proteinLevels" :key="level" class="btn btn-sm difficulty-btn flex-grow-1"
+                        :class="recipeFilters.proteinClass === level ? 'active' : ''"
+                        @click="toggleProteinLevel(level)">
+                        {{ level }}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Fat Selection -->
+            <div class="col-12 col-md-6 mb-2">
+                <label class="filter-label fw-bold small">Fat Level</label>
+                <div class="d-flex gap-2 mt-1">
+                    <button v-for="level in fatLevels" :key="level" class="btn btn-sm difficulty-btn flex-grow-1"
+                        :class="recipeFilters.fatClass === level ? 'active' : ''" @click="toggleFatLevel(level)">
+                        {{ level }}
+                    </button>
+                </div>
+            </div>
         </div>
     </aside>
 </template>
@@ -46,11 +69,22 @@
 import { recipeFilters } from '@/utils/recipeFilterInstance'
 
 const difficulties = ['Easy', 'Medium', 'Hard']
+const proteinLevels = ['Low Protein', 'Moderate Protein', 'High Protein']
+const fatLevels = ['Low Fat', 'Moderate Fat', 'High Fat']
 const toNum = (val) => val === '' ? null : Number(val)
 
 const toggleDifficulty = (level) => {
     recipeFilters.value.difficulty = recipeFilters.value.difficulty === level ? null : level
 }
+
+const toggleProteinLevel = (level) => {
+    recipeFilters.value.proteinClass = recipeFilters.value.proteinClass === level ? null : level
+}
+
+const toggleFatLevel = (level) => {
+    recipeFilters.value.fatClass = recipeFilters.value.fatClass === level ? null : level
+}
+
 </script>
 
 <style scoped>
