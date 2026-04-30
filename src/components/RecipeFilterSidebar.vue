@@ -117,8 +117,4 @@ const toggleFatLevel = (level) => {
     border-color: #2e7d32;
     color: white;
 }
-
-.difficulty-btn:hover:not(.active) {
-    background-color: #eee;
-}
 </style>
