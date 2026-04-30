@@ -7,7 +7,7 @@ const go = (path) => router.push(path)
 
 const navItems = [
   {
-    label: 'Awareness',
+    label: 'About',
     command: () => go('/'),
   },
   {
@@ -82,7 +82,7 @@ const navItems = [
 .logo-text {
   font-size: 1.3rem;
   font-weight: 700;
-  color: aliceblue;
+  color: black;
   font-family: 'Nunito', sans-serif;
   white-space: nowrap;
 }
@@ -90,7 +90,7 @@ const navItems = [
 
 <style>
 .app-menubar.p-menubar {
-  background: darkgreen;
+  background: white;
   border: none;
   border-radius: 0;
   padding: 0.5rem 1.25rem;
