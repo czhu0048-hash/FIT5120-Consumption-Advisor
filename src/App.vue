@@ -90,6 +90,10 @@ const navItems = [
 
 <style>
 .app-menubar.p-menubar {
+  position: sticky; /* make the navbar stick to the top (remove if no need) */
+  top: 0;           /* make the navbar stick to the top (remove if no need) */
+  z-index: 1000;    /* make the navbar stick to the top (remove if no need) */
+
   background: white;
   border: none;
   border-radius: 0;
@@ -101,7 +105,7 @@ const navItems = [
   overflow: visible;
 }
 
-/* ── All item links: base state ── */
+/* All item links: base state */
 .app-menubar .p-menubar-item-link {
   color: black;
   border-radius: 5rem;
@@ -123,7 +127,7 @@ const navItems = [
   color: grey;
 }
 
-/* ── Mobile hamburger button — push to the far right ── */
+/* Mobile hamburger button: push to the far right */
 .app-menubar .p-menubar-start {
   flex: 1 1 auto;
 }
