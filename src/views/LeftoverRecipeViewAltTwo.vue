@@ -6,12 +6,12 @@
                     <div class="col-12 col-md-4">
                         <label class="form-label fw-bold small">Ingredients to Include</label>
                         <input class="form-control" type="text" placeholder="e.g. Tomato, Pasta"
-                            v-model="ingredientInputString" @input="onInputStringChanged">
+                            v-model="ingredientInputString" @input="onInputStringChanged" @keyup.enter="applyFilters">
                     </div>
                     <div class="col-12 col-md-4">
                         <label class="form-label fw-bold small">Ingredients to Exclude</label>
                         <input class="form-control" type="text" placeholder="e.g. Nuts, Dairy"
-                            v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged">
+                            v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged" @keyup.enter="applyFilters">
                     </div>
                     <div class="col-12 col-md-2">
                         <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
