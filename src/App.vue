@@ -42,7 +42,7 @@ const navItems = [
   },
   {
     label: 'Archive',
-    command: () => go('/archive/')
+    command: () => window.location.href = '/FIT5120-Consumption-Advisor/archive/'
   }
 ]
 </script>
