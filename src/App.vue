@@ -42,7 +42,7 @@ const navItems = [
   },
   {
     label: 'Archive',
-    command: () => go('/archive')
+    command: () => go('/archive/')
   }
 ]
 </script>
