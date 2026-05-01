@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FoodMainView from '@/views/FoodMainView.vue'
 import FoodDisposalView from '@/views/FoodDisposalView.vue'
 import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
-import ClothingMainView from '@/views/ClothingMainView.vue'
 import ClothingAwarenessView from '@/views/ClothingAwarenessView.vue'
 
 const routes = [
@@ -11,11 +9,6 @@ const routes = [
         path: '/',
         name: 'Home',
         component: WelcomeView
-    },
-    {
-        path: '/food',
-        name: 'Food',
-        component: FoodMainView
     },
     {
         path: '/food1',
@@ -27,26 +20,12 @@ const routes = [
         name: 'Leftover Disposal',
         component: FoodDisposalView
     },
-    {
-        path: '/clothing',
-        name: 'Clothing',
-        component: ClothingMainView
-    },
+
     {
         path: '/clothing/awareness',
         name: 'Clothing Awareness',
         component: ClothingAwarenessView
-    },
-    {
-        path: '/clothing/decision',
-        name: 'Clothing Decision',
-        component: ClothingMainView
-    },
-    {
-        path: '/clothing/calculator',
-        name: 'Clothing Calculator',
-        component: ClothingMainView
-    },
+    }
 ]
 
 const router = createRouter({
