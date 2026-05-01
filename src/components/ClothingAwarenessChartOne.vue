@@ -1,6 +1,6 @@
 <template>
     <div class="chart-wrapper">
-        <apexchart type="bar" :options="chartOptions" :series="series" height="400" />
+        <apexchart type="line" :options="chartOptions" :series="series" height="400" />
     </div>
 </template>
 
@@ -36,16 +36,16 @@ const series = computed(() => [
 
 const chartOptions = computed(() => ({
     chart: {
-        type: 'bar',
-        stacked: true,
+        type: "line",
+        stacked: false,
         toolbar: { show: true },
     },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            borderRadius: 4,
-        },
-    },
+    // plotOptions: {
+    //     bar: {
+    //         horizontal: false,
+    //         borderRadius: 4,
+    //     },
+    // },
     xaxis: {
         categories: categories.value,
         title: { text: 'Financial Year' },
