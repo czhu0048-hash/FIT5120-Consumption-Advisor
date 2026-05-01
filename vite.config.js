@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/FIT5120-Consumption-Advisor/',
+  base: '/FIT5120-Consumption-Advisor/archive/',
   plugins: [
     vue(),
     vueDevTools(),
