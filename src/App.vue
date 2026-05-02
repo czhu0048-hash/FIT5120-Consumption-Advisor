@@ -1,9 +1,14 @@
 <script setup>
 import Menubar from 'primevue/menubar'
 import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 
 const router = useRouter()
 const go = (path) => router.push(path)
+const passwordCorrect = ref(false);
+const userInput = ref("");
+const passwordTemp = "fit5120ta38";
+const passwordMessage = ref("")
 
 const navItems = [
   {
@@ -45,10 +50,24 @@ const navItems = [
     command: () => window.location.href = '/FIT5120-Consumption-Advisor/archive/'
   }
 ]
+
+const onClick = () => {
+  if (userInput.value === passwordTemp) {
+    passwordCorrect.value = true;
+    return;
+  }
+  passwordMessage.value = "Password Incorrect"
+}
 </script>
 
 <template>
-  <div class="d-flex flex-column min-vh-100">
+  <div v-if="!passwordCorrect"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 0.75rem;">
+    <input v-model="userInput" type="password" placeholder="Please enter website password" style="width: 100vh;">
+    <button @click="onClick">Confirm</button>
+    <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
+  </div>
+  <div class="d-flex flex-column min-vh-100" v-else-if="passwordCorrect">
     <Menubar :model="navItems" class="app-menubar">
       <template #start>
         <img src="@/assets/Icon_reduse.png" alt="RedUse Logo" class="nav-logo" />
