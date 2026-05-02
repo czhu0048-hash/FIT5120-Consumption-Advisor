@@ -1,7 +1,8 @@
 <script setup>
 import Menubar from 'primevue/menubar'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+// import { fetchTextileDetails } from './utils/clothingAwarenessStasticsFetcher'
 
 const router = useRouter()
 const go = (path) => router.push(path)
@@ -44,10 +45,6 @@ const navItems = [
         command: () => go('/clothing/calculator'),
       },
     ],
-  },
-  {
-    label: 'Archive',
-    command: () => window.location.href = '/FIT5120-Consumption-Advisor/archive/'
   }
 ]
 
@@ -58,6 +55,14 @@ const onClick = () => {
   }
   passwordMessage.value = "Password Incorrect"
 }
+
+// Test textile api
+onMounted(() => {
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    passwordCorrect.value = true;
+  }
+  // fetchTextileDetails();
+});
 </script>
 
 <template>
@@ -81,6 +86,9 @@ const onClick = () => {
     <main class="flex-grow-1 main-content">
       <div class="content-layer">
         <router-view></router-view>
+      </div>
+      <div style="display: flex; justify-content: center; align-items: center;">
+        <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
       </div>
     </main>
   </div>

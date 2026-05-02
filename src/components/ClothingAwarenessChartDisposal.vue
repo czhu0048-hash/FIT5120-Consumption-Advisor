@@ -39,6 +39,7 @@ const chartOptions = computed(() => ({
         type: "line",
         stacked: false,
         toolbar: { show: true },
+        background: '#fff'
     },
     // plotOptions: {
     //     bar: {
