@@ -38,7 +38,7 @@ const navItems = [
       },
       {
         label: 'Before You Buy',
-        command: () => go('/clothing/decision'),
+        command: () => go('/clothing/questionaire'),
       },
       {
         label: 'Calculator',
@@ -55,13 +55,11 @@ const onClick = () => {
   }
   passwordMessage.value = "Password Incorrect"
 }
-
-// Test textile api
 onMounted(() => {
+  // Skip password validation on mounted
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     passwordCorrect.value = true;
   }
-  // fetchTextileDetails();
 });
 </script>
 
@@ -87,10 +85,10 @@ onMounted(() => {
       <div class="content-layer">
         <router-view></router-view>
       </div>
-      <div style="display: flex; justify-content: center; align-items: center;">
-        <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
-      </div>
     </main>
+  </div>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
   </div>
 </template>
 
