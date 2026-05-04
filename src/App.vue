@@ -9,7 +9,7 @@ const router = useRouter()
 const go = (path) => router.push(path)
 const passwordCorrect = ref(false);
 const userInput = ref("");
-const passwordTemp = "fit5120ta38";
+const passwordTemp = "aNyThInG1sPaSsWoRd";
 const passwordMessage = ref("")
 
 const navItems = [
