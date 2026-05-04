@@ -48,7 +48,7 @@
 
             <!-- Reset -->
             <button style="border: none; color: #888;" @click="resetQuestionaire">
-                <i class="pi pi-refresh"></i> Start over
+                <i class="pi pi-refresh"></i> Back
             </button>
         </div>
     </div>
