@@ -18,6 +18,12 @@ export const resetQuestionaire = () => {
     answers.value = {}
 }
 
+export const returntoLastQuestion = () => {
+    questionIndex.value -= 1
+    // currentScore.value = 0
+    // answers.value = {}
+}
+
 export const addScore = (val) => {
     currentScore.value += val;
 }

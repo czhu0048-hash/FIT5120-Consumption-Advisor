@@ -3,7 +3,7 @@
     text-align: center; background-color: white; padding: 2rem;  width: 100%;">
         <!-- Back button -->
         <button @click="resetQuestionaire"
-            style="color: grey; border: none; background-color: transparent;">back</button>
+            style="color: grey; border: none; margin-left: auto; background-color: transparent; text-decoration: underline;">back</button>
         <!-- Progress -->
         <div style="width: 100%;">
             <div
