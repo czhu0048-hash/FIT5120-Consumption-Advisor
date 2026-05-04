@@ -95,11 +95,19 @@ onMounted(() => {
 <style scoped>
 .main-content {
   position: relative;
-  background-color: #e0f8f2;
+  /*background-color: #e0f8f2;*/
+  background-image:
+    radial-gradient(100000px 90% at 0% 0%, #e0f8f2, transparent 100%);
+
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
+
+
+
+
+
 
 .content-layer {
   position: relative;
