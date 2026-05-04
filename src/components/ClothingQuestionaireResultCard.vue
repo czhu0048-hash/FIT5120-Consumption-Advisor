@@ -35,7 +35,7 @@
 
             <div class="row gap-2" style="width: 100%; justify-content: center;">
                 <!-- Calculator Button -->
-                <button class="questionaireButton">
+                <button class="questionaireButton" @click="router.push('/clothing/calculator')">
                     Clothing Care Calculator →
                 </button>
                 <!-- Community Listing Button -->
@@ -57,7 +57,8 @@
 <script setup>
 import { computed } from 'vue'
 import { getScore, resetQuestionaire } from '@/utils/questionaireController'
-
+import { useRouter } from 'vue-router'
+const router = useRouter();
 const props = defineProps({
     results: {
         type: Object,
