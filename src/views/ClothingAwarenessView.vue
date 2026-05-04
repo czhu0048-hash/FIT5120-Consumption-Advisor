@@ -1,6 +1,11 @@
 <template>
     <div class="clothing-awareness-view">
-        <h1 class="view-title">Clothing & Textile Waste Awareness</h1>
+        <h1 class="display-5 fw-normal">
+            <span class="font-inter"><b>The</b></span>
+            <span class="font-grace"> Story behind </span>
+            <span class="font-inter"><b>our wardrobes</b></span></h1>
+        <p class="text-secondary fs-8">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's what the numbers actually look like.</p>
+
 
 
         <div v-if="loading" class="status-message">Loading data...</div>
@@ -55,12 +60,11 @@ onMounted(async () => {
     padding: 2rem;
     max-width: 1000px;
     margin: 0 auto;
+    text-align: center;
 }
 
 .view-title {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.0rem;
     text-align: center;
 }
 
@@ -95,5 +99,20 @@ button:hover {
     border-color: transparent;
     background-color: darkgray;
     color: white;
+}
+
+
+.font-inter {
+	font-family: 'Inter', sans-serif;
+	overflow-x: hidden;
+}
+
+
+.font-grace {
+	font-family: 'Covered By Your Grace';
+	color: #009387;
+	font-size: clamp(24px, 5vw, 60px);
+	margin-bottom: 20px;
+    word-spacing: -7px;
 }
 </style>
