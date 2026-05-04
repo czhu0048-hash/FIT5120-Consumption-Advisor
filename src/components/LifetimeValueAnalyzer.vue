@@ -1,21 +1,24 @@
 <template>
   <div v-if="isOpen"
-    style="position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem;"
+    style="position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem; "
     @click.self="$emit('close')">
-    <div style="background:white; border-radius:1.5rem; box-shadow:0 25px 60px rgba(0,0,0,0.3); max-width:72rem; width:100%; height:90vh; display:flex; flex-direction:column; overflow:hidden;">
+    <div
+      style="background:white; border-radius:1.5rem; box-shadow:0 25px 60px rgba(0,0,0,0.3); max-width:52rem; width:100%; height:78vh; display:flex; flex-direction:column; overflow:hidden;">
 
       <!-- Header -->
-      <div style="border-bottom:1px solid #f3f4f6; padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+      <div
+        style="border-bottom:1px solid #f3f4f6; padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
         <div>
           <h2 style="font-size:1.5rem; font-weight:700; color:#111827; margin:0 0 0.25rem;">Analyze Lifetime Value</h2>
-          <p style="font-size:0.875rem; color:#6b7280; margin:0;">Add details about your clothing item and care habits to get a personalized value score.</p>
+          <p style="font-size:0.875rem; color:#6b7280; margin:0;">Add details about your clothing item and care habits
+            to get a personalized value score.</p>
         </div>
         <button @click="$emit('close')"
           style="background:none; border:none; cursor:pointer; padding:0.5rem; border-radius:0.5rem; color:#9ca3af; transition:background 0.2s;"
           onmouseover="this.style.background='#f3f4f6'; this.style.color='#374151'"
           onmouseout="this.style.background='none'; this.style.color='#9ca3af'">
           <svg style="width:1.25rem; height:1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
@@ -24,14 +27,20 @@
       <div style="display:grid; grid-template-columns:40% 60%; flex:1; overflow:hidden;">
 
         <!-- LEFT PANEL -->
-        <div style="background:#f9fafb; padding:2rem; overflow-y:auto; display:flex; flex-direction:column; gap:1.5rem;">
+        <div
+          style="background:#f9fafb; padding:2rem; overflow-y:auto; display:flex; flex-direction:column; gap:1.5rem;">
 
           <!-- Item Details -->
-          <div style="background:white; border-radius:1rem; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #f3f4f6;">
-            <h3 style="font-size:0.875rem; font-weight:700; color:#111827; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">Item Details</h3>
+          <div
+            style="background:white; border-radius:1rem; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #f3f4f6;">
+            <h3
+              style="font-size:0.875rem; font-weight:700; color:#111827; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">
+              Item Details</h3>
             <div style="display:flex; flex-direction:column; gap:1rem;">
               <div>
-                <label style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Clothing Type</label>
+                <label
+                  style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Clothing
+                  Type</label>
                 <select v-model="itemType"
                   style="width:100%; padding:0.75rem 1rem; background:#f9fafb; border:1px solid #e5e7eb; border-radius:0.75rem; font-size:0.9375rem; color:#111827; outline:none; cursor:pointer; transition:border-color 0.2s;"
                   onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'">
@@ -45,7 +54,8 @@
                 </select>
               </div>
               <div>
-                <label style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Material</label>
+                <label
+                  style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Material</label>
                 <select v-model="material"
                   style="width:100%; padding:0.75rem 1rem; background:#f9fafb; border:1px solid #e5e7eb; border-radius:0.75rem; font-size:0.9375rem; color:#111827; outline:none; cursor:pointer; transition:border-color 0.2s;"
                   onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'">
@@ -60,13 +70,17 @@
                 </select>
               </div>
               <div>
-                <label style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Price Paid ($)</label>
+                <label
+                  style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Price
+                  Paid ($)</label>
                 <input type="number" v-model.number="price" min="0" max="2000" placeholder="e.g. 89"
                   style="width:100%; padding:0.75rem 1rem; background:#f9fafb; border:1px solid #e5e7eb; border-radius:0.75rem; font-size:0.9375rem; color:#111827; outline:none; transition:border-color 0.2s; box-sizing:border-box;"
                   onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'" />
               </div>
               <div>
-                <label style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Brand Quality</label>
+                <label
+                  style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Brand
+                  Quality</label>
                 <select v-model="quality"
                   style="width:100%; padding:0.75rem 1rem; background:#f9fafb; border:1px solid #e5e7eb; border-radius:0.75rem; font-size:0.9375rem; color:#111827; outline:none; cursor:pointer; transition:border-color 0.2s;"
                   onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'">
@@ -80,8 +94,11 @@
           </div>
 
           <!-- Usage -->
-          <div style="background:white; border-radius:1rem; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #f3f4f6;">
-            <h3 style="font-size:0.875rem; font-weight:700; color:#111827; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">Usage Habits</h3>
+          <div
+            style="background:white; border-radius:1rem; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #f3f4f6;">
+            <h3
+              style="font-size:0.875rem; font-weight:700; color:#111827; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">
+              Usage Habits</h3>
             <div style="display:flex; flex-direction:column; gap:1.25rem;">
               <div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
@@ -97,8 +114,11 @@
           </div>
 
           <!-- Care Habits -->
-          <div style="background:white; border-radius:1rem; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #f3f4f6;">
-            <h3 style="font-size:0.875rem; font-weight:700; color:#111827; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">Care Habits</h3>
+          <div
+            style="background:white; border-radius:1rem; padding:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,0.06); border:1px solid #f3f4f6;">
+            <h3
+              style="font-size:0.875rem; font-weight:700; color:#111827; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">
+              Care Habits</h3>
             <div style="display:flex; flex-direction:column; gap:1.25rem;">
               <div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
@@ -110,7 +130,8 @@
                   :style="`background: linear-gradient(to right, #16a34a 0%, #16a34a ${(washFrequency / 20) * 100}%, #e5e7eb ${(washFrequency / 20) * 100}%, #e5e7eb 100%)`" />
                 <p style="font-size:0.75rem; color:#9ca3af; margin:0.375rem 0 0;">{{ washLabel }}</p>
               </div>
-              <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.5rem; border-top:1px solid #f3f4f6;">
+              <div
+                style="display:flex; align-items:center; justify-content:space-between; padding-top:0.5rem; border-top:1px solid #f3f4f6;">
                 <div>
                   <label style="font-size:0.875rem; font-weight:500; color:#374151; display:block;">Tumble Dry</label>
                   <span style="font-size:0.75rem; color:#9ca3af;">Reduces fabric lifespan significantly</span>
@@ -118,21 +139,21 @@
                 <button @click="tumbleDry = !tumbleDry"
                   :style="tumbleDry ? 'background:#16a34a;' : 'background:#d1d5db;'"
                   style="position:relative; width:3.5rem; height:1.75rem; border-radius:9999px; border:none; cursor:pointer; transition:background 0.2s; flex-shrink:0;">
-                  <span
-                    :style="tumbleDry ? 'transform:translateX(1.75rem);' : 'transform:translateX(0.125rem);'"
+                  <span :style="tumbleDry ? 'transform:translateX(1.75rem);' : 'transform:translateX(0.125rem);'"
                     style="position:absolute; top:0.125rem; width:1.5rem; height:1.5rem; background:white; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:transform 0.2s; display:block;" />
                 </button>
               </div>
-              <div style="display:flex; align-items:center; justify-content:space-between; padding-top:0.5rem; border-top:1px solid #f3f4f6;">
+              <div
+                style="display:flex; align-items:center; justify-content:space-between; padding-top:0.5rem; border-top:1px solid #f3f4f6;">
                 <div>
-                  <label style="font-size:0.875rem; font-weight:500; color:#374151; display:block;">Proper Storage</label>
+                  <label style="font-size:0.875rem; font-weight:500; color:#374151; display:block;">Proper
+                    Storage</label>
                   <span style="font-size:0.75rem; color:#9ca3af;">Hanging, folded correctly, climate-controlled</span>
                 </div>
                 <button @click="properStorage = !properStorage"
                   :style="properStorage ? 'background:#16a34a;' : 'background:#d1d5db;'"
                   style="position:relative; width:3.5rem; height:1.75rem; border-radius:9999px; border:none; cursor:pointer; transition:background 0.2s; flex-shrink:0;">
-                  <span
-                    :style="properStorage ? 'transform:translateX(1.75rem);' : 'transform:translateX(0.125rem);'"
+                  <span :style="properStorage ? 'transform:translateX(1.75rem);' : 'transform:translateX(0.125rem);'"
                     style="position:absolute; top:0.125rem; width:1.5rem; height:1.5rem; background:white; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:transform 0.2s; display:block;" />
                 </button>
               </div>
@@ -146,9 +167,10 @@
             onmouseover="if(!this.disabled) { this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22,163,74,0.4)' }"
             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
             <template v-if="isAnalyzing">
-              <svg style="width:1.25rem; height:1.25rem; animation:spin 1s linear infinite;" fill="none" viewBox="0 0 24 24">
-                <circle style="opacity:0.25;" cx="12" cy="12" r="10" stroke="white" stroke-width="4"/>
-                <path style="opacity:0.75;" fill="white" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+              <svg style="width:1.25rem; height:1.25rem; animation:spin 1s linear infinite;" fill="none"
+                viewBox="0 0 24 24">
+                <circle style="opacity:0.25;" cx="12" cy="12" r="10" stroke="white" stroke-width="4" />
+                <path style="opacity:0.75;" fill="white" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
               Analyzing...
             </template>
@@ -165,76 +187,96 @@
           <div v-if="!showResults">
             <div style="margin-bottom:1.5rem;">
               <h3 style="font-size:1.25rem; font-weight:700; color:#111827; margin:0 0 0.25rem;">Live Value Preview</h3>
-              <p style="font-size:0.875rem; color:#9ca3af; margin:0;">Adjust inputs to see how your habits affect the score in real time.</p>
+              <p style="font-size:0.875rem; color:#9ca3af; margin:0;">Adjust inputs to see how your habits affect the
+                score in
+                real time.</p>
             </div>
 
             <!-- Score Circle -->
-            <div style="background:linear-gradient(135deg, #f9fafb, white); border-radius:1.5rem; padding:2rem; border:1px solid #f3f4f6; box-shadow:0 1px 4px rgba(0,0,0,0.04); margin-bottom:1.5rem; text-align:center;">
-              <p style="font-size:0.875rem; font-weight:500; color:#6b7280; margin:0 0 1.5rem;">Overall Lifetime Value Score</p>
-              <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+            <div
+              style="background:linear-gradient(135deg, #f9fafb, white); border-radius:1.5rem; padding:2rem; border:1px solid #f3f4f6; box-shadow:0 1px 4px rgba(0,0,0,0.04); margin-bottom:1.5rem; text-align:center;">
+              <p style="font-size:0.875rem; font-weight:500; color:#6b7280; margin:0 0 1.5rem;">Overall Lifetime Value
+                Score</p>
+              <div
+                style="position:relative; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
                 <svg style="width:10rem; height:10rem; transform:rotate(-90deg);" viewBox="0 0 160 160">
-                  <circle cx="80" cy="80" r="68" stroke="#f3f4f6" stroke-width="12" fill="none"/>
-                  <circle cx="80" cy="80" r="68"
-                    :stroke="scoreRingColor"
-                    stroke-width="12" fill="none"
-                    stroke-linecap="round"
-                    :stroke-dasharray="`${2 * Math.PI * 68}`"
+                  <circle cx="80" cy="80" r="68" stroke="#f3f4f6" stroke-width="12" fill="none" />
+                  <circle cx="80" cy="80" r="68" :stroke="scoreRingColor" stroke-width="12" fill="none"
+                    stroke-linecap="round" :stroke-dasharray="`${2 * Math.PI * 68}`"
                     :stroke-dashoffset="`${2 * Math.PI * 68 * (1 - calc.overallScore / 100)}`"
-                    style="transition: stroke-dashoffset 0.6s ease-out, stroke 0.6s ease;"
-                  />
+                    style="transition: stroke-dashoffset 0.6s ease-out, stroke 0.6s ease;" />
                   <defs>
                     <linearGradient id="scoreGradLive" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#22c55e"/>
-                      <stop offset="100%" stop-color="#10b981"/>
+                      <stop offset="0%" stop-color="#22c55e" />
+                      <stop offset="100%" stop-color="#10b981" />
                     </linearGradient>
                   </defs>
                 </svg>
-                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                  <div style="font-size:2.5rem; font-weight:800; color:#111827; line-height:1;">{{ Math.round(calc.overallScore) }}</div>
+                <div
+                  style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                  <div style="font-size:2.5rem; font-weight:800; color:#111827; line-height:1;">{{
+                    Math.round(calc.overallScore)
+                  }}</div>
                   <div style="font-size:0.875rem; color:#9ca3af;">/100</div>
                 </div>
               </div>
-              <p :style="{fontSize: '1.25rem', fontWeight: '700', color: scoreTextColor, margin: '0'}">{{ valueLabel }}</p>
+              <p :style="{ fontSize: '1.25rem', fontWeight: '700', color: scoreTextColor, margin: '0' }">{{ valueLabel
+                }}
+              </p>
             </div>
 
             <!-- Score Breakdown -->
             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:1.5rem;">
-              <div style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{ calc.lifespan.toFixed(1) }}<span style="font-size:0.75rem; color:#9ca3af;"> yrs</span></div>
+              <div
+                style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{
+                  calc.lifespan.toFixed(1) }}<span style="font-size:0.75rem; color:#9ca3af;"> yrs</span></div>
                 <div style="font-size:0.75rem; color:#9ca3af;">Est. Lifespan</div>
               </div>
-              <div style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">${{ calc.costPerWear.toFixed(2) }}</div>
+              <div
+                style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">${{
+                  calc.costPerWear.toFixed(2) }}</div>
                 <div style="font-size:0.75rem; color:#9ca3af;">Cost / Wear</div>
               </div>
-              <div style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{ calc.breakEven }}</div>
+              <div
+                style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{ calc.breakEven
+                }}
+                </div>
                 <div style="font-size:0.75rem; color:#9ca3af;">Break-even</div>
               </div>
             </div>
 
             <!-- Sub-scores -->
-            <div style="background:#f9fafb; border-radius:1rem; padding:1.5rem; border:1px solid #f3f4f6; margin-bottom:1.5rem;">
-              <h4 style="font-size:0.8125rem; font-weight:700; color:#374151; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">Score Breakdown</h4>
+            <div
+              style="background:#f9fafb; border-radius:1rem; padding:1.5rem; border:1px solid #f3f4f6; margin-bottom:1.5rem;">
+              <h4
+                style="font-size:0.8125rem; font-weight:700; color:#374151; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">
+                Score Breakdown</h4>
               <div style="display:flex; flex-direction:column; gap:0.875rem;">
                 <div v-for="sub in scoreBreakdown" :key="sub.label">
                   <div style="display:flex; justify-content:space-between; margin-bottom:0.375rem;">
                     <span style="font-size:0.875rem; color:#374151;">{{ sub.label }}</span>
-                    <span style="font-size:0.875rem; font-weight:600; color:#111827;">{{ Math.round(sub.score) }}/100</span>
+                    <span style="font-size:0.875rem; font-weight:600; color:#111827;">{{ Math.round(sub.score)
+                    }}/100</span>
                   </div>
                   <div style="height:0.5rem; background:#e5e7eb; border-radius:9999px; overflow:hidden;">
-                    <div :style="{width: sub.score + '%', background: sub.color, height:'100%', borderRadius:'9999px', transition:'width 0.6s ease'}" />
+                    <div
+                      :style="{ width: sub.score + '%', background: sub.color, height: '100%', borderRadius: '9999px', transition: 'width 0.6s ease' }" />
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Insight -->
-            <div style="background:linear-gradient(135deg, #eff6ff, #eef2ff); border-radius:1rem; padding:1.25rem; border:1px solid #bfdbfe;">
+            <div
+              style="background:linear-gradient(135deg, #eff6ff, #eef2ff); border-radius:1rem; padding:1.25rem; border:1px solid #bfdbfe;">
               <div style="display:flex; gap:0.75rem;">
                 <span style="font-size:1.25rem; flex-shrink:0;">💡</span>
                 <div>
-                  <h4 style="font-weight:600; color:#111827; margin:0 0 0.375rem; font-size:0.9375rem;">Quick Insight</h4>
+                  <h4 style="font-weight:600; color:#111827; margin:0 0 0.375rem; font-size:0.9375rem;">Quick Insight
+                  </h4>
                   <p style="font-size:0.875rem; color:#374151; line-height:1.6; margin:0;">{{ calc.insight }}</p>
                 </div>
               </div>
@@ -245,7 +287,8 @@
           <div v-else>
             <div style="margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between;">
               <div>
-                <h3 style="font-size:1.25rem; font-weight:700; color:#111827; margin:0 0 0.25rem;">Analysis Complete</h3>
+                <h3 style="font-size:1.25rem; font-weight:700; color:#111827; margin:0 0 0.25rem;">Analysis Complete
+                </h3>
                 <p style="font-size:0.875rem; color:#9ca3af; margin:0;">Full lifetime value report for your item</p>
               </div>
               <button @click="showResults = false"
@@ -257,42 +300,52 @@
             </div>
 
             <!-- Big Score -->
-            <div style="background:linear-gradient(135deg, #f9fafb, white); border-radius:1.5rem; padding:2rem; border:1px solid #f3f4f6; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:1.5rem; text-align:center;">
-              <p style="font-size:0.875rem; font-weight:500; color:#6b7280; margin:0 0 1.5rem;">Overall Lifetime Value Score</p>
-              <div style="position:relative; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
+            <div
+              style="background:linear-gradient(135deg, #f9fafb, white); border-radius:1.5rem; padding:2rem; border:1px solid #f3f4f6; box-shadow:0 2px 8px rgba(0,0,0,0.06); margin-bottom:1.5rem; text-align:center;">
+              <p style="font-size:0.875rem; font-weight:500; color:#6b7280; margin:0 0 1.5rem;">Overall Lifetime Value
+                Score</p>
+              <div
+                style="position:relative; display:inline-flex; align-items:center; justify-content:center; margin-bottom:1rem;">
                 <svg style="width:12rem; height:12rem; transform:rotate(-90deg);" viewBox="0 0 160 160">
-                  <circle cx="80" cy="80" r="68" stroke="#f3f4f6" stroke-width="14" fill="none"/>
-                  <circle cx="80" cy="80" r="68"
-                    :stroke="scoreRingColor"
-                    stroke-width="14" fill="none"
-                    stroke-linecap="round"
-                    :stroke-dasharray="`${2 * Math.PI * 68}`"
+                  <circle cx="80" cy="80" r="68" stroke="#f3f4f6" stroke-width="14" fill="none" />
+                  <circle cx="80" cy="80" r="68" :stroke="scoreRingColor" stroke-width="14" fill="none"
+                    stroke-linecap="round" :stroke-dasharray="`${2 * Math.PI * 68}`"
                     :stroke-dashoffset="`${2 * Math.PI * 68 * (1 - animatedScore / 100)}`"
-                    style="transition: stroke-dashoffset 1.2s ease-out;"
-                  />
+                    style="transition: stroke-dashoffset 1.2s ease-out;" />
                 </svg>
-                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                  <div style="font-size:3rem; font-weight:800; color:#111827; line-height:1;">{{ Math.round(animatedScore) }}</div>
+                <div
+                  style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                  <div style="font-size:3rem; font-weight:800; color:#111827; line-height:1;">{{
+                    Math.round(animatedScore) }}
+                  </div>
                   <div style="font-size:0.875rem; color:#9ca3af;">/100</div>
                 </div>
               </div>
-              <p :style="{fontSize: '1.5rem', fontWeight: '800', color: scoreTextColor, margin: '0'}">{{ valueLabel }}</p>
+              <p :style="{ fontSize: '1.5rem', fontWeight: '800', color: scoreTextColor, margin: '0' }">{{ valueLabel }}
+              </p>
             </div>
 
             <!-- Metrics Grid -->
             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:1.5rem;">
-              <div v-for="m in resultMetrics" :key="m.label" style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04); text-align:center;">
+              <div v-for="m in resultMetrics" :key="m.label"
+                style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04); text-align:center;">
                 <div style="font-size:0.875rem; margin-bottom:0.25rem;">{{ m.icon }}</div>
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{ m.value }}</div>
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{ m.value }}
+                </div>
                 <div style="font-size:0.75rem; color:#9ca3af;">{{ m.label }}</div>
               </div>
             </div>
 
             <!-- Break-even Progress -->
-            <div style="background:#eff6ff; border-radius:1rem; padding:1.5rem; border:1px solid #bfdbfe; margin-bottom:1.5rem;">
-              <h4 style="font-size:0.8125rem; font-weight:700; color:#374151; margin:0 0 0.875rem; text-transform:uppercase; letter-spacing:0.05em;">Break-even Progress</h4>
-              <div style="height:0.625rem; background:white; border-radius:9999px; overflow:hidden; margin-bottom:0.75rem;">
-                <div :style="{width: Math.min(100, (wearsPerMonth / calc.breakEvenWears) * 100) + '%', background: 'linear-gradient(to right, #3b82f6, #6366f1)', height:'100%', borderRadius:'9999px', transition:'width 1s ease'}" />
+            <div
+              style="background:#eff6ff; border-radius:1rem; padding:1.5rem; border:1px solid #bfdbfe; margin-bottom:1.5rem;">
+              <h4
+                style="font-size:0.8125rem; font-weight:700; color:#374151; margin:0 0 0.875rem; text-transform:uppercase; letter-spacing:0.05em;">
+                Break-even Progress</h4>
+              <div
+                style="height:0.625rem; background:white; border-radius:9999px; overflow:hidden; margin-bottom:0.75rem;">
+                <div
+                  :style="{ width: Math.min(100, (wearsPerMonth / calc.breakEvenWears) * 100) + '%', background: 'linear-gradient(to right, #3b82f6, #6366f1)', height: '100%', borderRadius: '9999px', transition: 'width 1s ease' }" />
               </div>
               <div style="display:flex; justify-content:space-between; font-size:0.8125rem; color:#374151;">
                 <span>0 wears</span>
@@ -302,28 +355,36 @@
             </div>
 
             <!-- Score Breakdown -->
-            <div style="background:#f9fafb; border-radius:1rem; padding:1.5rem; border:1px solid #f3f4f6; margin-bottom:1.5rem;">
-              <h4 style="font-size:0.8125rem; font-weight:700; color:#374151; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">Score Breakdown</h4>
+            <div
+              style="background:#f9fafb; border-radius:1rem; padding:1.5rem; border:1px solid #f3f4f6; margin-bottom:1.5rem;">
+              <h4
+                style="font-size:0.8125rem; font-weight:700; color:#374151; margin:0 0 1rem; text-transform:uppercase; letter-spacing:0.05em;">
+                Score Breakdown</h4>
               <div style="display:flex; flex-direction:column; gap:0.875rem;">
                 <div v-for="sub in scoreBreakdown" :key="sub.label">
                   <div style="display:flex; justify-content:space-between; margin-bottom:0.375rem;">
                     <span style="font-size:0.875rem; color:#374151;">{{ sub.label }}</span>
-                    <span style="font-size:0.875rem; font-weight:600; color:#111827;">{{ Math.round(sub.score) }}/100</span>
+                    <span style="font-size:0.875rem; font-weight:600; color:#111827;">{{ Math.round(sub.score)
+                    }}/100</span>
                   </div>
                   <div style="height:0.5rem; background:#e5e7eb; border-radius:9999px; overflow:hidden;">
-                    <div :style="{width: sub.score + '%', background: sub.color, height:'100%', borderRadius:'9999px'}" />
+                    <div
+                      :style="{ width: sub.score + '%', background: sub.color, height: '100%', borderRadius: '9999px' }" />
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Recommendation -->
-            <div :style="{background: recommendationBg, border: `1px solid ${recommendationBorder}`, borderRadius:'1rem', padding:'1.25rem', marginBottom:'1.5rem'}">
+            <div
+              :style="{ background: recommendationBg, border: `1px solid ${recommendationBorder}`, borderRadius: '1rem', padding: '1.25rem', marginBottom: '1.5rem' }">
               <div style="display:flex; gap:0.75rem;">
                 <span style="font-size:1.25rem; flex-shrink:0;">{{ recommendationIcon }}</span>
                 <div>
-                  <h4 style="font-weight:700; color:#111827; margin:0 0 0.5rem; font-size:0.9375rem;">Recommendation</h4>
-                  <p style="font-size:0.875rem; color:#374151; line-height:1.65; margin:0;">{{ calc.recommendation }}</p>
+                  <h4 style="font-weight:700; color:#111827; margin:0 0 0.5rem; font-size:0.9375rem;">Recommendation
+                  </h4>
+                  <p style="font-size:0.875rem; color:#374151; line-height:1.65; margin:0;">{{ calc.recommendation }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -357,18 +418,18 @@ const props = defineProps({ isOpen: { type: Boolean, required: true } })
 defineEmits(['close'])
 
 // Inputs
-const itemType    = ref('')
-const material    = ref('')
-const price       = ref(89)
-const quality     = ref('mid')
+const itemType = ref('')
+const material = ref('')
+const price = ref(89)
+const quality = ref('mid')
 const wearsPerMonth = ref(4)
 const washFrequency = ref(3)
-const tumbleDry   = ref(false)
+const tumbleDry = ref(false)
 const properStorage = ref(true)
 
 // UI state
-const showResults  = ref(false)
-const isAnalyzing  = ref(false)
+const showResults = ref(false)
+const isAnalyzing = ref(false)
 const animatedScore = ref(0)
 
 // ─── Calculation Engine ───────────────────────────────────────────
@@ -393,15 +454,15 @@ const MATERIAL_ENV = {
 const QUALITY_MOD = { fast: 0.75, mid: 1.0, premium: 1.25, luxury: 1.40 }
 
 const calc = computed(() => {
-  const priceNum      = Math.max(1, price.value || 89)
-  const matMod        = MATERIAL_MODIFIER[material.value] || 1.0
-  const qualMod       = QUALITY_MOD[quality.value] || 1.0
-  const baseMonths    = ITEM_LIFESPAN[itemType.value] || 36
+  const priceNum = Math.max(1, price.value || 89)
+  const matMod = MATERIAL_MODIFIER[material.value] || 1.0
+  const qualMod = QUALITY_MOD[quality.value] || 1.0
+  const baseMonths = ITEM_LIFESPAN[itemType.value] || 36
 
   // Lifespan calculation (in years)
   let lifespanMonths = baseMonths * matMod * qualMod
   lifespanMonths *= Math.pow(0.96, washFrequency.value)   // each wash/month degrades by 4%
-  if (tumbleDry.value)    lifespanMonths *= 0.80           // tumble dry = -20%
+  if (tumbleDry.value) lifespanMonths *= 0.80           // tumble dry = -20%
   if (!properStorage.value) lifespanMonths *= 0.88          // bad storage = -12%
   // High wear frequency slightly reduces lifespan too
   lifespanMonths *= Math.max(0.7, 1 - (wearsPerMonth.value - 4) * 0.005)
@@ -420,12 +481,12 @@ const calc = computed(() => {
 
   // 1. Cost-Per-Wear Score
   let cpwScore
-  if      (costPerWear < 0.25) cpwScore = 100
+  if (costPerWear < 0.25) cpwScore = 100
   else if (costPerWear < 0.50) cpwScore = 90
   else if (costPerWear < 1.00) cpwScore = 70
   else if (costPerWear < 2.00) cpwScore = 45
   else if (costPerWear < 3.50) cpwScore = 25
-  else                          cpwScore = 10
+  else cpwScore = 10
 
   // 2. Longevity Score (baseline: 3 years = 60)
   const longevityScore = Math.min(100, Math.max(5, (lifespan / 5) * 100))
@@ -443,10 +504,10 @@ const calc = computed(() => {
 
   // Overall score: weighted
   const overallScore = Math.min(100, Math.max(0,
-    cpwScore    * 0.35 +
+    cpwScore * 0.35 +
     longevityScore * 0.30 +
-    envScore    * 0.20 +
-    usageScore  * 0.15
+    envScore * 0.20 +
+    usageScore * 0.15
   ))
 
   // Recommendation
@@ -465,26 +526,26 @@ const calc = computed(() => {
   const insight = overallScore >= 70
     ? `Great habits! At $${costPerWear.toFixed(2)}/wear you're maximizing value. ${!tumbleDry.value ? 'Air drying is extending your item\'s life.' : ''}`
     : overallScore >= 50
-    ? `You can improve value by wearing this item ${wearsPerMonth.value < 6 ? 'more often (aim for 6+ wears/month)' : 'more carefully'}. Cost/wear is currently $${costPerWear.toFixed(2)}.`
-    : `Low wear rate + frequent washing results in poor value. Try wearing before washing and using air drying.`
+      ? `You can improve value by wearing this item ${wearsPerMonth.value < 6 ? 'more often (aim for 6+ wears/month)' : 'more carefully'}. Cost/wear is currently $${costPerWear.toFixed(2)}.`
+      : `Low wear rate + frequent washing results in poor value. Try wearing before washing and using air drying.`
 
   return { lifespan, totalWears, costPerWear, breakEvenWears, overallScore, cpwScore, longevityScore, envScore, usageScore, recommendation, insight }
 })
 
 const scoreBreakdown = computed(() => [
-  { label: 'Cost Efficiency',  score: calc.value.cpwScore,       color: '#10b981' },
-  { label: 'Longevity',        score: calc.value.longevityScore, color: '#3b82f6' },
-  { label: 'Environmental',    score: calc.value.envScore,       color: '#22c55e' },
-  { label: 'Usage Rate',       score: calc.value.usageScore,     color: '#f59e0b' },
+  { label: 'Cost Efficiency', score: calc.value.cpwScore, color: '#10b981' },
+  { label: 'Longevity', score: calc.value.longevityScore, color: '#3b82f6' },
+  { label: 'Environmental', score: calc.value.envScore, color: '#22c55e' },
+  { label: 'Usage Rate', score: calc.value.usageScore, color: '#f59e0b' },
 ])
 
 const resultMetrics = computed(() => [
-  { label: 'Lifespan',      value: `${calc.value.lifespan.toFixed(1)} yrs`, icon: '⏳' },
-  { label: 'Cost / Wear',   value: `$${calc.value.costPerWear.toFixed(2)}`, icon: '💰' },
-  { label: 'Total Wears',   value: calc.value.totalWears,                    icon: '👕' },
-  { label: 'Break-even',    value: `${calc.value.breakEvenWears} wears`,     icon: '📊' },
-  { label: 'Env. Score',    value: `${Math.round(calc.value.envScore)}/100`,  icon: '🌿' },
-  { label: 'Value Rating',  value: valueLabel.value,                          icon: '⭐' },
+  { label: 'Lifespan', value: `${calc.value.lifespan.toFixed(1)} yrs`, icon: '⏳' },
+  { label: 'Cost / Wear', value: `$${calc.value.costPerWear.toFixed(2)}`, icon: '💰' },
+  { label: 'Total Wears', value: calc.value.totalWears, icon: '👕' },
+  { label: 'Break-even', value: `${calc.value.breakEvenWears} wears`, icon: '📊' },
+  { label: 'Env. Score', value: `${Math.round(calc.value.envScore)}/100`, icon: '🌿' },
+  { label: 'Value Rating', value: valueLabel.value, icon: '⭐' },
 ])
 
 const valueLabel = computed(() => {
@@ -583,7 +644,12 @@ function animateScore() {
 
 <style>
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>

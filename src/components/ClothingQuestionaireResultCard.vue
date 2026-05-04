@@ -1,6 +1,6 @@
 <template>
-    <div class="container card gap-4 col-12 col-md-6" style="justify-content: center; align-items: center;
-    text-align: center; background-color: #eee; padding: 2rem;">
+    <div class="container card gap-4" style="justify-content: center; align-items: center;
+    text-align: center; background-color: white; padding: 2rem; width: 100%;">
 
         <div v-if="result" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
 
@@ -35,7 +35,7 @@
 
             <div class="row gap-2" style="width: 100%; justify-content: center;">
                 <!-- Calculator Button -->
-                <button class="questionaireButton" @click="router.push('/clothing/calculator')">
+                <button class="questionaireButton" @click="$emit('openCalculator')">
                     Clothing Care Calculator →
                 </button>
                 <!-- Community Listing Button -->
@@ -57,8 +57,8 @@
 <script setup>
 import { computed } from 'vue'
 import { getScore, resetQuestionaire } from '@/utils/questionaireController'
-import { useRouter } from 'vue-router'
-const router = useRouter();
+
+defineEmits(['openCalculator'])
 const props = defineProps({
     results: {
         type: Object,

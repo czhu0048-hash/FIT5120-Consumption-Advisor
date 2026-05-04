@@ -6,15 +6,17 @@
         <div v-if="loading" class="status-message">Loading data...</div>
         <div v-else-if="error" class="status-message error">Failed to load data. Please try again.</div>
         <div v-else class="charts-column">
-            <div class="row gap-5" style="justify-content: center; align-items: center;">
-                <label for="" style="width: auto;">Group by:</label>
-                <button @click="textileDataIndex = 0">Disposal Type</button>
-                <button @click="textileDataIndex = 1">Material</button>
-                <button @click="textileDataIndex = 2">Source Sector</button>
+            <div class="card" style="padding: 5%;">
+                <div class="row gap-5" style="justify-content: center; align-items: center;">
+                    <label for="" style="width: auto;">Group by:</label>
+                    <button @click="textileDataIndex = 0">Disposal Type</button>
+                    <button @click="textileDataIndex = 1">Material</button>
+                    <button @click="textileDataIndex = 2">Source Sector</button>
+                </div>
+                <ClothingAwarenessChartDisposal v-if="textileDataIndex == 0" :data="textileData" />
+                <ClothingAwarenessChartMaterials v-else-if="textileDataIndex == 1" :data="materialsData" />
+                <ClothingAwarenessChartSectors v-else :data="detailsData" />
             </div>
-            <ClothingAwarenessChartDisposal v-if="textileDataIndex == 0" :data="textileData" />
-            <ClothingAwarenessChartMaterials v-else-if="textileDataIndex == 1" :data="materialsData" />
-            <ClothingAwarenessChartSectors v-else :data="detailsData" />
         </div>
     </div>
 </template>

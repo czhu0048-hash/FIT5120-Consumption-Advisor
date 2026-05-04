@@ -1,6 +1,6 @@
 <template>
-    <div class="container card gap-4 col-12 col-md-6" style="justify-content: center; align-items: center;
-    text-align: center; background-color: #eee; padding: 2rem;">
+    <div class="container card gap-4" style="justify-content: center; align-items: center;
+    text-align: center; background-color: white; padding: 2rem;  width: 100%;">
 
         <!-- Progress -->
         <div style="width: 100%;">

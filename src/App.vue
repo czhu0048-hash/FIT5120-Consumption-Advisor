@@ -40,10 +40,10 @@ const navItems = [
         label: 'Before You Buy',
         command: () => go('/clothing/questionaire'),
       },
-      {
-        label: 'Calculator',
-        command: () => go('/clothing/calculator'),
-      },
+      // {
+      //   label: 'Calculator',
+      //   command: () => go('/clothing/calculator'),
+      // },
     ],
   }
 ]
