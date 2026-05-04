@@ -115,7 +115,6 @@ defineProps({
 }
 
 .recipe-badge {
-    /* 1. The Border and Shape */
     border: 1px solid #e0e0e0;
     border-radius: 7px;
     padding: 4px 12px;

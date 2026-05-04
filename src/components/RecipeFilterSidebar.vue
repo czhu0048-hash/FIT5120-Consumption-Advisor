@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-12 col-md-6 mb-4">
                 <label class="filter-label fw-bold small">
-                    <i class="pi pi-stopwatch" style="color: #6b705c;"></i>
+                    <i class="pi pi-stopwatch" style="color: #444;"></i>
                     Duration (mins)</label>
                 <div class="d-flex gap-2 mt-1">
 
@@ -32,7 +32,7 @@
 
             <!-- Difficulty -->
             <div class="col-12 col-md-6 mb-2">
-                <label class="filter-label fw-bold small"><i class="pi pi-chart-bar me-1"></i> Difficulty</label>
+                <label class="filter-label fw-bold small"><i class="pi pi-chart-bar me-1"></i>Difficulty</label>
                 <div class="d-flex gap-2 mt-1">
                     <button v-for="level in difficulties" :key="level" class="btn btn-sm difficulty-btn flex-grow-1"
                         :class="recipeFilters.difficulty === level ? 'active' : ''" @click="toggleDifficulty(level)">
@@ -100,7 +100,8 @@ const toggleFatLevel = (level) => {
 
 .filter-label {
     letter-spacing: 0.04em;
-    color: #555;
+    color: #444;
+    ;
     display: block;
 }
 
@@ -119,8 +120,8 @@ const toggleFatLevel = (level) => {
 }
 
 .difficulty-btn.active {
-    background-color: #2e7d32;
-    border-color: #2e7d32;
+    background-color: #009387;
+    border-color: #009387;
     color: white;
 }
 
@@ -128,5 +129,10 @@ const toggleFatLevel = (level) => {
 .material-symbols-outlined {
     font-size: 15px;
     transform: translateY(2px);
+}
+
+
+.pi {
+    font-size: 0.9em;
 }
 </style>
