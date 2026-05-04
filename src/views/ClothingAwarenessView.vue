@@ -3,8 +3,10 @@
         <h1 class="display-5 fw-normal">
             <span class="font-inter"><b>The</b></span>
             <span class="font-grace"> Story behind </span>
-            <span class="font-inter"><b>our wardrobes</b></span></h1>
-        <p class="text-secondary fs-8">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's what the numbers actually look like.</p>
+            <span class="font-inter"><b>our wardrobes</b></span>
+        </h1>
+        <p class="text-secondary fs-8">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's what
+            the numbers actually look like.</p>
 
 
 
@@ -94,7 +96,6 @@ button {
     border-style: solid;
     background-color: transparent;
     transition: all 0.2s;
-
 }
 
 button:hover {
@@ -103,18 +104,23 @@ button:hover {
     color: white;
 }
 
+button:focus {
+    color: white;
+    background-color: darkgreen;
+}
+
 
 .font-inter {
-	font-family: 'Inter', sans-serif;
-	overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
 }
 
 
 .font-grace {
-	font-family: 'Covered By Your Grace';
-	color: #009387;
-	font-size: clamp(24px, 5vw, 60px);
-	margin-bottom: 20px;
+    font-family: 'Covered By Your Grace';
+    color: #009387;
+    font-size: clamp(24px, 5vw, 60px);
+    margin-bottom: 20px;
     word-spacing: -7px;
 }
 </style>
