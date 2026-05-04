@@ -2,6 +2,7 @@
 import Menubar from 'primevue/menubar'
 import { useRouter } from 'vue-router'
 import { onMounted, ref } from 'vue'
+import { resetQuestionaire } from './utils/questionaireController'
 // import { fetchTextileDetails } from './utils/clothingAwarenessStasticsFetcher'
 
 const router = useRouter()
@@ -38,7 +39,10 @@ const navItems = [
       },
       {
         label: 'Before You Buy',
-        command: () => go('/clothing/questionaire'),
+        command: () => {
+          go('/clothing/questionaire');
+          resetQuestionaire();
+        },
       },
       // {
       //   label: 'Calculator',

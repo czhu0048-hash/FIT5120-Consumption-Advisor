@@ -15,7 +15,8 @@ const seeData = () => router.push('/clothing/awareness');
 <template>
     <div style="align-items: center;
     justify-content: center;">
-        <h1 v-if="getQuestionIndex === -1" style="text-align: center;">Cart can wait, <span>wardrobe can't</span></h1>
+        <h1 v-if="getQuestionIndex === -1" style="text-align: center; margin-top: 5rem;">Cart can wait, <span>wardrobe
+                can't</span></h1>
         <p v-if="getQuestionIndex === -1">Aussies buy 27kg of new clothes a year and toss most of it. Before you add to
             that pile, just 6 quick
             questions.
