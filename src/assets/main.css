@@ -5,6 +5,12 @@ body {
 }
 
 label {
+  color: black;
+  font-family: 'Nunito', sans-serif;
+}
+
+span {
+  color: black;
   font-family: 'Nunito', sans-serif;
 }
 
@@ -46,9 +52,9 @@ button {
   border-radius: 5rem;
 }
 
-/* .aura {
+.aura {
   background-color: #d2ffcc;
   color: #009387;
   padding: 2rem;
   border-radius: 5rem;
-} */
+}
