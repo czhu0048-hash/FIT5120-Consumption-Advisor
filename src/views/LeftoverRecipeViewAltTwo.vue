@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <a href="javascript:void(0)" class="text-decoration-none small fw-bold text-success color: #555"
+                    <a href="javascript:void(0)" class="small fw-bold filter-toggle"
                         @click="showFilters = !showFilters">
                         {{ showFilters ? 'Show Fewer Options ▲' : 'Show More Options ▼' }}
                     </a>
@@ -253,10 +253,6 @@ async function applyFilters() {
     border: 1px solid #e0e0e0;
 }
 
-.font-options {
-    color: #555;
-}
-
 
 .form-label {
     color: #444;
@@ -271,6 +267,17 @@ async function applyFilters() {
 
 .btn-success:hover {
     background-color: #007f70 !important;
+}
+
+.filter-toggle {
+    color: #009387;
+    transition: color 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.filter-toggle:hover {
+    color: #007f70;
+    text-decoration: underline;
 }
 
 .recipe-modal-backdrop {
