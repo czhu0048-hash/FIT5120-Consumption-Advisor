@@ -66,7 +66,7 @@ h1 {
     border-color: transparent;
     border-radius: 1rem;
     box-shadow: 5rem;
-    padding: 3%;
+    padding: 2rem;
     width: auto;
     color: white;
     font-size: 100%;

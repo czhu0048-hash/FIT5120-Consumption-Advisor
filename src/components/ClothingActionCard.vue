@@ -9,8 +9,8 @@
             <label v-if="description" style="color: #555; width: 75%;">{{ description }}</label>
             <div class="row gap-2 mb-3" style="width: 100%; justify-content: center;">
                 <button class="questionaireButton" @click="onLeftClick">{{ leftButtonLabel }}</button>
-                <button class="questionaireButton questionaireSubButton" @click="onRightClick">{{ rightButtonLabel
-                    }}</button>
+                <!-- <button class="questionaireButton questionaireSubButton" @click="onRightClick">{{ rightButtonLabel
+                    }}</button> -->
             </div>
         </div>
     </div>

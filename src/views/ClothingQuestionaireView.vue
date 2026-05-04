@@ -21,7 +21,7 @@ const seeData = () => router.push('/clothing/awareness');
             questions.
             No judgment, no pressure.</p>
         <div class="row justify-content-center align-items-stretch g-4" style="margin: 0;">
-            <div class="col-12 col-lg-5">
+            <div :class="getQuestionIndex === -1 ? 'col-12 col-lg-5' : 'col-12'">
                 <ClothingQuestionaireCard title="About to tap &quot;buy&quot;?"
                     description="Six quick questions, no judgement, no pressure -- just a pause"
                     confirmLabel=" Let's do it →" skipLabel="Already decided? Make it last"

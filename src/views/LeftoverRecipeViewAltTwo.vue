@@ -5,7 +5,8 @@
             <div class="text-center mb-4">
                 <h1 class="display-5 fw-normal">
                     <span class="font-inter"><b>Cook with what </b></span>
-                    <span class="font-grace">you've got</span></h1>
+                    <span class="font-grace">you've got</span>
+                </h1>
                 <p class="text-secondary fs-8">Add what's in your fridge. We'll do the matching.</p>
             </div>
 
@@ -13,13 +14,15 @@
             <div class="search-bar-container p-4 rounded shadow-sm bg-white mb-4">
                 <div class="row g-2 align-items-end">
                     <div class="col-12 col-md-4">
-                        <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-check-circle me-2" style="color: #6b705c;"></i>
+                        <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-check-circle me-2"
+                                style="color: #6b705c;"></i>
                             Ingredients to Include</label>
                         <input class="form-control" type="text" placeholder="e.g. Tomato, Apple"
                             v-model="ingredientInputString" @input="onInputStringChanged" @keyup.enter="applyFilters">
                     </div>
                     <div class="col-12 col-md-4">
-                        <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-times-circle me-2" style="color: #6b705c;"></i>
+                        <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-times-circle me-2"
+                                style="color: #6b705c;"></i>
                             Ingredients to Exclude</label>
                         <input class="form-control" type="text" placeholder="e.g. Nuts, Milk"
                             v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged"
@@ -231,19 +234,18 @@ async function applyFilters() {
 </script>
 
 <style scoped>
-
 .font-inter {
-	font-family: 'Inter', sans-serif;
-	overflow-x: hidden;
-    color: black
+    font-family: 'Inter', sans-serif;
+    color: black;
+    overflow-x: hidden;
 }
 
 
 .font-grace {
-	font-family: 'Covered By Your Grace';
-	color: #009387;
-	font-size: clamp(24px, 5vw, 60px);
-	margin-bottom: 20px;
+    font-family: 'Covered By Your Grace';
+    color: #009387;
+    font-size: clamp(24px, 5vw, 60px);
+    margin-bottom: 20px;
     word-spacing: -7px;
 }
 

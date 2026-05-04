@@ -1,5 +1,5 @@
 <template>
-    <div class="container card gap-4" style="justify-content: center; align-items: center;
+    <div class="container-fluid card gap-4" style="justify-content: center; align-items: center;
     text-align: center; background-color: white; padding: 2rem;  width: 100%;">
         <!-- Back button -->
         <button @click="resetQuestionaire"

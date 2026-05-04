@@ -151,7 +151,6 @@ onMounted(() => {
   /* make the navbar stick to the top (remove if no need) */
   z-index: 1000;
   /* make the navbar stick to the top (remove if no need) */
-
   background: white;
   border: none;
   border-radius: 0;
@@ -164,6 +163,11 @@ onMounted(() => {
 }
 
 /* All item links: base state */
+.app-menubar .p-menubar-item-label {
+  color: #2f2f31;
+  font-family: sans-serif;
+}
+
 .app-menubar .p-menubar-item-link {
   color: #2f2f31;
   border-radius: 5rem;

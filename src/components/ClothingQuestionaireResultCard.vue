@@ -1,5 +1,5 @@
 <template>
-    <div class="container card gap-4" style="justify-content: center; align-items: center;
+    <div class="container-fluid card gap-4" style="justify-content: center; align-items: center;
     text-align: center; background-color: white; padding: 2rem; width: 100%;">
 
         <div v-if="result" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
@@ -22,9 +22,9 @@
 
             <!-- Dynamic reasons -->
             <div v-if="dynamicReasons.length > 0"
-                style="background: white; border-radius: 0.75rem; padding: 1rem 1.25rem; width: 100%; text-align: left;">
+                style="background: white; text-align: center; border-radius: 0.75rem; width: 100%;">
                 <p
-                    style="font-size: 0.8rem; font-weight: 700; color: #888; margin: 0 0 0.5rem; text-transform: uppercase; letter-spacing: 0.1em;">
+                    style="font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.1em;">
                     A few things to consider:
                 </p>
                 <ul
@@ -33,15 +33,15 @@
                 </ul>
             </div>
 
-            <div class="row gap-2" style="width: 100%; justify-content: center;">
+            <div class="row gap-5" style="width: 100%; justify-content: center;">
                 <!-- Calculator Button -->
                 <button class="questionaireButton" @click="$emit('openCalculator')">
                     Clothing Care Calculator →
                 </button>
                 <!-- Community Listing Button -->
-                <button class="questionaireButton questionaireSubButton">
+                <!-- <button class="questionaireButton questionaireSubButton">
                     Browse Community Listings →
-                </button>
+                </button> -->
             </div>
             <!-- Tip -->
             <p style="color: #888; font-style: italic; font-size: 0.9rem; margin: 0;">{{ result.tip }}</p>
