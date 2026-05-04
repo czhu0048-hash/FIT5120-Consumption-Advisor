@@ -38,7 +38,7 @@ const seeData = () => router.push('/clothing/awareness');
     <LifetimeValueAnalyzer :isOpen="calculatorOpen" @close="calculatorOpen = false" />
 </template>
 
-<style>
+<style scoped>
 span {
     color: #009387;
     font-family: 'Covered By Your Grace'
