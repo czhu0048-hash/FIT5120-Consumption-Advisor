@@ -32,9 +32,7 @@
 
             <!-- Difficulty -->
             <div class="col-12 col-md-6 mb-2">
-                <label class="filter-label fw-bold small">
-                    <span class="material-symbols-outlined">floor</span>
-                    Difficulty</label>
+                <label class="filter-label fw-bold small"><i class="pi pi-chart-bar me-1"></i> Difficulty</label>
                 <div class="d-flex gap-2 mt-1">
                     <button v-for="level in difficulties" :key="level" class="btn btn-sm difficulty-btn flex-grow-1"
                         :class="recipeFilters.difficulty === level ? 'active' : ''" @click="toggleDifficulty(level)">
@@ -129,5 +127,6 @@ const toggleFatLevel = (level) => {
 
 .material-symbols-outlined {
     font-size: 15px;
+    transform: translateY(2px);
 }
 </style>
