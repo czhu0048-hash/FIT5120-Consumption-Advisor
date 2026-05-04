@@ -1,7 +1,9 @@
 <template>
     <div class="container card gap-4" style="justify-content: center; align-items: center;
     text-align: center; background-color: white; padding: 2rem;  width: 100%;">
-
+        <!-- Back button -->
+        <button @click="resetQuestionaire"
+            style="color: grey; border: none; background-color: transparent;">back</button>
         <!-- Progress -->
         <div style="width: 100%;">
             <div
@@ -35,7 +37,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { addScore, moveToNextQuestion, recordAnswer } from '@/utils/questionaireController'
+import { addScore, moveToNextQuestion, recordAnswer, resetQuestionaire } from '@/utils/questionaireController'
 
 const props = defineProps({
     question: {

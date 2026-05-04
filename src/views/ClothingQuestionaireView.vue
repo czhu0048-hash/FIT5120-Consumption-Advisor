@@ -15,8 +15,9 @@ const seeData = () => router.push('/clothing/awareness');
 <template>
     <div style="align-items: center;
     justify-content: center;">
-        <h1 style="text-align: center;">Cart can wait, <span>wardrobe can't</span></h1>
-        <p>Aussies buy 27kg of new clothes a year and toss most of it. Before you add to that pile, just 6 quick
+        <h1 v-if="getQuestionIndex === -1" style="text-align: center;">Cart can wait, <span>wardrobe can't</span></h1>
+        <p v-if="getQuestionIndex === -1">Aussies buy 27kg of new clothes a year and toss most of it. Before you add to
+            that pile, just 6 quick
             questions.
             No judgment, no pressure.</p>
         <div class="row justify-content-center align-items-stretch g-4" style="margin: 0;">
