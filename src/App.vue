@@ -95,7 +95,7 @@ onMounted(() => {
 <style scoped>
 .main-content {
   position: relative;
-  background-image: url('./assets/BackgroundBlurred.png');
+  background-color: #e0f8f2;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
