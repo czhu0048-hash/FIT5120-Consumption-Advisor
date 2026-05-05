@@ -1,9 +1,9 @@
 <template>
   <div v-if="isOpen"
-    style="position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem; "
+    style="position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem;"
     @click.self="$emit('close')">
     <div
-      style="background:white; border-radius:1.5rem; box-shadow:0 25px 60px rgba(0,0,0,0.3); max-width:52rem; width:100%; height:78vh; display:flex; flex-direction:column; overflow:hidden;">
+      style="background:white; border-radius:1.5rem; box-shadow:0 25px 60px rgba(0,0,0,0.3); max-width:72rem; width:100%; height:90vh; display:flex; flex-direction:column; overflow:hidden;">
 
       <!-- Header -->
       <div
@@ -72,10 +72,14 @@
               <div>
                 <label
                   style="display:block; font-size:0.875rem; font-weight:500; color:#374151; margin-bottom:0.375rem;">Price
-                  Paid ($)</label>
-                <input type="number" v-model.number="price" min="0" max="2000" placeholder="e.g. 89"
+                  Paid ($) <span style="color:#dc2626;">*</span></label>
+                <input type="number" v-model.number="price" min="1" max="2000" placeholder="e.g. 89"
+                  :style="(!isPriceValid && price !== null) ? 'border-color:#dc2626;' : ''"
                   style="width:100%; padding:0.75rem 1rem; background:#f9fafb; border:1px solid #e5e7eb; border-radius:0.75rem; font-size:0.9375rem; color:#111827; outline:none; transition:border-color 0.2s; box-sizing:border-box;"
                   onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e5e7eb'" />
+                <p v-if="price !== null && !isPriceValid"
+                  style="font-size:0.75rem; color:#dc2626; margin:0.375rem 0 0;">Please enter a price greater than $0 to
+                  calculate.</p>
               </div>
               <div>
                 <label
@@ -161,9 +165,9 @@
           </div>
 
           <!-- Analyze Button -->
-          <button @click="handleAnalyze" :disabled="isAnalyzing"
+          <button @click="handleAnalyze" :disabled="isAnalyzing || !canAnalyze"
             style="width:100%; background:linear-gradient(to right, #16a34a, #059669); color:white; padding:1rem; border-radius:0.75rem; font-weight:700; font-size:1rem; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:opacity 0.2s, transform 0.2s; margin-top:0.5rem;"
-            :style="isAnalyzing ? 'opacity:0.6; cursor:not-allowed;' : ''"
+            :style="(isAnalyzing || !canAnalyze) ? 'opacity:0.45; cursor:not-allowed;' : ''"
             onmouseover="if(!this.disabled) { this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22,163,74,0.4)' }"
             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
             <template v-if="isAnalyzing">
@@ -216,12 +220,11 @@
                   style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
                   <div style="font-size:2.5rem; font-weight:800; color:#111827; line-height:1;">{{
                     Math.round(calc.overallScore)
-                  }}</div>
+                    }}</div>
                   <div style="font-size:0.875rem; color:#9ca3af;">/100</div>
                 </div>
               </div>
-              <p :style="{ fontSize: '1.25rem', fontWeight: '700', color: scoreTextColor, margin: '0' }">{{ valueLabel
-                }}
+              <p :style="{ fontSize: '1.25rem', fontWeight: '700', color: scoreTextColor, margin: '0' }">{{ valueLabel }}
               </p>
             </div>
 
@@ -229,20 +232,26 @@
             <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-bottom:1.5rem;">
               <div
                 style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{
-                  calc.lifespan.toFixed(1) }}<span style="font-size:0.75rem; color:#9ca3af;"> yrs</span></div>
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">
+                  <template v-if="isPriceValid">{{ calc.lifespan.toFixed(1) }}<span
+                      style="font-size:0.75rem; color:#9ca3af;"> yrs</span></template>
+                  <template v-else><span style="color:#d1d5db;">—</span></template>
+                </div>
                 <div style="font-size:0.75rem; color:#9ca3af;">Est. Lifespan</div>
               </div>
               <div
                 style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">${{
-                  calc.costPerWear.toFixed(2) }}</div>
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">
+                  <template v-if="isPriceValid">${{ calc.costPerWear.toFixed(2) }}</template>
+                  <template v-else><span style="color:#d1d5db;">—</span></template>
+                </div>
                 <div style="font-size:0.75rem; color:#9ca3af;">Cost / Wear</div>
               </div>
               <div
                 style="background:white; border-radius:0.875rem; padding:1.25rem; border:1px solid #f3f4f6; box-shadow:0 1px 3px rgba(0,0,0,0.04);">
-                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">{{ calc.breakEven
-                }}
+                <div style="font-size:1.25rem; font-weight:800; color:#111827; margin-bottom:0.25rem;">
+                  <template v-if="isPriceValid">{{ calc.breakEvenWears }} wears</template>
+                  <template v-else><span style="color:#d1d5db;">—</span></template>
                 </div>
                 <div style="font-size:0.75rem; color:#9ca3af;">Break-even</div>
               </div>
@@ -259,7 +268,7 @@
                   <div style="display:flex; justify-content:space-between; margin-bottom:0.375rem;">
                     <span style="font-size:0.875rem; color:#374151;">{{ sub.label }}</span>
                     <span style="font-size:0.875rem; font-weight:600; color:#111827;">{{ Math.round(sub.score)
-                    }}/100</span>
+                      }}/100</span>
                   </div>
                   <div style="height:0.5rem; background:#e5e7eb; border-radius:9999px; overflow:hidden;">
                     <div
@@ -365,7 +374,7 @@
                   <div style="display:flex; justify-content:space-between; margin-bottom:0.375rem;">
                     <span style="font-size:0.875rem; color:#374151;">{{ sub.label }}</span>
                     <span style="font-size:0.875rem; font-weight:600; color:#111827;">{{ Math.round(sub.score)
-                    }}/100</span>
+                      }}/100</span>
                   </div>
                   <div style="height:0.5rem; background:#e5e7eb; border-radius:9999px; overflow:hidden;">
                     <div
@@ -420,7 +429,7 @@ defineEmits(['close'])
 // Inputs
 const itemType = ref('')
 const material = ref('')
-const price = ref(89)
+const price = ref(null)
 const quality = ref('mid')
 const wearsPerMonth = ref(4)
 const washFrequency = ref(3)
@@ -431,6 +440,9 @@ const properStorage = ref(true)
 const showResults = ref(false)
 const isAnalyzing = ref(false)
 const animatedScore = ref(0)
+
+const isPriceValid = computed(() => price.value !== null && price.value > 0)
+const canAnalyze = computed(() => isPriceValid.value)
 
 // ─── Calculation Engine ───────────────────────────────────────────
 // Base lifespan by item type (months)
@@ -454,7 +466,15 @@ const MATERIAL_ENV = {
 const QUALITY_MOD = { fast: 0.75, mid: 1.0, premium: 1.25, luxury: 1.40 }
 
 const calc = computed(() => {
-  const priceNum = Math.max(1, price.value || 89)
+  const priceNum = isPriceValid.value ? price.value : 0
+  if (!isPriceValid.value) {
+    return {
+      lifespan: 0, totalWears: 0, costPerWear: 0, breakEvenWears: 0,
+      overallScore: 0, cpwScore: 0, longevityScore: 0, envScore: 50,
+      usageScore: 0, recommendation: '',
+      insight: 'Enter the price you paid to see your lifetime value estimate.',
+    }
+  }
   const matMod = MATERIAL_MODIFIER[material.value] || 1.0
   const qualMod = QUALITY_MOD[quality.value] || 1.0
   const baseMonths = ITEM_LIFESPAN[itemType.value] || 36
@@ -611,6 +631,14 @@ watch(() => props.isOpen, (val) => {
   if (val) {
     showResults.value = false
     animatedScore.value = 0
+    itemType.value = ''
+    material.value = ''
+    price.value = null
+    quality.value = 'mid'
+    wearsPerMonth.value = 4
+    washFrequency.value = 3
+    tumbleDry.value = false
+    properStorage.value = true
   }
 })
 
