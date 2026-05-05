@@ -8,7 +8,7 @@ import { getQuestionIndex } from '@/utils/questionaireController';
 
 const router = useRouter();
 const calculatorOpen = ref(false);
-const openCalculator = () => { calculatorOpen.value = true; };
+const openCalculator = () => { calculatorOpen.value = false; };
 const seeData = () => router.push('/clothing/awareness');
 </script>
 
@@ -31,8 +31,8 @@ const seeData = () => router.push('/clothing/awareness');
             <div v-if="getQuestionIndex === -1" class="col-12 col-lg-5">
                 <ClothingActionCard icon="pi pi-tag" title="Already bought it?"
                     description="See what wear actually costs -- and how to stretch it."
-                    leftButtonLabel="Open Calculator" rightButtonLabel="See the data" :onLeftClick="openCalculator"
-                    :onRightClick="seeData" />
+                    leftButtonLabel="Open Calculator (WIP)" rightButtonLabel="See the data"
+                    :onLeftClick="openCalculator" :onRightClick="seeData" />
             </div>
         </div>
     </div>
