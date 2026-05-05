@@ -212,6 +212,7 @@
         <p style="font-size:1.125rem; color:#6b7280; margin:0;">Small changes compound into massive impact over time.
         </p>
       </div>
+
       <div
         style="background:white; border-radius:2rem; box-shadow:0 25px 50px rgba(0,0,0,0.1); padding:2.5rem; border:1px solid #e5e7eb;">
         <div style="display:flex; flex-direction:column; gap:1.5rem;">
