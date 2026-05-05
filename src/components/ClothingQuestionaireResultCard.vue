@@ -35,7 +35,7 @@
 
             <div class="row gap-5" style="width: 100%; justify-content: center;">
                 <!-- Calculator Button -->
-                <button class="questionaireButton">
+                <button class="questionaireButton" @click="$emit('openCalculator')">
                     Clothing Care Calculator (WIP) →
                 </button>
                 <!-- Community Listing Button -->

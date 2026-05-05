@@ -8,7 +8,7 @@ import { getQuestionIndex } from '@/utils/questionaireController';
 
 const router = useRouter();
 const calculatorOpen = ref(false);
-const openCalculator = () => { calculatorOpen.value = false; };
+const openCalculator = () => { calculatorOpen.value = true; };
 const seeData = () => router.push('/clothing/awareness');
 </script>
 
