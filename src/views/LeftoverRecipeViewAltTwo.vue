@@ -1,16 +1,30 @@
 <template>
     <div class="d-flex" style="min-height: 100vh;">
         <div class="flex-grow-1 container mt-5">
+
+            <div class="text-center mb-4">
+                <h1 class="display-5 fw-normal">
+                    <span class="font-inter"><b>Cook with what </b></span>
+                    <span class="font-grace">you've got</span>
+                </h1>
+                <p class="text-secondary fs-8">Add what's in your fridge. We'll do the matching.</p>
+            </div>
+
+
             <div class="search-bar-container p-4 rounded shadow-sm bg-white mb-4">
                 <div class="row g-2 align-items-end">
                     <div class="col-12 col-md-4">
-                        <label class="form-label fw-bold small">Ingredients to Include</label>
-                        <input class="form-control" type="text" placeholder="e.g. Tomato, Pasta"
+                        <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-check-circle me-2"
+                                style="color: #6b705c;"></i>
+                            Ingredients to Include</label>
+                        <input class="form-control" type="text" placeholder="e.g. Tomato, Apple"
                             v-model="ingredientInputString" @input="onInputStringChanged" @keyup.enter="applyFilters">
                     </div>
                     <div class="col-12 col-md-4">
-                        <label class="form-label fw-bold small">Ingredients to Exclude</label>
-                        <input class="form-control" type="text" placeholder="e.g. Nuts, Dairy"
+                        <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-times-circle me-2"
+                                style="color: #6b705c;"></i>
+                            Ingredients to Exclude</label>
+                        <input class="form-control" type="text" placeholder="e.g. Nuts, Milk"
                             v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged"
                             @keyup.enter="applyFilters">
                     </div>
@@ -27,7 +41,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <a href="javascript:void(0)" class="text-decoration-none small fw-bold text-success"
+                    <a href="javascript:void(0)" class="text-decoration-none small fw-bold text-success color: #555"
                         @click="showFilters = !showFilters">
                         {{ showFilters ? 'Show Fewer Options ▲' : 'Show More Options ▼' }}
                     </a>
@@ -123,6 +137,7 @@ const isInvalidFormat = (val) => {
     const hasWrongSymbols = /[;/|:+&>."']/.test(raw);
     const hasMultipleWordsNoComma = !raw.includes(',') && raw.split(/\s+/).length > 1;
 
+
     return hasWrongSymbols || hasMultipleWordsNoComma;
 };
 
@@ -199,7 +214,7 @@ async function applyFilters() {
         return;
     }
 
-    // HIGHLIGHT: Block search if format is invalid in either field
+    // Block search if format is invalid in either field
     if (isInvalidFormat(includeRaw) || isInvalidFormat(excludeRaw)) {
         errormsg.value = "Please separate ingredients with a comma";
         return;
@@ -219,11 +234,32 @@ async function applyFilters() {
 </script>
 
 <style scoped>
+.font-inter {
+    font-family: 'Inter', sans-serif;
+    color: black;
+    overflow-x: hidden;
+}
+
+
+.font-grace {
+    font-family: 'Covered By Your Grace';
+    color: #009387;
+    font-size: clamp(24px, 5vw, 60px);
+    margin-bottom: 20px;
+    word-spacing: -7px;
+}
+
+
 .search-bar-container {
     background: rgba(255, 255, 255, 0.9) !important;
     border-radius: 15px;
     border: 1px solid #e0e0e0;
 }
+
+.font-options {
+    color: #555;
+}
+
 
 .form-label {
     color: #444;
@@ -231,13 +267,13 @@ async function applyFilters() {
 }
 
 .btn-success {
-    background-color: #2e7d32 !important;
+    background-color: #009387 !important;
     border: none;
     height: 38px;
 }
 
 .btn-success:hover {
-    background-color: #1b5e20 !important;
+    background-color: #007f70 !important;
 }
 
 .recipe-modal-backdrop {

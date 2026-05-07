@@ -6,13 +6,14 @@
             <div class="card-header">
                 {{ recipeJson.recipe_name }}
             </div>
-            <div class="card-header d-flex justify-content-between">
-                <span v-if="recipeJson.total_time">{{ recipeJson.total_time }}</span>
-                <span v-if="recipeJson.rating">⭐ {{ recipeJson.rating }}</span>
-                <span v-if="recipeJson.difficulty">Difficulty: {{ recipeJson.difficulty }}</span>
-                <span v-if="recipeJson.protein_class"> {{ recipeJson.protein_class }}</span>
-                <span v-if="recipeJson.fat_class"> {{ recipeJson.fat_class }}</span>
+            <div class="card-header sub-header d-flex flex-wrap gap-2">
+                <span v-if="recipeJson.total_time" class="recipe-badge"><i class="pi pi-clock me-1"></i>{{ recipeJson.total_time }}</span>
+                <span v-if="recipeJson.rating" class="recipe-badge">⭐ {{ recipeJson.rating }}</span>
+                <span v-if="recipeJson.difficulty" class="recipe-badge"><i class="pi pi-chart-bar me-1"></i>Difficulty: {{ recipeJson.difficulty }}</span>
+                <span v-if="recipeJson.protein_class" class="recipe-badge"><span class="material-symbols-outlined">humerus_alt</span> {{ recipeJson.protein_class }}</span>
+                <span v-if="recipeJson.fat_class" class="recipe-badge"><span class="material-symbols-outlined">water_drop</span> {{ recipeJson.fat_class }}</span>
             </div>
+
             <div class="card-body" v-if="recipeJson.matchedIngredients && recipeJson.matchedIngredients.length">
                 <strong>Matched:</strong> {{ recipeJson.matchedIngredients.join(', ') }}
             </div>
@@ -77,10 +78,19 @@ const directionSteps = computed(() => {
 }
 
 .card-header {
-    background-color: darkgreen;
-    color: white;
+    color: black;
     padding: 10px;
 }
+
+.recipe-badge {
+    border: 1px solid #e0e0e0;
+    border-radius: 7px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    color: #444;
+    background-color: #ffffff;
+}
+
 
 .card-body ul,
 .card-body ol {
@@ -88,9 +98,27 @@ const directionSteps = computed(() => {
     margin-bottom: 0;
 }
 
-.card-footer a {
+.card-footer {
     color: darkgreen;
     text-decoration: none;
     font-weight: bold;
 }
+
+
+.recipe-badge .pi,
+.recipe-badge .material-symbols-outlined {
+    margin-right: 1px;
+}
+
+.pi {
+    font-size: 0.9em;
+}
+.material-symbols-outlined {
+    font-size: 1.1em !important;
+    margin-right: 1px;
+    display: inline-block;
+    transform: translateY(2px);
+}
+
+
 </style>

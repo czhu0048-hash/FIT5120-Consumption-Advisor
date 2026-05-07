@@ -1,9 +1,16 @@
 <script setup>
 import Menubar from 'primevue/menubar'
 import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { resetQuestionaire } from './utils/questionaireController'
+// import { fetchTextileDetails } from './utils/clothingAwarenessStasticsFetcher'
 
 const router = useRouter()
 const go = (path) => router.push(path)
+const passwordCorrect = ref(false);
+const userInput = ref("");
+const passwordTemp = "Fit5120@Ta38";
+const passwordMessage = ref("")
 
 const navItems = [
   {
@@ -32,19 +39,42 @@ const navItems = [
       },
       {
         label: 'Before You Buy',
-        command: () => go('/clothing/decision'),
+        command: () => {
+          go('/clothing/questionaire');
+          resetQuestionaire();
+        },
       },
-      {
-        label: 'Calculator',
-        command: () => go('/clothing/calculator'),
-      },
+      // {
+      //   label: 'Calculator',
+      //   command: () => go('/clothing/calculator'),
+      // },
     ],
-  },
+  }
 ]
+
+const onClick = () => {
+  if (userInput.value === passwordTemp) {
+    passwordCorrect.value = true;
+    return;
+  }
+  passwordMessage.value = "Password Incorrect"
+}
+onMounted(() => {
+  // Skip password validation on mounted
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    passwordCorrect.value = true;
+  }
+});
 </script>
 
 <template>
-  <div class="d-flex flex-column min-vh-100">
+  <div v-if="!passwordCorrect"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 0.75rem;">
+    <input v-model="userInput" type="password" placeholder="Please enter website password" style="width: 100vh;">
+    <button @click="onClick">Confirm</button>
+    <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
+  </div>
+  <div class="d-flex flex-column min-vh-100" v-else-if="passwordCorrect">
     <Menubar :model="navItems" class="app-menubar">
       <template #start>
         <img src="@/assets/Icon_reduse.png" alt="RedUse Logo" class="nav-logo" />
@@ -61,16 +91,22 @@ const navItems = [
       </div>
     </main>
   </div>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
+  </div>
 </template>
 
 <style scoped>
 .main-content {
   position: relative;
-  background-image: url('./assets/BackgroundBlurred.png');
+  /*background-color: #e0f8f2;*/
+  background-image: linear-gradient(to bottom, #e0f8f2, transparent 0%);
+  background-image: linear-gradient(to bottom, #e0f8f2 50%, transparent 100%);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
 }
+
 
 .content-layer {
   position: relative;
@@ -88,7 +124,8 @@ const navItems = [
   color: #2f2f31;
   font-family: 'Nunito', sans-serif;
   white-space: nowrap;
-  letter-spacing: -0.2px; /* spacing for logos */
+  letter-spacing: -0.2px;
+  /* spacing for logos */
   margin-left: 0.5rem;
 }
 
@@ -101,18 +138,23 @@ const navItems = [
 /* Color for "Use" */
 .brand-use {
   color: #009387;
-  font-weight: 550; /* comment out if no need */
-  font-family: 'Covered By Your Grace'; /* comment out if no need */
-  font-size: 28px; /* comment out if no need */
+  font-weight: 550;
+  /* comment out if no need */
+  font-family: 'Covered By Your Grace';
+  /* comment out if no need */
+  font-size: 28px;
+  /* comment out if no need */
 }
 </style>
 
 <style>
 .app-menubar.p-menubar {
-  position: sticky; /* make the navbar stick to the top (remove if no need) */
-  top: 0;           /* make the navbar stick to the top (remove if no need) */
-  z-index: 1000;    /* make the navbar stick to the top (remove if no need) */
-
+  position: sticky;
+  /* make the navbar stick to the top (remove if no need) */
+  top: 0;
+  /* make the navbar stick to the top (remove if no need) */
+  z-index: 1000;
+  /* make the navbar stick to the top (remove if no need) */
   background: white;
   border: none;
   border-radius: 0;
@@ -125,6 +167,11 @@ const navItems = [
 }
 
 /* All item links: base state */
+.app-menubar .p-menubar-item-label {
+  color: #2f2f31;
+  font-family: sans-serif;
+}
+
 .app-menubar .p-menubar-item-link {
   color: #2f2f31;
   border-radius: 5rem;
