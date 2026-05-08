@@ -41,7 +41,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHistory('/FIT5120-Consumption-Advisor/'),
+    history: createWebHistory('/'),
     routes
 })
 
