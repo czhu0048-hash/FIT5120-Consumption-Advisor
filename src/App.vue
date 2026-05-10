@@ -14,7 +14,7 @@ const passwordMessage = ref("")
 
 const navItems = [
   {
-    label: 'About',
+    label: 'Home',
     command: () => go('/'),
   },
   {
@@ -90,9 +90,6 @@ onMounted(() => {
         <router-view></router-view>
       </div>
     </main>
-  </div>
-  <div style="display: flex; justify-content: center; align-items: center;">
-    <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
   </div>
 </template>
 
