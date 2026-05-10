@@ -14,7 +14,7 @@ const passwordMessage = ref("")
 
 const navItems = [
   {
-    label: 'About',
+    label: 'Home',
     command: () => go('/'),
   },
   {
