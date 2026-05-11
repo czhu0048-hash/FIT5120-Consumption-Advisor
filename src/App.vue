@@ -51,7 +51,7 @@ const navItems = [
       
       {
         label: 'Textile Decode',
-        command: () => go('/clothing/textiledecode'),
+        command: () => go('/clothing/textile_decode'),
       },
     ],
   }

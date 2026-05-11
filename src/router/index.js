@@ -5,6 +5,7 @@ import WelcomeView from '@/views/WelcomeView.vue'
 import ClothingAwarenessView from '@/views/ClothingAwarenessView.vue'
 import ClothingQuestionaireView from '@/views/ClothingQuestionaireView.vue'
 import ClothingImpactDashboard from '@/views/ClothingImpactDashboard.vue'
+import ClothingDecode from '@/views/ClothingDecode.vue'
 
 const routes = [
     {
@@ -13,12 +14,12 @@ const routes = [
         component: WelcomeView
     },
     {
-        path: '/food/recipes',
+        path: '/food1',
         name: 'Leftover Recipe',
         component: LeftoverRecipeViewAltTwo
     },
     {
-        path: '/food/disposal',
+        path: '/food2',
         name: 'Leftover Disposal',
         component: FoodDisposalView
     },
@@ -37,11 +38,16 @@ const routes = [
         path: '/clothing/calculator',
         name: 'Clothing Calculator',
         component: ClothingImpactDashboard
+    },
+    {
+        path: '/clothing/textile_decode',
+        name: 'Clothing Decode',
+        component: ClothingDecode
     }
 ]
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHistory('/'),
     routes
 })
 
