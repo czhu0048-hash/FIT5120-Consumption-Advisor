@@ -22,11 +22,11 @@ const navItems = [
     items: [
       {
         label: 'Kitchen-raid Recipes',
-        command: () => go('/food/recipes'),
+        command: () => go('/food1'),
       },
       {
         label: 'Food Disposal',
-        command: () => go('/food/disposal'),
+        command: () => go('/food2'),
       },
     ],
   },
@@ -48,6 +48,11 @@ const navItems = [
       //   label: 'Calculator',
       //   command: () => go('/clothing/calculator'),
       // },
+      
+      {
+        label: 'Textile Decode',
+        command: () => go('/clothing/textiledecode'),
+      },
     ],
   }
 ]
@@ -90,6 +95,9 @@ onMounted(() => {
         <router-view></router-view>
       </div>
     </main>
+  </div>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
   </div>
 </template>
 
