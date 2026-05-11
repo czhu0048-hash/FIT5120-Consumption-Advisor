@@ -3,10 +3,7 @@
         <div class="flex-grow-1 container mt-5">
 
             <div class="text-center mb-4">
-                <h1 class="display-5 fw-normal">
-                    <span class="font-inter"><b>Cook with what </b></span>
-                    <span class="font-grace">you've got</span>
-                </h1>
+                <RedUseHeader inter="Cook with what " grace="you've got"></RedUseHeader>
                 <p class="text-secondary fs-8">Add what's in your fridge. We'll do the matching.</p>
             </div>
 
@@ -112,6 +109,7 @@ import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
 import RecipeFilterSidebar from '@/components/RecipeFilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
 import { passesFilters } from '@/utils/recipeFilterInstance';
+import RedUseHeader from '@/components/RedUseHeader.vue';
 
 const errormsg = ref("");
 const searching = ref(false);
@@ -234,22 +232,6 @@ async function applyFilters() {
 </script>
 
 <style scoped>
-.font-inter {
-    font-family: 'Inter', sans-serif;
-    color: black;
-    overflow-x: hidden;
-}
-
-
-.font-grace {
-    font-family: 'Covered By Your Grace';
-    color: #009387;
-    font-size: clamp(24px, 5vw, 60px);
-    margin-bottom: 20px;
-    word-spacing: -7px;
-}
-
-
 .search-bar-container {
     background: rgba(255, 255, 255, 0.9) !important;
     border-radius: 15px;

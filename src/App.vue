@@ -44,16 +44,23 @@ const navItems = [
           resetQuestionaire();
         },
       },
-      // {
-      //   label: 'Calculator',
-      //   command: () => go('/clothing/calculator'),
-      // },
-
       {
         label: 'Textile Decode',
         command: () => go('/clothing/textiledecode'),
       },
     ],
+  },
+  {
+    label: 'Household Guidance',
+    items: [
+      {
+        label: 'Waste Hotspot Audit'
+        // command
+      },
+      {
+        label: 'Product Journey Reveal'
+      }
+    ]
   }
 ]
 
@@ -95,9 +102,6 @@ onMounted(() => {
         <router-view></router-view>
       </div>
     </main>
-  </div>
-  <div style="display: flex; justify-content: center; align-items: center;">
-    <a href="/FIT5120-Consumption-Advisor/archive/" style="color: black;">Archive</a>
   </div>
 </template>
 

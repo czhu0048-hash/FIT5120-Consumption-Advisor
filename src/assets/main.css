@@ -58,3 +58,80 @@ button {
   padding: 2rem;
   border-radius: 5rem;
 }
+
+.text-special {
+  color: #009387;
+  font-family: 'Covered By Your Grace';
+}
+
+.tabs {
+  display: flex;
+  background: white;
+  border: 1px solid #E5E5DF;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #5C5C5C;
+  background-color: white;
+  border-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background: #009387;
+  color: white;
+}
+
+.tab:focus {
+  background: #009387;
+  color: white;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  color: black
+}
+
+.font-grace {
+  font-family: 'Covered By Your Grace';
+  color: #009387;
+  font-size: clamp(24px, 5vw, 60px);
+  margin-bottom: 20px;
+  word-spacing: -7px;
+}
+
+.questionaireButton {
+  background-color: #009387;
+  border-color: transparent;
+  border-radius: 1rem;
+  box-shadow: 5rem;
+  padding: 2rem;
+  width: auto;
+  color: white;
+  font-size: 100%;
+  transition: all 0.2s;
+}
+
+.questionaireSubButton {
+  background-color: transparent;
+  color: #555;
+  border-color: #555;
+  border-style: solid;
+}
+
+.questionaireButton:hover {
+  color: black;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+}

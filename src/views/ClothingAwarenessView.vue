@@ -1,10 +1,6 @@
 <template>
     <div class="clothing-awareness-view">
-        <h1 class="display-5 fw-normal">
-            <span class="font-inter"><b>The</b></span>
-            <span class="font-grace"> Story behind </span>
-            <span class="font-inter"><b>our wardrobes</b></span>
-        </h1>
+        <RedUseHeader inter="The " grace="Story behind " inter-two="our wardrobes"></RedUseHeader>
         <p class="text-secondary fs-8">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's what
             the numbers actually look like.</p>
 
@@ -16,9 +12,14 @@
             <div class="card" style="padding: 5%;">
                 <div class="row gap-5" style="justify-content: center; align-items: center;">
                     <label for="" style="width: auto;">Group by:</label>
-                    <button @click="textileDataIndex = 0">Disposal Type</button>
-                    <button @click="textileDataIndex = 1">Material</button>
-                    <button @click="textileDataIndex = 2">Source Sector</button>
+                    <div class="tabs">
+                        <button class="tab" :class="{ active: textileDataIndex === 0 }"
+                            @click="textileDataIndex = 0">Disposal Type</button>
+                        <button class="tab" :class="{ active: textileDataIndex === 1 }"
+                            @click="textileDataIndex = 1">Material</button>
+                        <button class="tab" :class="{ active: textileDataIndex === 2 }"
+                            @click="textileDataIndex = 2">Source Sector</button>
+                    </div>
                 </div>
                 <ClothingAwarenessChartDisposal v-if="textileDataIndex == 0" :data="textileData" />
                 <ClothingAwarenessChartMaterials v-else-if="textileDataIndex == 1" :data="materialsData" />
@@ -34,6 +35,7 @@ import ClothingAwarenessChartDisposal from '@/components/ClothingAwarenessChartD
 import ClothingAwarenessChartMaterials from '@/components/ClothingAwarenessChartMaterials.vue'
 import ClothingAwarenessChartSectors from '@/components/ClothingAwarenessChartSectors.vue'
 import { fetchTextileYears, fetchTextileMaterials, fetchTextileDetails } from '@/utils/clothingAwarenessStasticsFetcher'
+import RedUseHeader from '@/components/RedUseHeader.vue'
 
 const textileData = ref([])
 const materialsData = ref([])
@@ -87,40 +89,5 @@ onMounted(async () => {
 
 .status-message.error {
     color: #c62828;
-}
-
-button {
-    width: auto;
-    border-radius: 5rem;
-    border-color: black;
-    border-style: solid;
-    background-color: transparent;
-    transition: all 0.2s;
-}
-
-button:hover {
-    border-color: transparent;
-    background-color: darkgray;
-    color: white;
-}
-
-button:focus {
-    color: white;
-    background-color: darkgreen;
-}
-
-
-.font-inter {
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-}
-
-
-.font-grace {
-    font-family: 'Covered By Your Grace';
-    color: #009387;
-    font-size: clamp(24px, 5vw, 60px);
-    margin-bottom: 20px;
-    word-spacing: -7px;
 }
 </style>

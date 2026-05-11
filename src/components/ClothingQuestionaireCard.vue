@@ -54,36 +54,3 @@ const startQuestionaire = () => {
     moveToNextQuestion()
 }
 </script>
-
-
-<style>
-h1 {
-    font: bolder;
-}
-
-.questionaireButton {
-    background-color: darkgreen;
-    border-color: transparent;
-    border-radius: 1rem;
-    box-shadow: 5rem;
-    padding: 2rem;
-    width: auto;
-    color: white;
-    font-size: 100%;
-    transition: all 0.2s;
-}
-
-.questionaireSubButton {
-    background-color: transparent;
-    color: #555;
-    border-color: #555;
-    border-style: solid;
-}
-
-.questionaireButton:hover {
-    color: black;
-    background-color: white;
-    border-color: black;
-    border-style: solid;
-}
-</style>
