@@ -14,12 +14,12 @@ const routes = [
         component: WelcomeView
     },
     {
-        path: '/food1',
+        path: '/food/recipes',
         name: 'Leftover Recipe',
         component: LeftoverRecipeViewAltTwo
     },
     {
-        path: '/food2',
+        path: '/food/disposal',
         name: 'Leftover Disposal',
         component: FoodDisposalView
     },
@@ -40,14 +40,14 @@ const routes = [
         component: ClothingImpactDashboard
     },
     {
-        path: '/clothing/textile_decode',
+        path: '/clothing/textiledecode',
         name: 'Clothing Decode',
         component: ClothingDecode
     }
 ]
 
 const router = createRouter({
-    history: createWebHistory('/'),
+    history: createWebHistory('import.meta.env.BASE_URL'),
     routes
 })
 
