@@ -13,12 +13,12 @@ const routes = [
         component: WelcomeView
     },
     {
-        path: '/food1',
+        path: '/food/recipes',
         name: 'Leftover Recipe',
         component: LeftoverRecipeViewAltTwo
     },
     {
-        path: '/food2',
+        path: '/food/disposal',
         name: 'Leftover Disposal',
         component: FoodDisposalView
     },

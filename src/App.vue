@@ -22,11 +22,11 @@ const navItems = [
     items: [
       {
         label: 'Kitchen-raid Recipes',
-        command: () => go('/food1'),
+        command: () => go('/food/recipes'),
       },
       {
         label: 'Food Disposal',
-        command: () => go('/food2'),
+        command: () => go('/food/disposal'),
       },
     ],
   },
