@@ -45,6 +45,8 @@ __screenshots__/
 
 # environment secrets
 backend_ai/.env
+.env
+env
 
 # virtual environment
 backend_ai/venv/
