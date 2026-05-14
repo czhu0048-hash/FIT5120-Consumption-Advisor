@@ -1,7 +1,7 @@
 <template>
     <div style="justify-content: center; align-items: center; text-align: center;">
-        <RedUseHeader inter="Find your home's " grace="Waste Hotspot"></RedUseHeader>
-        <p class="col-12 col-md-6">
+        <RedUseHeader class="mt-5" inter="Find your home's " grace="Waste Hotspot"></RedUseHeader>
+        <p class="col-12 col-md-6 mt-5">
             Our quick audit helps you discover where your household waste comes from -- and shows you simple ways to
             reduce it.
         </p>

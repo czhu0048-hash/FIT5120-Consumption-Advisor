@@ -4,7 +4,7 @@
 
             <div class="text-center mb-4">
                 <RedUseHeader inter="Cook with what " grace="you've got"></RedUseHeader>
-                <p class="text-secondary fs-8">Add what's in your fridge. We'll do the matching.</p>
+                <p class="text-secondary fs-8 mt-5">Add what's in your fridge. We'll do the matching.</p>
             </div>
 
 

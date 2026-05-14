@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-center mt-5 display-5 fw-normal">
+    <h1 class="text-center display-5 fw-normal">
         <span class="font-inter"><b>{{ inter }}</b></span>
         <span class="font-grace"> {{ grace }}</span>
         <span class="font-inter"><b>{{ interTwo }}</b></span>

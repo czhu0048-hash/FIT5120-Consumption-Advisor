@@ -4,7 +4,8 @@
 
             <div class="text-center mb-4">
                 <RedUseHeader inter="Bin it " grace="Smart"></RedUseHeader>
-                <p class="text-secondary fs-8">Pick your food waste type and stop guessing. Green bin, recycling, or
+                <p class="text-secondary fs-8 mt-5">Pick your food waste type and stop guessing. Green bin, recycling,
+                    or
                     general waste, we got you.</p>
             </div>
             <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>

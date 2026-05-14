@@ -1,7 +1,8 @@
 <template>
     <div class="clothing-awareness-view">
-        <RedUseHeader inter="The " grace="Story behind " inter-two="our wardrobes"></RedUseHeader>
-        <p class="text-secondary fs-8">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's what
+        <RedUseHeader class="mt-5" inter="The " grace="Story behind " inter-two="our wardrobes"></RedUseHeader>
+        <p class="text-secondary fs-8 mt-5">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's
+            what
             the numbers actually look like.</p>
 
 

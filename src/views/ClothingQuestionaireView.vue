@@ -16,13 +16,14 @@ const seeData = () => router.push('/clothing/awareness');
 <template>
     <div style="align-items: center;
     justify-content: center;">
-        <RedUseHeader inter="Your Cart Can Wait," grace="wardrobe can't"></RedUseHeader>
+        <RedUseHeader class="mt-5" inter="Your Cart Can Wait," grace="wardrobe can't"></RedUseHeader>
         <!-- <h1 v-if="getQuestionIndex === -1" class="font-inter display-5 fw-normal"
             style="text-align: center; margin-top: 5rem;">
             Cart can
             wait, <span>wardrobe
                 can't</span></h1> -->
-        <p v-if="getQuestionIndex === -1">Aussies buy 27kg of new clothes a year and toss most of it. Before you add to
+        <p v-if="getQuestionIndex === -1" class="mt-5">Aussies buy 27kg of new clothes a year and toss most of it.
+            Before you add to
             that pile, just 6 quick
             questions.
             No judgment, no pressure.</p>
