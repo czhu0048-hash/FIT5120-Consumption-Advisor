@@ -41,3 +41,20 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+
+# environment secrets
+backend_ai/.env
+
+# virtual environment
+backend_ai/venv/
+.venv/
+venv/
+
+# node modules from frontend
+node_modules/
+dist/
+
+# python cache files
+__pycache__/
+*.pyc
