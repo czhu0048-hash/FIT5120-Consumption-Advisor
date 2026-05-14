@@ -281,8 +281,8 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import LifetimeValueAnalyzer from '../components/LifetimeValueAnalyzer.vue'
-import PurchaseHelpChatbot from '../components/PurchaseHelpChatbot.vue'
+import LifetimeValueAnalyzer from '../components/clothing/LifetimeValueAnalyzer.vue'
+import PurchaseHelpChatbot from '../components/clothing/PurchaseHelpChatbot.vue'
 import wardrobeImg from '../assets/wardrobe.png'
 
 const itemsPerMonth = ref(2)

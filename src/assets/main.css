@@ -91,10 +91,10 @@ button {
   color: white;
 }
 
-.tab:focus {
+/* .tab:focus {
   background: #009387;
   color: white;
-}
+} */
 
 .font-inter {
   font-family: 'Inter', sans-serif;
@@ -134,4 +134,33 @@ button {
   background-color: white;
   border-color: black;
   border-style: solid;
+}
+
+p {
+  color: grey;
+  text-align: center;
+  width: 50%;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.capture-option {
+  background: white;
+  border: 1px solid #E5E5DF;
+  border-radius: 12px;
+  padding: 24px 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.icon-md {
+  font-size: 32px;
+  color: #01696F;
+  margin-bottom: 8px;
+  /* color: #e0fffc; */
 }

@@ -18,21 +18,16 @@ const years = computed(() =>
     [...new Set(props.data.map((d) => d.financial_year))].sort()
 )
 
-const sectors = computed(() =>
-    [...new Set(props.data.map((d) => d.source_sector).filter(Boolean))]
+const materials = computed(() =>
+    [...new Set(props.data.map((d) => d.material_name).filter(Boolean))]
 )
 
-const sectorLabel = (sector) => {
-    const item = props.data.find((d) => d.source_sector === sector)
-    return item?.source_sector_label ?? sector
-}
-
 const series = computed(() =>
-    sectors.value.map((sector) => ({
-        name: sectorLabel(sector),
+    materials.value.map((material) => ({
+        name: material,
         data: years.value.map((year) => {
             const item = props.data.find(
-                (d) => d.source_sector === sector && d.financial_year === year
+                (d) => d.material_name === material && d.financial_year === year
             )
             return item ? Math.round(item.disposal) : 0
         }),
@@ -65,7 +60,7 @@ const chartOptions = computed(() => ({
         },
     },
     title: {
-        text: 'Textile Waste Disposal by Source Sector',
+        text: '2. Textile Waste Disposal by Material',
         align: 'center',
         style: { fontSize: '16px', fontWeight: '600' },
     },

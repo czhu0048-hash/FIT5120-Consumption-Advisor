@@ -54,8 +54,8 @@ const navItems = [
     label: 'Household Guidance',
     items: [
       {
-        label: 'Waste Hotspot Audit'
-        // command
+        label: 'Waste Hotspot Audit',
+        command: () => go('/household/audit')
       },
       {
         label: 'Product Journey Reveal'

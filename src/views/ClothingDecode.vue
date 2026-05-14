@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import DecodeInput from '@/components/ClothingDecodeInput.vue';
+import DecodeInput from '@/components/clothing/ClothingDecodeInput.vue';
 //import DecodeConfirm from '@/components/ClothingDecodeConfirm.vue';
 //import DecodeResult from '@/components/ClothingDecodeResult.vue';
 

@@ -19,9 +19,9 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { getQuestionIndex, moveToNextQuestion, resetQuestionaire } from '@/utils/questionaireController'
-import ClothingActionCard from '@/components/ClothingActionCard.vue'
-import ClothingQuestionaireSubCard from '@/components/ClothingQuestionaireSubCard.vue'
-import ClothingQuestionaireResultCard from '@/components/ClothingQuestionaireResultCard.vue'
+import ClothingActionCard from '@/components/clothing/ClothingActionCard.vue'
+import ClothingQuestionaireSubCard from '@/components/clothing/ClothingQuestionaireSubCard.vue'
+import ClothingQuestionaireResultCard from '@/components/clothing/ClothingQuestionaireResultCard.vue'
 
 const router = useRouter()
 

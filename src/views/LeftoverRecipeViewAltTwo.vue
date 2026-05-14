@@ -104,12 +104,12 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
-import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
-import RecipeFilterSidebar from '@/components/RecipeFilterSidebar.vue';
+import RecipeCardOverview from '@/components/food/RecipeCardOverview.vue';
+import RecipeCardDetailed from '@/components/food/RecipeCardDetailed.vue';
+import RecipeFilterSidebar from '@/components/food/RecipeFilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
 import { passesFilters } from '@/utils/recipeFilterInstance';
-import RedUseHeader from '@/components/RedUseHeader.vue';
+import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 
 const errormsg = ref("");
 const searching = ref(false);

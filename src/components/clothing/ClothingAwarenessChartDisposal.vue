@@ -41,12 +41,6 @@ const chartOptions = computed(() => ({
         toolbar: { show: false },
         background: '#fff'
     },
-    // plotOptions: {
-    //     bar: {
-    //         horizontal: false,
-    //         borderRadius: 4,
-    //     },
-    // },
     xaxis: {
         categories: categories.value,
         title: { text: 'Financial Year' },
@@ -67,7 +61,7 @@ const chartOptions = computed(() => ({
     },
     colors: ['#E53935', '#FB8C00', '#43A047', '#1E88E5'],
     title: {
-        text: 'Australian Textile Waste by Financial Year',
+        text: '1. Australian Textile Waste by Financial Year',
         align: 'center',
         style: { fontSize: '16px', fontWeight: '600' },
     },

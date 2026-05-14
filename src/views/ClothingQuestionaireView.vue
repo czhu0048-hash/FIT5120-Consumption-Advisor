@@ -1,11 +1,11 @@
 <script setup>
-import ClothingQuestionaireCard from '@/components/ClothingQuestionaireCard.vue';
-import ClothingActionCard from '@/components/ClothingActionCard.vue';
-import LifetimeValueAnalyzer from '@/components/LifetimeValueAnalyzer.vue';
+import ClothingQuestionaireCard from '@/components/clothing/ClothingQuestionaireCard.vue';
+import ClothingActionCard from '@/components/clothing/ClothingActionCard.vue';
+import LifetimeValueAnalyzer from '@/components/clothing/LifetimeValueAnalyzer.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getQuestionIndex } from '@/utils/questionaireController';
-import RedUseHeader from '@/components/RedUseHeader.vue';
+import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 
 const router = useRouter();
 const calculatorOpen = ref(false);

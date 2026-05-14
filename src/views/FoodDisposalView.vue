@@ -1,24 +1,15 @@
 <template>
     <div class="d-flex" style="min-height: 100vh;">
-        <div class="flex-grow-1 container mt-5">
+        <div class="flex-grow-1 container mt-5" style="text-align: center;">
 
             <div class="text-center mb-4">
                 <RedUseHeader inter="Bin it " grace="Smart"></RedUseHeader>
                 <p class="text-secondary fs-8">Pick your food waste type and stop guessing. Green bin, recycling, or
                     general waste, we got you.</p>
             </div>
-
-            <div class="category-wrapper">
-                <select class="form-select" v-model="selectedCategory">
-                    <option value="">All categories</option>
-                    <option v-for="method in allMethods" :key="method.id" :value="method.food_category">
-                        {{ method.label }}
-                    </option>
-                </select>
-            </div>
-            <div v-if="loading" class="text-center mt-5">Loading...</div>
-            <div v-else-if="filteredMethods.length" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 mt-3 px-3">
-                <div v-for="method in filteredMethods" :key="method.id" class="col">
+            <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
+            <div v-else-if="filteredMethods.length" class="row row-cols-4 g-3 mt-3">
+                <div v-for="method in filteredMethods" :key="method.id" style="display: block;">
                     <FoodDisposalCard :method="method" />
                 </div>
             </div>
@@ -28,10 +19,10 @@
 </template>
 
 <script setup>
-import FoodDisposalCard from '@/components/FoodDisposalCard.vue';
+import FoodDisposalCard from '@/components/food/FoodDisposalCard.vue';
 import { onMounted, ref, computed } from 'vue';
 import { fetchDisposalMethods } from '@/utils/disposalmethodFetcher';
-import RedUseHeader from '@/components/RedUseHeader.vue';
+import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 
 const allMethods = ref([]);
 const selectedCategory = ref('');
@@ -48,11 +39,3 @@ onMounted(async () => {
     loading.value = false;
 });
 </script>
-
-<style scoped>
-.category-wrapper {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0;
-}
-</style>
