@@ -1,56 +1,68 @@
 <template>
   <div class="form-container">
     <div class="tabs">
-      <div class="tab" :class="{ active: activeTab === 'photo' }" @click="activeTab = 'photo'"><b>Photo scan</b></div>
-      <div class="tab" :class="{ active: activeTab === 'manual' }" @click="activeTab = 'manual'"><b>Manual entry</b>
+      <div class="tab" :class="{ active: activeTab === 'photo' }" @click="activeTab = 'photo'">
+        <b>Photo scan</b>
+      </div>
+      <div class="tab" :class="{ active: activeTab === 'manual' }" @click="activeTab = 'manual'">
+        <b>Manual entry</b>
       </div>
     </div>
 
     <div v-if="activeTab === 'photo'" :key="'photo'" class="animate-in">
       <div v-if="!previewUrl" class="capture-grid">
-        <div class="capture-option" @click="$refs.cameraInput.click()">
-          <span class="material-symbols-outlined icon-md">photo_camera</span>
-          <span class="text-sm font-medium">Take photo</span>
-        </div>
         <div class="capture-option" @click="$refs.fileInput.click()">
           <span class="material-symbols-outlined icon-md">image</span>
           <span class="text-sm font-medium">Upload image</span>
         </div>
 
-        <input type="file" ref="cameraInput" accept="image/*" capture="environment" class="hidden"
-          @change="handleFileUpload">
-        <input type="file" ref="fileInput" accept="image/*" class="hidden" @change="handleFileUpload">
+        <div class="capture-option" @click="$refs.cameraInput.click()">
+          <span class="material-symbols-outlined icon-md">mobile_camera</span>
+          <span class="text-sm font-medium">Take photo (Mobile)</span>
+        </div>
+
+        <input type="file" ref="cameraInput" accept="image/jpeg, image/png, image/webp" capture="environment" class="hidden" @change="handleFileUpload">
+        
+        <input type="file" ref="fileInput" accept="image/jpeg, image/png, image/webp" class="hidden" @change="handleFileUpload">
       </div>
 
       <div v-else>
         <img :src="previewUrl" alt="Label preview" class="mock-preview mt-4" />
         <button @click="proceedToConfirm" class="btn btn-primary mt-4 w-100">
-          <span class="material-symbols-outlined icon-sm">wand_stars</span> Scan this label
+          <span class="material-symbols-outlined icon-sm icon-white">document_scanner</span>
+          Scan this label
         </button>
+        <button @click="previewUrl = null" class="btn btn-link w-100 mt-2 text-secondary text-sm">Retake photo</button>
       </div>
     </div>
 
     <div v-if="activeTab === 'manual'" :key="'manual'" class="animate-in">
       <div class="input-group">
-        <label>Brand name</label>
-        <input type="text" v-model="localFormData.brand" placeholder="e.g., Zara">
+        <label>Fibre composition <span style="color: #D93B3B">*</span></label>
+        <input 
+          type="text" 
+          v-model="localFormData.composition" 
+          placeholder="e.g., Polyester 65%, Cotton 35%"
+          :class="{ 'border-danger': errors.composition }"
+        >
+        <small class="text-muted mt-1 d-block">Separate different materials with a comma (,)</small>
+        <p v-if="errors.composition" class="error-text">Please enter the composition to proceed.</p>
       </div>
 
       <div class="input-group">
-        <label>Fibre composition <span style="color: #D93B3B">*</span></label>
-        <input type="text" v-model="localFormData.composition" placeholder="e.g., 50% Cotton, 50% Polyester"
-          :style="errors.composition ? 'border-color: #D93B3B' : ''">
-
-        <!-- error handling -->
-        <p v-if="errors.composition" style="color: #D93B3B; font-size: 0.75rem; margin-top: 4px; text-align: left;">
-          Please enter the composition to proceed.
-        </p>
+        <label>Brand name</label>
+        <input type="text" v-model="localFormData.brand" placeholder="e.g. Zara">
       </div>
+
+      <div class="input-group">
+        <label>Made in</label>
+        <input type="text" v-model="localFormData.madeIn" placeholder="e.g., China">
+      </div>
+
       <button @click="proceedToConfirm" class="btn btn-primary mt-4 w-100"><b>Next step</b></button>
     </div>
 
-
-    <div class="expandable-tooltip mt-4 animate-in">
+    <div class="expandable-tooltip mt-5 animate-in">
       <div class="tooltip-toggle" @click="tooltipOpen = !tooltipOpen">
         <span class="material-symbols-outlined icon-xs">shield_lock</span><b> Transparency & Privacy</b>
       </div>
@@ -64,44 +76,104 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import axios from 'axios';
+import Swal from 'sweetalert2'; //error handling
 
 const emit = defineEmits(['next']);
 const activeTab = ref('photo');
 const previewUrl = ref(null);
+const isScanning = ref(false); // loading state
 const tooltipOpen = ref(true);
 const errors = reactive({ composition: false });
 
 const localFormData = reactive({
   brand: '',
-  composition: ''
+  composition: '',
+  madeIn: ''
 });
 
-const handleFileUpload = (event) => {
+const handleFileUpload = async (event) => {
   const file = event.target.files[0];
-  if (file) {
-    previewUrl.value = URL.createObjectURL(file);
-    localFormData.brand = "Detected Brand";
-    localFormData.composition = "Detected 100% Cotton";
+  if (!file) return;
+
+
+  if (!file.type.startsWith('image/')) {
+    Swal.fire({
+      title: 'Invalid File',
+      text: 'Please upload an image file (JPG, PNG, or WebP)',
+      icon: 'error',
+      confirmButtonColor: '#009387',
+      background: '#ffffff',
+      color: '#333'
+    });
+    event.target.value = ""; // reset the input
+    return;
+  }
+  // -----------------------------------------
+
+  previewUrl.value = URL.createObjectURL(file);
+  isScanning.value = true;
+
+  // FormData for the API
+  const formData = new FormData();
+  formData.append('file', file);
+
+  try {
+    // call extraction endpoint
+    const response = await axios.post('http://127.0.0.1:8000/api/extract', formData);
+
+
+
+    // update form with AI results (if any)
+    const data = response.data;
+    localFormData.brand = data.brand || '';        // store empty string, not 'Unknown'
+    localFormData.composition = data.composition || '';
+    localFormData.madeIn = data.made_in || '';     // store empty string, not 'Unknown'
+    
     errors.composition = false;
+  } catch (err) {
+    console.error("Scanning failed:", err);
+
+
+    // backend failure handling (stay on photo tab)
+    Swal.fire({
+      title: 'Scan Failed',
+      text: 'The AI couldn\'t read the label. Please try again or enter details manually.',
+      icon: 'warning',
+      confirmButtonColor: '#3D6666'
+    });
+  } finally {
+    isScanning.value = false;
   }
 };
 
+
 const proceedToConfirm = () => {
-  // error handling (in progress)
+  // validation Rule
   if (!localFormData.composition || localFormData.composition.trim() === "") {
     errors.composition = true;
     return;
   }
   errors.composition = false;
-  emit('next', { ...localFormData });
+  emit('next', {
+    brand: localFormData.brand,
+    composition: localFormData.composition,
+    made_in: localFormData.madeIn
+  });
 };
 </script>
 
 <style scoped>
 .form-container {
-  max-width: 560px;
+  max-width: 560px; 
   margin: 0 auto;
   width: 100%;
+}
+
+.capture-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
 .capture-option {
@@ -118,28 +190,44 @@ const proceedToConfirm = () => {
 }
 
 .capture-option:hover {
-  border-color: #01696F;
+  border-color: #009387;
+  background-color: #f0f9f8;
 }
 
 .icon-md {
   font-size: 32px;
-  color: #01696F;
+  color: #009387;
   margin-bottom: 8px;
 }
 
-
-.btn-primary.w-100 {
-  width: 100%;
-  display: flex;
-  box-sizing: border-box;
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
 }
 
+.input-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
 
 .input-group input {
   width: 100%;
   padding: 12px;
   border: 1px solid #E5E5DF;
-  border-radius: 0.4rem !important;
+  border-radius: 8px !important;
+  box-sizing: border-box;
+}
+
+.border-danger {
+  border-color: #D93B3B !important;
+}
+
+.error-text {
+  color: #D93B3B;
+  font-size: 0.75rem;
+  margin-top: 4px;
 }
 
 .tabs {
@@ -153,37 +241,19 @@ const proceedToConfirm = () => {
 .tab {
   flex: 1;
   text-align: center;
-  padding: 10px;
+  padding: 12px;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 4px;
   color: #5C5C5C;
-  transition: all 0.2s ease;
 }
 
 .tab.active {
   background: #009387;
   color: white;
+  border-radius: 4px;
 }
 
-.capture-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.input-group {
-  margin-bottom: 16px;
-  text-align: left;
-}
-
-.input-group label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
 
 .btn {
   display: inline-flex;
@@ -192,35 +262,67 @@ const proceedToConfirm = () => {
   padding: 14px 16px;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 1rem;
   cursor: pointer;
-  border: 1px solid transparent;
-  gap: 8px;
+  transition: all 0.2s ease;
 }
 
 .btn-primary {
   background-color: #009387;
   color: white;
+  border: none;
+  gap: 10px;
 }
 
+.btn-primary:hover { background-color: #007a70; }
+.btn-primary:active { background-color: #00665e !important; }
+
+.w-100 { width: 100%; }
+
+.icon-white {
+  color: white !important;
+}
+
+
+.mock-preview {
+  width: 100%;
+  height: 280px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.expandable-tooltip {
+  border-top: 1px dashed #E5E5DF;
+  padding-top: 16px;
+}
+
+
+/* transparency & privacy */
+.tooltip-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: black;
+  cursor: pointer;
+}
+
+.tooltip-content {
+  padding: 12px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #E5E5DF;
+  font-size: 0.8rem;
+  text-align: left;
+}
 
 .animate-in {
   animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 </style>
