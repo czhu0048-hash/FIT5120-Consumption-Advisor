@@ -7,7 +7,7 @@ backend_ai/venv/
 venv/
 
 # Ignore node modules from frontend (tbc)
-frontend/node_modules/
+node_modules/
 dist/
 
 # Python cache files
