@@ -40,7 +40,8 @@
         <label>Fibre composition <span style="color: #D93B3B">*</span></label>
         <input type="text" v-model="localFormData.composition" placeholder="e.g., 50% Cotton, 50% Polyester"
           :style="errors.composition ? 'border-color: #D93B3B' : ''">
-        <!-- Error Handling in progress -->
+
+        <!-- error handling -->
         <p v-if="errors.composition" style="color: #D93B3B; font-size: 0.75rem; margin-top: 4px; text-align: left;">
           Please enter the composition to proceed.
         </p>
@@ -86,7 +87,7 @@ const handleFileUpload = (event) => {
 };
 
 const proceedToConfirm = () => {
-  // Error handling (In progress)
+  // error handling (in progress)
   if (!localFormData.composition || localFormData.composition.trim() === "") {
     errors.composition = true;
     return;
