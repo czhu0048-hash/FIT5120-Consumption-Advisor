@@ -1,45 +1,52 @@
 <template>
-    <div class="card h-100 clickable" v-if="method.source_link" @click="openLink(method.source_link)">
-        <div class="d-flex justify-content-between align-items-start gap-2">
-            <span>{{ method.label }}</span>
-        </div>
-        <div class="card-body d-flex flex-column gap-2">
-            <div>
-                <span class="text-success">{{ method.stream }}</span>
-            </div>
-            <b class="small mb-0">{{ method.steps }}</b>
-            <label v-if="method.notes" class="small text-muted fst-italic mb-0">~ {{ method.notes }}</label>
+    <div class="card h-100 clickable text-center" v-if="method.source_link" @click="openLink(method.source_link)">
+        <div class="card-body d-flex flex-column align-items-center gap-2 p-3">
+            <!-- Icon -->
+            <img :src="icon || defaultIcon" class="mb-1" style="width:48px;height:48px;object-fit:contain;" alt="">
+
+            <!-- Label -->
+            <b class="lh-sm">
+                {{ parsed.main }}
+                <span v-if="parsed.sub" class="d-block fw-normal small text-muted">({{ parsed.sub }})</span>
+            </b>
+
+            <!-- Divider -->
+            <hr class="w-100 my-1">
+
+            <!-- Stream -->
+            <label :class="streamColor" class="small fw-semibold mb-0">{{ method.stream }}</label>
+
+            <!-- Notes -->
+            <span v-if="method.notes" class="text-muted small fst-italic">~ {{ method.notes }}</span>
         </div>
     </div>
 </template>
 
 <script setup>
-defineProps({
-    method: {
-        type: Object,
-        required: true,
-    }
+import { computed } from 'vue'
+import { parseLabel } from '@/utils/labelParser'
+import defaultIcon from '@/assets/Wel_fridge.png'
+
+const props = defineProps({
+    method: { type: Object, required: true },
+    streamColor: { type: String, default: 'text-secondary' },
+    icon: { type: String }
 })
 
+const parsed = computed(() => parseLabel(props.method.label))
+
 const openLink = (link) => {
-    if (link) {
-        window.open(link, '_blank');
-    }
+    if (link) window.open(link, '_blank')
 }
 </script>
 
 <style scoped>
-span {
-    color: black;
-    font-family: 'Nunito', sans-serif;
-}
-
 .clickable {
-    cursor: pointer !important;
-    transition: 0.5ms;
+    cursor: pointer;
+    transition: background-color 0.15s;
 }
 
 .clickable:hover {
-    background-color: #eee;
+    background-color: #f5f5f5;
 }
 </style>

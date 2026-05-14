@@ -9,8 +9,8 @@
             </div>
             <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
             <div v-else-if="filteredMethods.length" class="row row-cols-4 g-3 mt-3">
-                <div v-for="method in filteredMethods" :key="method.id" style="display: block;">
-                    <FoodDisposalCard :method="method" />
+                <div v-for="(method, index) in filteredMethods" :key="method.id" style="display: block;">
+                    <FoodDisposalCard :method="method" :stream-color="getColorByIndex(index).text" />
                 </div>
             </div>
             <div v-else class="text-center mt-5 text-muted">No disposal methods found.</div>
@@ -23,6 +23,7 @@ import FoodDisposalCard from '@/components/food/FoodDisposalCard.vue';
 import { onMounted, ref, computed } from 'vue';
 import { fetchDisposalMethods } from '@/utils/disposalmethodFetcher';
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
+import { getColorByIndex } from '@/utils/colorPalette';
 
 const allMethods = ref([]);
 const selectedCategory = ref('');

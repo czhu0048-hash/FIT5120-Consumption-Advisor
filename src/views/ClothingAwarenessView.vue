@@ -13,7 +13,9 @@
                 <ClothingAwarenessCard title="Key insight"
                     description="Over 200,000 tonnes of textile waste are still sent to landfill each year — significantly more than any other pathway."
                     insights="Landfill remains the dominant disposal pathway"
-                    badge=">3× more than the next largest pathway" badge-icon="pi pi-arrow-up-right">
+                    badge=">3× more than the next largest pathway" badge-icon="pi pi-arrow-up-right"
+                    color="color:#c2185b" aura-color="background-color:#fff0f6"
+                    badge-aura-color="background-color:#eee0e6">
                     <ClothingAwarenessChartDisposal :data="textileData" />
                 </ClothingAwarenessCard>
             </div>
@@ -29,12 +31,14 @@
                 <ClothingAwarenessCard v-if="textileDataIndex == 0" title="key insight"
                     description="Clothing makes up the largest share of textile waste"
                     insights="clothing waste is consistently higher than other txtiles, peaking at 120,000 tons in 2019-2020"
-                    badge="~55% of total textile waste is clothing">
+                    badge="~55% of total textile waste is clothing" color="color:#2e7d32"
+                    aura-color="background-color:#f1fff3">
                     <ClothingAwarenessChartMaterials :data="materialsData" />
                 </ClothingAwarenessCard>
                 <ClothingAwarenessCard v-else title="key insight"
                     description="Municipal waste is the biggest source of textile waste" insights="textile waste from municipal solid waste is the highest across all sectors, 
-                    contributing more than half of the total" badge=">50% of textile waste comes from municiple waste">
+                    contributing more than half of the total" badge=">50% of textile waste comes from municiple waste"
+                    color="color:#e65100" aura-color="background-color:#fff8f0">
                     <ClothingAwarenessChartSectors :data="detailsData" />
                 </ClothingAwarenessCard>
             </div>
