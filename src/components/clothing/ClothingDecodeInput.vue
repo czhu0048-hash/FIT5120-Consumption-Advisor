@@ -62,13 +62,13 @@
       <button @click="proceedToConfirm" class="btn btn-primary mt-4 w-100"><b>Next step</b></button>
     </div>
 
-    <div class="expandable-tooltip mt-5 animate-in">
-      <div class="tooltip-toggle" @click="tooltipOpen = !tooltipOpen">
+    <div class="section-separator mt-5 animate-in">
+      <div class="tip-toggle">
         <span class="material-symbols-outlined icon-xs">shield_lock</span><b> Transparency & Privacy</b>
       </div>
-      <div v-if="tooltipOpen" class="tooltip-content mt-2">
+      <div class="tip-content mt-2">
         <p class="mb-2"><strong>AI Usage:</strong> We use Gemini AI to extract fabric details from your labels.</p>
-        <p><strong>Your Privacy:</strong> We don’t store your photos. Images are processed and then discarded.</p>
+        <p><strong>Your Privacy:</strong> We do not store your photos. Images are processed and then discarded.</p>
       </div>
     </div>
   </div>
@@ -83,7 +83,6 @@ const emit = defineEmits(['next']);
 const activeTab = ref('photo');
 const previewUrl = ref(null);
 const isScanning = ref(false); // loading state
-const tooltipOpen = ref(true);
 const errors = reactive({ composition: false });
 
 const localFormData = reactive({
@@ -109,7 +108,7 @@ const handleFileUpload = async (event) => {
     event.target.value = ""; // reset the input
     return;
   }
-  // -----------------------------------------
+
 
   previewUrl.value = URL.createObjectURL(file);
   isScanning.value = true;
@@ -290,38 +289,56 @@ const proceedToConfirm = () => {
   object-fit: cover;
 }
 
-.expandable-tooltip {
-  border-top: 1px dashed #E5E5DF;
+.section-separator {
+  border-top: 1px solid #E5E5DF;
   padding-top: 16px;
 }
 
 
 /* transparency & privacy */
-.tooltip-toggle {
+.tip-toggle {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.875rem;
+  gap: 3px;
+  font-size: 0.85rem;
   color: black;
-  cursor: pointer;
+  align-items: center;
+  /*cursor: pointer;*/
 }
 
-.tooltip-content {
-  padding: 12px;
+.tip-content {
   background: #fff;
   border-radius: 8px;
+  box-sizing: border-box;
   border: 1px solid #E5E5DF;
   font-size: 0.8rem;
+  padding: 12px 16px;
   text-align: left;
+  width: 100%;
 }
+
+.tip-content p  {
+  text-align: left;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  display: block;
+}
+
 
 .animate-in {
   animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hidden { display: none; }
