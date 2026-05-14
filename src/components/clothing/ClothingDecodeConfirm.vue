@@ -145,7 +145,7 @@ const startAnalysis = async () => {
   isAnalyzing.value = true;
   try {
     // const response = await axios.post('http://127.0.0.1:8000/api/decode', { //for local testing
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/decode`, {  //for prod
+    const response = await axios.post('https://redusetagdecoder-gbhfdmdddgfaaec2.canadacentral-01.azurewebsites.net/api/decode', {  //for prod
       composition: localData.composition,
       location: localData.madeIn,
       brand: localData.brand

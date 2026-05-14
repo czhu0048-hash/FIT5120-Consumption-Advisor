@@ -120,7 +120,7 @@ const handleFileUpload = async (event) => {
   try {
     // call extraction endpoint
     // const response = await axios.post('http://127.0.0.1:8000/api/extract', formData); //for local testing
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/extract`, formData); //for prod
+    const response = await axios.post('https://redusetagdecoder-gbhfdmdddgfaaec2.canadacentral-01.azurewebsites.net/api/extract', formData); //for prod
 
 
 
