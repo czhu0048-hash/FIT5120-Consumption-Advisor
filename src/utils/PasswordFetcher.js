@@ -1,6 +1,6 @@
 import { ref } from "vue"
 
-const BASE_URL = 'https://reduse-api-ddfkdgengccka5fz.australiaeast-01.azurewebsites.net'
+const BASE_URL = 'https://redusetagdecoder-gbhfdmdddgfaaec2.canadacentral-01.azurewebsites.net'
 
 export const isPasswordCorrect = ref(false);
 
