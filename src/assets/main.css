@@ -24,7 +24,7 @@ button {
 }
 
 .bg_main {
-  background-color: darkgreen;
+  background-color: #009387;
 }
 
 .bg_sub {
@@ -158,9 +158,25 @@ p {
   transition: all 0.2s ease;
 }
 
+.capture-option:hover {
+  border-color: #009387;
+  background-color: #f0f9f8;
+}
+
+
 .icon-md {
   font-size: 32px;
   color: #01696F;
   margin-bottom: 8px;
   /* color: #e0fffc; */
+}
+
+.btn-success {
+  background-color: #009387 !important;
+  border: none;
+  height: 38px;
+}
+
+.btn-success:hover {
+  background-color: #007f70 !important;
 }

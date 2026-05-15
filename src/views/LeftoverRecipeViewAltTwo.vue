@@ -246,15 +246,7 @@ async function applyFilters() {
     margin-bottom: 4px;
 }
 
-.btn-success {
-    background-color: #009387 !important;
-    border: none;
-    height: 38px;
-}
 
-.btn-success:hover {
-    background-color: #007f70 !important;
-}
 
 .recipe-modal-backdrop {
     position: fixed;

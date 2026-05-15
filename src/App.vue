@@ -58,7 +58,8 @@ const navItems = [
         command: () => go('/household/audit')
       },
       {
-        label: 'Product Journey Reveal'
+        label: 'Product Journey Reveal',
+        command: () => go('/household/journey')
       }
     ]
   }
