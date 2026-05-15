@@ -5,7 +5,7 @@
             Our quick audit helps you discover where your household waste comes from -- and shows you simple ways to
             reduce it.
         </p>
-        <div class="tabs col-12 col-md-6 offset-3">
+        <div class="tabs col-12 col-md-6 offset-md-3">
             <div class="tab" :class="{ active: activeTab === 0 }" @click="activeTab = 0"><b>Audit Options</b>
             </div>
             <div class="tab" :class="{ active: activeTab === 1 }" @click="activeTab = 1"><b>How it works</b>

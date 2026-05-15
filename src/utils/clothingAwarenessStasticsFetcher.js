@@ -34,8 +34,6 @@ export const fetchTextileYears = async () => {
     try {
         const res = await fetch(`${BASE_URL}/api/textiles-xls/yearly/`)
         const data = await res.json()
-        // console.log(data);
-
         return data.map(normalizeTextileYear)
     } catch (e) {
         console.error(`Failed to fetch textile year statistics: ${e}`)
@@ -47,11 +45,11 @@ export const fetchTextileMaterials = async () => {
     try {
         const res = await fetch(`${BASE_URL}/api/textiles-xls/materials/`)
         const data = await res.json()
-        console.log(data);
         return data.map(normalizeTextileYearMaterials)
     }
     catch (e) {
         console.error(`Failed to fetch textile materials statistics: ${e}`)
+        return []
     }
 }
 
@@ -59,11 +57,11 @@ export const fetchTextileDetails = async () => {
     try {
         const res = await fetch(`${BASE_URL}/api/textiles-xls/detail/`)
         const data = await res.json()
-        console.log(data);
         return data.map(normalizeTextileYearDetails)
     }
     catch (e) {
         console.error(`Failed to fetch textile detailed statistics: ${e}`)
+        return []
     }
 }
 

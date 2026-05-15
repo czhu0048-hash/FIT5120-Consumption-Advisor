@@ -69,7 +69,7 @@ onMounted(async () => {
         fetchTextileMaterials(),
         fetchTextileDetails(),
     ])
-    if (!yearly?.length && !materials?.length && !details?.length) {
+    if (!yearly?.length || !materials?.length || !details?.length) {
         error.value = true
     } else {
         textileData.value = yearly ?? []
