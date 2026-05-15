@@ -6,6 +6,10 @@ import MainFunctionButton from '@/components/misc/MainFunctionButton.vue';
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 import StepsIndicator from '@/components/misc/StepsIndicator.vue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { fetchProductJourney } from '@/utils/productjourneyFetcher';
+
+const router = useRouter();
 
 const popularItems = [
     { name: 'Plastic Bottle', icon: 'pi pi-star' },
@@ -22,8 +26,17 @@ const steps = [
 ]
 
 const searchedItem = ref("")
-const search = () => {
+const searching = ref(false)
 
+const search = async (itemName) => {
+    const query = (itemName || searchedItem.value).trim()
+    if (!query) return
+    searching.value = true
+    const result = await fetchProductJourney(query)
+    searching.value = false
+    if (result) {
+        router.push({ path: '/household/detailedjourney', state: { journeyData: result } })
+    }
 }
 </script>
 
@@ -38,13 +51,15 @@ const search = () => {
     <!-- Search for an item -->
     <div class="card p-4 mb-4">
         <h5 class="fw-bold mb-3">Search for an item</h5>
-        <div class="col-12 row g-3 gap-5 justify-content-center">
-            <div class="col-3">
+        <div class="col-12 row gap-5 justify-content-center">
+            <div class="col-md-3 col-12">
                 <input class="form-control" type="text" placeholder="e.g. chair, desk fan" v-model="searchedItem"
-                    @keyup.enter="search">
+                    @keyup.enter="search()" :disabled="searching">
             </div>
-            <button class="btn btn-success fw-bold col-auto" @click="search" :disabled="searching">
-                <i class="pi pi-search me-2"></i>Search
+            <button class="btn btn-success fw-bold col-auto" @click="search()" :disabled="searching">
+                <i v-if="searching" class="pi pi-spin pi-spinner me-2"></i>
+                <i v-else class="pi pi-search me-2"></i>
+                {{ searching ? 'Searching...' : 'Search' }}
             </button>
         </div>
     </div>
@@ -54,7 +69,7 @@ const search = () => {
         <h5 class="fw-bold mb-3">Popular items to explore</h5>
         <div class="row g-3 gap-5">
             <MainFunctionButton v-for="item in popularItems" :key="item.name" :feature-name="item.name"
-                :icon-name="item.icon" col-class="col-12 col-md-2" />
+                :icon-name="item.icon" col-class="col-12 col-md-2" @card-funtion="search(item.name)" />
         </div>
     </div>
 

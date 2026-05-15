@@ -8,6 +8,7 @@ import ClothingImpactDashboard from '@/views/ClothingImpactDashboard.vue'
 import ClothingDecode from '@/views/ClothingDecode.vue'
 import WasteAuditView from '@/views/WasteAuditView.vue'
 import ProductJourneyView from '@/views/ProductJourneyView.vue'
+import ProductJourneyDetailedView from '@/views/ProductJourneyDetailedView.vue'
 
 const routes = [
     {
@@ -55,6 +56,11 @@ const routes = [
         path: '/household/journey',
         name: 'Product Journey',
         component: ProductJourneyView
+    },
+    {
+        path: '/household/detailedjourney',
+        name: 'Product Journey Detailed',
+        component: ProductJourneyDetailedView
     }
 ]
 
