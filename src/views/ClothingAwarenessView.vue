@@ -82,7 +82,7 @@ onMounted(async () => {
 
 <style scoped>
 .clothing-awareness-view {
-    padding: 2rem;
+    /* padding: 2rem; */
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;

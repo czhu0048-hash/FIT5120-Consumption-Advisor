@@ -1,11 +1,9 @@
 <template>
     <div class="d-flex" style="min-height: 100vh;">
-        <div class="flex-grow-1 container mt-5">
+        <div class="flex-grow-1 container">
 
-            <div class="text-center mb-4">
-                <RedUseHeader inter="Cook with what " grace="you've got"></RedUseHeader>
-                <p class="text-secondary fs-8 mt-5">Add what's in your fridge. We'll do the matching.</p>
-            </div>
+            <RedUseHeader class="mt-5" inter="Cook with what " grace="you've got"></RedUseHeader>
+            <p class="text-secondary fs-8 mt-5">Add what's in your fridge. We'll do the matching.</p>
 
 
             <div class="search-bar-container p-4 rounded shadow-sm bg-white mb-4">
