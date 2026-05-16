@@ -86,18 +86,18 @@ const goBack = () => router.push('/household/journey');
 
                             <!-- Chapter content -->
                             <div :class="getChapterImage(chapter.id) ? 'col-md-9' : 'col-12'">
-                                <div class="card-body p-4 d-flex flex-row h-100">
+                                <div class="card-body p-4 d-flex row h-100" style="align-items: center;">
                                     <!-- Main info -->
-                                    <div class="col-9">
+                                    <div class="col-md-8 col-12 mb-5">
                                         <!-- Step header -->
                                         <div class="align-items-center gap-3">
-                                            <div class="flex-row">
+                                            <div class="flex-row d-flex">
                                                 <div class="d-flex align-items-center justify-content-center rounded-circle fw-bold"
                                                     :class="chapterColors[i % chapterColors.length].bg"
                                                     :style="{ width: '3.5rem', height: '3.5rem', color: chapterColors[i % chapterColors.length].circle }">
                                                     {{ chapter.stepNumber }}
                                                 </div>
-                                                <p class="small fw-bold text-uppercase"
+                                                <p class="small fw-bold text-uppercase" style="margin-left: 5rem;"
                                                     :class="chapterColors[i % chapterColors.length].text">
                                                     <i :class="getChapterIcon(chapter.id)"></i>
                                                     {{ chapter.stepLabel }}
@@ -109,7 +109,8 @@ const goBack = () => router.push('/household/journey');
                                             </div>
                                         </div>
 
-                                        <p class="text-secondary mb-3">{{ chapter.text }}</p>
+                                        <p class="text-secondary mb-3" style="text-align: start; width: 75%;">{{
+                                            chapter.text }}</p>
 
                                         <!-- Micro facts -->
                                         <div class="row gap-2" style="justify-content: center;">
@@ -123,13 +124,14 @@ const goBack = () => router.push('/household/journey');
                                     </div>
 
                                     <!-- Impact box -->
-                                    <div class="rounded col-3" :class="chapterColors[i % chapterColors.length].bg"
-                                        style="text-align: center;">
-                                        <p class="small fw-semibold mb-5" style="font-size: 110%;"
+                                    <div class="rounded col-md-4 col-12"
+                                        :class="chapterColors[i % chapterColors.length].bg"
+                                        style="text-align: center; height: 35vh;">
+                                        <p class="mb-5" style="font-size: 110%; width: 100%;"
                                             :class="chapterColors[i % chapterColors.length].text">
                                             <i class="pi pi-bolt me-1"></i>{{ chapter.impactTitle }}
                                         </p>
-                                        <label>{{ chapter.impactText }}</label>
+                                        <label class="p-3">{{ chapter.impactText }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -147,34 +149,32 @@ const goBack = () => router.push('/household/journey');
                                 style="object-fit: contain;">
                         </div>
 
-                        <div class="col-12 col-md-4 offset-md-1">
-                            <h5 class="fw-bold mb-2">{{ journey.summaryPanel.title }}</h5>
-                            <label class="text-secondary mb-4 col-md-7 mx-auto">{{ journey.summaryPanel.text }}</label>
-                            <div class="d-flex flex-wrap gap-3">
-                                <button class="questionaireButton px-4" @click="goBack">
-                                    <i class="pi pi-search me-2"></i>{{ journey.summaryPanel.ctaPrimary }}
-                                </button>
+                        <div class="col-12 col-md-5 offset-md-1 row gap-2">
+                            <div>
+                                <h5 class="fw-bold mb-2">{{ journey.summaryPanel.title }}</h5>
+                                <label class="text-secondary mb-4 col-md-7 mx-auto">{{ journey.summaryPanel.text
+                                }}</label>
                             </div>
+
+                            <div class="row">
+                                <h5 class="fw-bold mb-2">One Small Change</h5>
+                                <label class="text-secondary">{{ journey.oneSmallChange }}</label>
+                            </div>
+
+                            <button class="questionaireButton px-4" @click="goBack">
+                                <i class="pi pi-search me-2"></i>{{ journey.summaryPanel.ctaPrimary }}
+                            </button>
                         </div>
-                        <div class="col-12 col-md-4 d-flex align-items-stretch gap-3">
-                            <div class="bg_main flex-shrink-0" style="width: 3px; border-radius: 2px;"></div>
-                            <label class="fst-italic p-5">
+                        <div class="col-12 col-md-4 d-flex align-items-center gap-3">
+                            <div class="bg_main flex-shrink-0"
+                                style="width: 3px; border-radius: 2px; align-self: stretch;"></div>
+                            <label class="fst-italic"
+                                style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                 <b style="font-size: 200%; color: #009387">"</b>{{ journey.closingStatement }}
                             </label>
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            <!-- One Small Change -->
-            <div class="card border-0 bg_main text-white mb-4 shadow-sm">
-                <div class="card-body p-4 d-flex align-items-start gap-3">
-                    <i class="pi pi-lightbulb mt-1" style="font-size: 1.5rem;"></i>
-                    <div class="row">
-                        <label class="fw-bold mb-1 small text-uppercase">One Small Change</label>
-                        <label>{{ journey.oneSmallChange }}</label>
-                    </div>
                 </div>
             </div>
         </div>
