@@ -2,6 +2,10 @@
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import journey1 from '@/assets/Journey_1.png';
+import journey2 from '@/assets/Journey_2.png';
+import journey3 from '@/assets/Journey_3.png';
+import journey4 from '@/assets/journey_4.png';
 
 const router = useRouter();
 const journey = ref(null);
@@ -20,7 +24,15 @@ const chapterIcons = {
     end_of_life: 'pi pi-trash',
 };
 
+const chapterImages = {
+    origin: journey1,
+    journey: journey2,
+    purchase: journey3,
+    end_of_life: journey4,
+}
+
 const getChapterIcon = (id) => chapterIcons[id] ?? 'pi pi-circle';
+const getChapterImage = (id) => chapterImages[id] ?? null;
 
 onMounted(() => {
     const state = window.history.state;
@@ -63,28 +75,34 @@ const goBack = () => router.push('/household/journey');
                         <div style="width: 2px; height: 2rem; background: #dee2e6;"></div>
                     </div>
 
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body p-4">
-                            <!-- Step number circle -->
-                            <div class="col-auto">
-                                <div class="d-flex align-items-center justify-content-center rounded-circle fw-bold fs-5"
-                                    :class="chapterColors[i % chapterColors.length].bg"
-                                    :style="{ width: '3.5rem', height: '3.5rem', color: chapterColors[i % chapterColors.length].circle }">
-                                    {{ chapter.stepNumber }}
-                                </div>
+                    <div class="card border-0 shadow-sm overflow-hidden">
+                        <div class="row g-0">
+                            <!-- Chapter image -->
+                            <div v-if="getChapterImage(chapter.id)" class="col-md-4 d-none d-md-block">
+                                <img :src="getChapterImage(chapter.id)" :alt="chapter.title" class="w-100 h-100"
+                                    style="object-fit: cover; min-height: 260px;" />
                             </div>
-                            <div class="row align-items-start g-3">
 
-                                <!-- Chapter content -->
-                                <div class="col">
-                                    <div class="row" style="text-align: center;">
-                                        <p class="small fw-bold text-uppercase mb-1"
-                                            :class="chapterColors[i % chapterColors.length].text">
-                                            <i :class="getChapterIcon(chapter.id)"></i>
-                                            {{ chapter.stepLabel }}
-                                        </p>
-                                        <h5 class="fw-bold mb-2">{{ chapter.title }}</h5>
+                            <!-- Chapter content -->
+                            <div :class="getChapterImage(chapter.id) ? 'col-md-8' : 'col-12'">
+                                <div class="card-body p-4 d-flex flex-column h-100">
+                                    <!-- Step header -->
+                                    <div class="align-items-center gap-3 mb-3">
+                                        <div class="d-flex align-items-center justify-content-center rounded-circle fw-bold fs-5 flex-shrink-0"
+                                            :class="chapterColors[i % chapterColors.length].bg"
+                                            :style="{ width: '3.5rem', height: '3.5rem', color: chapterColors[i % chapterColors.length].circle }">
+                                            {{ chapter.stepNumber }}
+                                        </div>
+                                        <div>
+                                            <p class="small fw-bold text-uppercase mb-0"
+                                                :class="chapterColors[i % chapterColors.length].text">
+                                                <i :class="getChapterIcon(chapter.id)"></i>
+                                                {{ chapter.stepLabel }}
+                                            </p>
+                                            <h5 class="fw-bold" style="text-align: center;">{{ chapter.title }}</h5>
+                                        </div>
                                     </div>
+
                                     <p class="text-secondary mb-3">{{ chapter.text }}</p>
 
                                     <!-- Micro facts -->
@@ -98,14 +116,13 @@ const goBack = () => router.push('/household/journey');
                                     </div>
 
                                     <!-- Impact box -->
-                                    <div class="rounded p-3" :class="chapterColors[i % chapterColors.length].bg"
+                                    <div class="rounded p-3 mt-auto" :class="chapterColors[i % chapterColors.length].bg"
                                         style="text-align: center;">
                                         <p class="small fw-semibold mb-1" style="font-size: 150%;"
                                             :class="chapterColors[i % chapterColors.length].text">
                                             <i class="pi pi-bolt me-1"></i>{{ chapter.impactTitle }}
                                         </p>
-                                        <label>{{ chapter.impactText
-                                        }}</label>
+                                        <label>{{ chapter.impactText }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -133,9 +150,6 @@ const goBack = () => router.push('/household/journey');
                     <div class="d-flex flex-wrap justify-content-center gap-3">
                         <button class="btn bg_main fw-semibold px-4" @click="goBack">
                             <i class="pi pi-search me-2"></i>{{ journey.summaryPanel.ctaPrimary }}
-                        </button>
-                        <button class="btn btn-outline-success fw-semibold px-4">
-                            <i class="pi pi-leaf me-2"></i>{{ journey.summaryPanel.ctaSecondary }}
                         </button>
                     </div>
                 </div>
