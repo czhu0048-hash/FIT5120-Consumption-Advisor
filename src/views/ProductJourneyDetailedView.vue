@@ -79,13 +79,13 @@ const goBack = () => router.push('/household/journey');
                         <div class="row g-0">
                             <!-- Chapter image -->
                             <div v-if="getChapterImage(chapter.id)"
-                                class="col-md-2 col-12 d-flex align-items-center justify-content-center">
+                                class="col-md-3 col-12 d-flex align-items-center justify-content-center">
                                 <img :src="getChapterImage(chapter.id)" :alt="chapter.title" class="w-100 h-100"
                                     style="object-fit: contain;" />
                             </div>
 
                             <!-- Chapter content -->
-                            <div :class="getChapterImage(chapter.id) ? 'col-md-10' : 'col-12'">
+                            <div :class="getChapterImage(chapter.id) ? 'col-md-9' : 'col-12'">
                                 <div class="card-body p-4 d-flex flex-row h-100">
                                     <!-- Main info -->
                                     <div class="col-9">
@@ -138,17 +138,6 @@ const goBack = () => router.push('/household/journey');
                 </div>
             </div>
 
-            <!-- One Small Change -->
-            <div class="card border-0 bg_main text-white mb-4 shadow-sm">
-                <div class="card-body p-4 d-flex align-items-start gap-3">
-                    <i class="pi pi-lightbulb mt-1" style="font-size: 1.5rem;"></i>
-                    <div class="row">
-                        <label class="fw-bold mb-1 small text-uppercase">One Small Change</label>
-                        <label>{{ journey.oneSmallChange }}</label>
-                    </div>
-                </div>
-            </div>
-
             <!-- Summary Panel -->
             <div class="card border-0 shadow-sm mb-4">
                 <div class="card-body p-5">
@@ -178,7 +167,16 @@ const goBack = () => router.push('/household/journey');
                 </div>
             </div>
 
-            <!-- Closing Statement -->
+            <!-- One Small Change -->
+            <div class="card border-0 bg_main text-white mb-4 shadow-sm">
+                <div class="card-body p-4 d-flex align-items-start gap-3">
+                    <i class="pi pi-lightbulb mt-1" style="font-size: 1.5rem;"></i>
+                    <div class="row">
+                        <label class="fw-bold mb-1 small text-uppercase">One Small Change</label>
+                        <label>{{ journey.oneSmallChange }}</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
