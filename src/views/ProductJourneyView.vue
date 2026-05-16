@@ -49,9 +49,8 @@ const search = async (itemName) => {
     </p>
 
     <!-- Search for an item -->
-    <div class="card p-4 mb-4">
-        <h5 class="fw-bold mb-3">Search for an item</h5>
-        <div class="col-12 row gap-5 justify-content-center">
+    <div class="p-4 mb-4">
+        <div class="col-12 row gap-1 justify-content-center">
             <div class="col-md-3 col-12">
                 <input class="form-control" type="text" placeholder="e.g. chair, desk fan" v-model="searchedItem"
                     @keyup.enter="search()" :disabled="searching">
@@ -59,7 +58,7 @@ const search = async (itemName) => {
             <button class="btn btn-success fw-bold col-auto" @click="search()" :disabled="searching">
                 <i v-if="searching" class="pi pi-spin pi-spinner me-2"></i>
                 <i v-else class="pi pi-search me-2"></i>
-                {{ searching ? 'Searching...' : 'Search' }}
+                {{ searching ? 'Searching...' : 'Explore journey' }}
             </button>
         </div>
     </div>
