@@ -2,8 +2,8 @@
     <div class="d-flex" style="min-height: 100vh;">
         <div class="flex-grow-1 container">
 
-            <RedUseHeader class="mt-5" inter="Cook with what " grace="you've got"></RedUseHeader>
-            <p class="text-secondary fs-8 mt-5">Add what's in your fridge. We'll do the matching.</p>
+            <RedUseHeader paragraph="Add what's in your fridge. We'll do the matching." inter="Cook with what "
+                grace="you've got"></RedUseHeader>
 
 
             <div class="search-bar-container p-4 rounded shadow-sm bg-white mb-4">

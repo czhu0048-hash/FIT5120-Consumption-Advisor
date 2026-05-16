@@ -59,8 +59,8 @@ const goBack = () => router.push('/household/journey');
         <div v-else>
             <!-- Hero Section -->
             <div class="text-center mb-5">
-                <RedUseHeader inter="The hidden journey of " :grace="journey.displayName"></RedUseHeader>
-                <p class="text-secondary mt-5 fs-6 col-md-8 mx-auto">{{ journey.heroSubtitle }}</p>
+                <RedUseHeader :paragraph="journey.heroSubtitle" inter="The hidden journey of "
+                    :grace="journey.displayName"></RedUseHeader>
                 <div class="alert alert-light border d-inline-flex align-items-center gap-2 mt-2 py-2 px-3 small">
                     <i class="pi pi-info-circle text-muted"></i>
                     <span>{{ journey.assumptionNote }}</span>
@@ -153,7 +153,7 @@ const goBack = () => router.push('/household/journey');
                             <div>
                                 <h5 class="fw-bold mb-2">{{ journey.summaryPanel.title }}</h5>
                                 <label class="text-secondary mb-4 col-md-7 mx-auto">{{ journey.summaryPanel.text
-                                }}</label>
+                                    }}</label>
                             </div>
 
                             <div class="row">

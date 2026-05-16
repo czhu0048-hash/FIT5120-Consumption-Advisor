@@ -1,13 +1,9 @@
 <template>
-    <div class="d-flex" style="min-height: 100vh;">
-        <div class="flex-grow-1 container mt-5" style="text-align: center;">
-
-            <div class="text-center mb-4">
-                <RedUseHeader inter="Bin it " grace="Smart"></RedUseHeader>
-                <p class="text-secondary fs-8 mt-5">Pick your food waste type and stop guessing. Green bin, recycling,
-                    or
-                    general waste, we got you.</p>
-            </div>
+    <RedUseHeader paragraph="Pick your food waste type and stop guessing. Green bin, recycling,
+            or
+            general waste, we got you." inter="Bin it " grace="Smart"></RedUseHeader>
+    <div class="flex-grow-1 container" style="text-align: center;">
+        <div class="d-flex" style="justify-content: center; align-items: center;">
             <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
             <div v-else-if="filteredMethods.length" class="row row-cols-4 g-3 mt-3">
                 <div v-for="(method, index) in filteredMethods" :key="method.id" style="display: block;">

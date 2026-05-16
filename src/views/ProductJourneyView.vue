@@ -41,12 +41,11 @@ const search = async (itemName) => {
 </script>
 
 <template>
-    <RedUseHeader class="mt-5" inter="Uncover the hidden journey of " grace="any item " inter-two="you use">
-    </RedUseHeader>
-    <p class="mb-5">Every item has a journey -- from where it begins,
+    <RedUseHeader paragraph="Every item has a journey -- from where it begins,
         how it reaches you, to where it ends up.
-        Search any household item to see its full story.
-    </p>
+        Search any household item to see its full story." inter="Uncover the hidden journey of " grace="any item "
+        inter-two="you use">
+    </RedUseHeader>
 
     <!-- Search for an item -->
     <div class="p-4 mb-4">

@@ -1,16 +1,11 @@
 <template>
+  <div v-if="currentScreen === 1" class="text-center">
+    <RedUseHeader paragraph="          Check any label to uncover the environmental cost and life of your clothes.
+" inter="Decode" grace="your wardrobe"></RedUseHeader>
+  </div>
   <div class="d-flex flex-column" style="min-height: 100vh;">
     <div class="container mt-5 flex-grow-1">
 
-      <div v-if="currentScreen === 1" class="text-center mb-4">
-        <h1 class="display-5 fw-normal">
-          <span class="font-inter"><b>Decode</b></span>
-          <span class="font-grace"> your wardrobe</span>
-        </h1>
-        <p class="text-secondary fs-8">
-          Check any label to uncover the environmental cost and life of your clothes.
-        </p>
-      </div>
 
       <DecodeInput v-if="currentScreen === 1" @next="goToConfirm" />
 
@@ -30,6 +25,7 @@ import { ref, reactive } from 'vue';
 import DecodeInput from '@/components/clothing/ClothingDecodeInput.vue';
 import DecodeConfirm from '@/components/clothing/ClothingDecodeConfirm.vue';
 import DecodeResult from '@/components/clothing/ClothingDecodeResult.vue';
+import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 
 const currentScreen = ref(1);
 

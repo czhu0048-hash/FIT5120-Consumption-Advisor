@@ -9,6 +9,7 @@ import ClothingDecode from '@/views/ClothingDecode.vue'
 import WasteAuditView from '@/views/WasteAuditView.vue'
 import ProductJourneyView from '@/views/ProductJourneyView.vue'
 import ProductJourneyDetailedView from '@/views/ProductJourneyDetailedView.vue'
+import WalkThroughHome from '@/views/WalkThroughHome.vue'
 
 const routes = [
     {
@@ -50,7 +51,7 @@ const routes = [
     {
         path: '/household/audit',
         name: 'Household Waste Audit',
-        component: WasteAuditView
+        component: WalkThroughHome
     },
     {
         path: '/household/journey',
