@@ -1,6 +1,5 @@
 <template>
-    <div style="display:flex;flex-direction:column;height:100%;">
-
+    <div class="d-flex flex-column h-100">
         <!-- Header -->
         <div
             style="padding:0.875rem 1.125rem;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:0.5625rem;flex-shrink:0;">
@@ -19,7 +18,7 @@
 
         <!-- Central success visual -->
         <div
-            style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem 1.25rem 0.75rem;gap:1rem;">
+            style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem 1.25rem 0.75rem;gap:1rem;overflow-y:auto;">
 
             <!-- Animated checkmark -->
             <div style="position:relative;width:72px;height:72px;">
