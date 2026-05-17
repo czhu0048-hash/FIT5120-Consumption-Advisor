@@ -6,14 +6,13 @@
             style="color: grey; border: none; margin-left: auto; background-color: transparent; text-decoration: underline;">back</button>
         <!-- Progress -->
         <div style="width: 100%;">
-            <div
-                style="display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.85rem; color: #777;">
+            <div style="display: flex; justify-content: space-between; color: #777;">
                 <span>Question {{ questionNumber }} of {{ totalQuestions }}</span>
                 <span>{{ Math.round((questionNumber / totalQuestions) * 100) }}%</span>
             </div>
             <div style="background: #ddd; border-radius: 9999px; height: 6px; width: 100%;">
                 <div :style="{ width: (questionNumber / totalQuestions * 100) + '%' }"
-                    style="background: darkslateblue; height: 6px; border-radius: 9999px; transition: width 0.3s;">
+                    style="background: #009387; height: 6px; border-radius: 9999px; transition: width 0.3s;">
                 </div>
             </div>
         </div>
@@ -79,15 +78,15 @@ const selectOption = (option, index) => {
 }
 
 .option-btn:hover:not(:disabled) {
-    border-color: darkslateblue;
-    color: darkslateblue;
-    background-color: #f0eefa;
+    border-color: #009387;
+    color: #009387;
+    background-color: #f5fffe;
 }
 
 .selected-option {
-    background-color: darkslateblue !important;
+    background-color: #009387 !important;
     color: white !important;
-    border-color: darkslateblue !important;
+    border-color: #009387 !important;
 }
 
 .option-btn:disabled {

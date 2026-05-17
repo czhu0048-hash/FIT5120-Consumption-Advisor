@@ -43,8 +43,8 @@ onMounted(async () => {
     resetQuestionaire()
     const base = import.meta.env.BASE_URL
     const [qRes, rRes] = await Promise.all([
-        fetch(base + 'questions.json'),
-        fetch(base + 'questionaireResults.json'),
+        fetch(base + 'questions.json', { cache: 'no-store' }),
+        fetch(base + 'questionaireResults.json', { cache: 'no-store' }),
     ])
     questions.value = (await qRes.json()).questions
     resultsData.value = await rRes.json()

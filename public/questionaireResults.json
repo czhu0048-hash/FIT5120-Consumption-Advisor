@@ -30,20 +30,20 @@
   ],
   "dynamicReasons": {
     "q2": {
-      "0": "One wear, then it lives rent-free in your wardrobe forever. Sounds familiar?"
+      "3": "One wear, then it lives rent-free in your wardrobe forever. Sounds familiar?"
     },
     "q3": {
-      "loved_it": "Your eyes now: obsessed. Also you in the future at 2am doing a wardrobe clearout: less sure.",
-      "sale": "Saving 40% on something you didn't need is still spending 60%. Still a good deal?"
+      "2": "Your eyes now: obsessed. Also you in the future at 2am doing a wardrobe clearout: less sure.",
+      "3": "Saving 40% on something you didn't need is still spending 60%. Still a good deal?"
     },
     "q4": {
-      "0": "So you'd have two of basically the same thing. A collection or a problem? Your call."
+      "2": "So you'd have two of basically the same thing. A collection or a problem? Your call."
     },
     "q5": {
-      "0": "There's a version of this sitting in someone's wardrobe right now, waiting to be yours for half the price. Worth a look!"
+      "2": "There's a version of this sitting in someone's wardrobe right now, waiting to be yours for half the price. Worth a look!"
     },
     "q6": {
-      "0": "It's giving fast fashion math: low price, low lifespan, somehow still expensive per wear."
+      "2": "It's giving fast fashion math: low price, low lifespan, somehow still expensive per wear."
     }
   }
 }

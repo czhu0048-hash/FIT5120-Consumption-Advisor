@@ -21,15 +21,14 @@
             <p style="color: #555; max-width: 480px; margin: 0;">{{ result.body }}</p>
 
             <!-- Dynamic reasons -->
-            <div v-if="dynamicReasons.length > 0"
-                style="background: white; text-align: center; border-radius: 0.75rem; width: 100%;">
+            <div v-if="dynamicReasons.length > 0" class="card p-5"
+                style="background: #eee; border-radius: 0.75rem; width: 60%;">
                 <p
                     style="font-size: 0.8rem; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.1em;">
                     A few things to consider:
                 </p>
-                <ul
-                    style="margin: 0; padding-left: 1.2rem; color: #555; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.3rem;">
-                    <li v-for="(reason, i) in dynamicReasons" :key="i">{{ reason }}</li>
+                <ul style="text-align: start; padding-left: 1.2rem;">
+                    <li class="p-1" v-for="(reason, i) in dynamicReasons" :key="i">{{ reason }}</li>
                 </ul>
             </div>
 
@@ -38,10 +37,6 @@
                 <button class="questionaireButton" @click="$emit('openCalculator')">
                     Clothing Care Calculator →
                 </button>
-                <!-- Community Listing Button -->
-                <!-- <button class="questionaireButton questionaireSubButton">
-                    Browse Community Listings →
-                </button> -->
             </div>
             <!-- Tip -->
             <p style="color: #888; font-style: italic; font-size: 0.9rem; margin: 0;">{{ result.tip }}</p>
@@ -56,7 +51,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { getScore, resetQuestionaire } from '@/utils/questionaireController'
+import { getScore, getAnswers, resetQuestionaire } from '@/utils/questionaireController'
 
 defineEmits(['openCalculator'])
 const props = defineProps({
@@ -73,12 +68,15 @@ const result = computed(() => {
 
 const dynamicReasons = computed(() => {
     const reasons = []
-    if (getScore.value >= 7) {
-        return reasons;
-    }
+    if (getScore.value >= 7) return reasons
     const dynamicMap = props.results.dynamicReasons
-    for (const optionMap of Object.values(dynamicMap)) {
-        reasons.push(...Object.values(optionMap))
+    const userAnswers = getAnswers.value
+    for (const [questionId, optionMap] of Object.entries(dynamicMap)) {
+        const selectedIndex = userAnswers[questionId]
+        if (selectedIndex !== undefined) {
+            const tip = optionMap[String(selectedIndex)]
+            if (tip) reasons.push(tip)
+        }
     }
     return reasons
 })
