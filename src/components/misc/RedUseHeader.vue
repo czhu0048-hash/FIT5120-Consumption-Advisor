@@ -10,6 +10,10 @@
             {{ paragraph }}
         </p>
 
+        <div class="mt-5" v-show="!collapsed">
+            <slot></slot>
+        </div>
+
         <i v-if="collapsed" class="pi pi-angle-down"></i>
     </div>
 </template>

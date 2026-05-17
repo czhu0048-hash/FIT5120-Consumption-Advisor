@@ -4,7 +4,8 @@
         {{ index + 1 }}
     </div>
     <div class="d-flex align-items-center justify-content-center gap-2 mb-1">
-        <i :class="[step.icon, 'text-success']"></i>
+        <span v-if="step.emoji"></span>
+        <i v-else :class="[step.icon, 'text-success']"></i>
         <span class="fw-semibold">{{ step.label }}</span>
     </div>
     <p class="text-muted small mb-0">{{ step.description }}</p>
@@ -13,6 +14,6 @@
 <script setup>
 defineProps({
     step: { type: Object, reqruied: true },
-    index: { type: Number, default: 0 }
+    index: { type: Number, default: 0 },
 })
 </script>

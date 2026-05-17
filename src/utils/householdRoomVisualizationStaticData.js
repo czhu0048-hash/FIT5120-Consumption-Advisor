@@ -40,7 +40,7 @@ export const ROOM_TIPS = {
 }
 
 export const HOW_IT_WORKS = [
-    { title: 'Click on any room', body: 'Select a room on the house to start your audit.' },
-    { title: 'Answer 5 questions', body: 'Honest answers work best — no right or wrong.' },
-    { title: 'See your hotspots', body: 'Discover your top waste patterns with personalised insights.' },
+    { label: 'Click on any room', description: 'Select a room on the house to start your audit.' },
+    { label: 'Answer 5 questions', description: 'Honest answers work best — no right or wrong.' },
+    { label: 'See your hotspots', description: 'Discover your top waste patterns with personalised insights.' },
 ]
