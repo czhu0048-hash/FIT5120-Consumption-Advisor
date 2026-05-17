@@ -35,14 +35,28 @@
     <!-- Carbon + Water -->
     <div class="stats-grid">
       <div class="result-card">
-        <div class="card-header"><span class="material-symbols-outlined header-icon">air</span><h3>Carbon</h3></div>
-        <span class="stat-value">{{ analysis?.carbon_kg ?? '-' }} kg</span>
+        <div class="card-header">
+          <span class="material-symbols-outlined header-icon">air</span>
+          <h3>Carbon</h3>
+        </div>
+        <span class="stat-value">
+          <span class="stat-dash">{{ carbonValue !== null ? carbonValue : '-' }}</span>
+          <span class="stat-unit"> kg</span>
+        </span>
         <span class="stat-sub">CO2e footprint</span>
       </div>
       <div class="result-card">
-        <div class="card-header"><span class="material-symbols-outlined header-icon">opacity</span><h3>Water</h3></div>
-        <span class="stat-value">{{ analysis?.water_liters ?? '-' }} L</span>
-        <span class="stat-sub">~ {{ showers }} showers</span>
+        <div class="card-header">
+          <span class="material-symbols-outlined header-icon">opacity</span>
+          <h3>Water</h3>
+        </div>
+        <span class="stat-value">
+          <span class="stat-dash">{{ waterValue !== null ? waterValue : '-' }}</span>
+          <span class="stat-unit"> L</span>
+        </span>
+        <span class="stat-sub">
+          {{ showers !== null ? `~ ${showers} showers` : '~ 0 showers' }}
+        </span>
       </div>
     </div>
 
@@ -52,8 +66,14 @@
         <span class="material-symbols-outlined header-icon">favorite</span>
         <h3>Lifespan & Care</h3>
       </div>
-      <p class="lifespan-text">Estimated life: <strong>{{ analysis?.estimated_lifespan ?? '-' }}</strong></p>
-      <div v-for="(warn, i) in analysis?.care_warnings ?? []" :key="i" class="warning-box">
+
+      <p class="lifespan-text">
+        Estimated life:
+        <strong v-if="lifespanValue">{{ lifespanValue }}</strong>
+        <span v-else class="text-muted">Not available for this composition</span>
+      </p>
+
+      <div v-for="(warn, i) in careWarnings" :key="i" class="warning-box">
         <span class="material-symbols-outlined warn-icon">warning</span>
         <p>{{ warn }}</p>
       </div>
@@ -144,7 +164,7 @@ import { ref, computed } from 'vue';
 
 const props = defineProps({ formData: Object, analysis: Object });
 const activeFaq = ref(null);
-const COLORS = ['#4F772D', '#90A955', '#ECF39E', '#C6C19A', '#A3B18A', '#588157'];
+const COLORS = ['#009387','#62a484','#96b28d','#bfc1a4','#ded3c4','#f2e7e4'];
 
 const materials = computed(() =>
   (props.analysis?.materials ?? []).map((m, i) => ({ ...m, color: COLORS[i % COLORS.length] }))
@@ -163,10 +183,47 @@ const dominantMaterial = computed(() =>
   materials.value.length ? materials.value.reduce((a, b) => a.percent > b.percent ? a : b) : null
 );
 
+// error handling for missing/invalid data (Carbon/water)
+const carbonValue = computed(() => {
+  const v = props.analysis?.carbon_kg;
+  if (!v || String(v).trim().startsWith('N/A') || String(v).trim() === '-') return null;
+  return v;
+});
+
+const waterValue = computed(() => {
+  const v = props.analysis?.water_liters;
+  if (!v || String(v).trim().startsWith('N/A') || String(v).trim() === '-') return null;
+  return v;
+});
+
+const showers = computed(() => {
+  if (!waterValue.value) return null;
+  return Math.round(Number(waterValue.value) / (7.8 * 7.1)); // average shower uses 7.8L/min, avg shower length 7.1min
+});
+
+
+// error handling for missing/invalid data Lifespan & Care
+const isNA = (v) => !v || String(v).trim().startsWith('N/A') || String(v).trim() === '-';
+
+const lifespanValue = computed(() => {
+  const v = props.analysis?.estimated_lifespan;
+  return isNA(v) ? null : v;
+});
+
+const careWarnings = computed(() => {
+  const raw = props.analysis?.care_warnings;
+  if (!Array.isArray(raw) || raw.length === 0) return []; // if empty or not an array, return empty list
+  if (raw.every(item => isNA(item))) return []; // if all items are N/A, treat as no warnings
+  return raw.filter(item => !isNA(item)); // return only valid warnings, filter out any N/A entries
+});
+
+
+
 const brandName = computed(() => props.formData?.brand || null);
 const brandIsUnknown = computed(() => !brandName.value || brandName.value.toLowerCase() === 'unknown');
-const showers = computed(() => Math.round((props.analysis?.water_liters ?? 0) / 25.6));
 const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; };
+
+
 </script>
 
 <style scoped>
@@ -215,6 +272,9 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .stat-value { display: block; font-size: 1.5rem; font-weight: 800; margin-top: 12px; }
 .stat-sub { display: block; font-size: 0.75rem; color: #8C8C8C; }
+/* -- muted visible unit when missing value -- */
+.stat-unit { font-size: 1.5rem; font-weight: 800; color: #1A1A1A; } 
+.stat-dash { font-size: 1.5rem; font-weight: 800; color: #1A1A1A; }
 
 /* Lifespan */
 /* .accent-left { border-left: 3px solid #90A955; } */
