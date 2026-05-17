@@ -35,7 +35,7 @@
           <div class="detail-value-group">
             <input v-if="isEditing.brand" type="text" v-model="localData.brand"
               class="form-control form-control-sm edit-input-small" @keyup.enter="toggleEdit('brand')">
-            <span v-else class="detail-value fw-bold">{{ localData.brand }}</span>
+            <span v-else class="detail-value fw-bold">{{ localData.brand || 'Unknown'  }}</span>
             <button class="edit-icon-tiny" @click="toggleEdit('brand')">
               <span class="material-symbols-outlined">
                 {{ isEditing.brand ? 'check' : 'edit' }}
@@ -116,7 +116,7 @@ const parsedCompositions = computed(() => {
   if (raw.includes(',')) {
     return raw.split(',').map(item => {
       const str = item.trim();
-      // Reorder "90% Cotton" → "Cotton 90%" if percent comes first
+      // reorder "90% Cotton" → "Cotton 90%" if percent comes first
       const match = str.match(/^(\d+%)\s+(.+)/);
       return match ? `${match[2]} ${match[1]}` : str;
     }).filter(Boolean);
