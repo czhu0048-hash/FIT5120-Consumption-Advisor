@@ -5,8 +5,7 @@
   </RedUseHeader>
 
 
-  <div class="d-flex flex-column"
-    style="height:calc(100vh - 3.75rem); background:#f7f9f7; font-family:'Inter',sans-serif; overflow:hidden;">
+  <div class="d-flex flex-column" style="background:#f7f9f7; font-family:'Inter',sans-serif; overflow:hidden;">
     <!-- ══ PAGE HEADER ══ -->
     <header class="flex-shrink-0 bg-white border-bottom px-3 py-2">
       <div class="d-flex align-items-center justify-content-end gap-2">
@@ -26,14 +25,10 @@
     </header>
 
     <!-- ══ BODY: responsive layout ══ -->
-    <div class="flex-grow-1 d-flex flex-column flex-lg-row overflow-hidden" style="min-height:0;">
-
-      <!-- ── LEFT SIDEBAR: desktop only ── -->
-
+    <div class="d-flex flex-column flex-lg-row" style="min-height:0;">
 
       <!-- ── CENTER: HOUSE ── -->
-      <div class="house-center position-relative bg-white d-flex align-items-center justify-content-center"
-        style="overflow:hidden; min-width:0;">
+      <div class="house-center bg-white d-flex align-items-center justify-content-center" style="min-width:0;">
         <div style="position:relative; height:100%; aspect-ratio:4/3; max-width:100%;">
 
           <img :src="houseImg" alt="House"
@@ -95,15 +90,13 @@
       </div>
 
       <!-- ── RIGHT PANEL ── -->
-      <aside class="audit-panel bg-white d-flex flex-column overflow-hidden" :style="{
-        flex: '0 0 ' + (panelOpen && panelMode === 'questions' ? '480px' : panelOpen ? '380px' : '296px'),
+      <div class="audit-panel bg-white d-flex" :style="{
         borderLeft: '1px solid #eef1ee',
         transition: 'flex 0.38s cubic-bezier(0.4,0,0.2,1)'
       }">
 
-        <!-- ─ OVERVIEW (default: no panel open) ─ -->
         <template v-if="!panelOpen">
-          <div class="flex-grow-1 d-flex flex-column overflow-auto">
+          <div class="d-flex flex-column">
 
             <!-- Eco Score ring -->
             <WasteHotspodAuditRing :sustainabilityScore="sustainabilityScore" :scoreMessage="scoreMessage"
@@ -150,12 +143,13 @@
             @reset="reset"></WasteHotspodAuditSummary>
         </template>
 
-      </aside>
+      </div>
+
     </div>
-    <WasteHotspodAuditTip :panelOpen="panelOpen" :activeRoom="activeRoom" :contextualTip="contextualTip">
-    </WasteHotspodAuditTip>
 
   </div>
+  <WasteHotspodAuditTip :panelOpen="panelOpen" :activeRoom="activeRoom" :contextualTip="contextualTip">
+  </WasteHotspodAuditTip>
 </template>
 
 <script setup>
@@ -410,18 +404,18 @@ function reset() {
 @media (max-width: 991.98px) {
   .house-center {
     flex: 0 0 42vh !important;
-    /* min-height: 180px; */
+    min-height: 180px;
     max-height: 0px;
     min-width: unset !important;
   }
 
   .audit-panel {
-    flex: 1 1 0 !important;
+    /* flex: 1 1 0 !important; */
     width: 100% !important;
     min-width: 0 !important;
+    min-height: 500px !important;
     border-left: none !important;
-    border-top: 1px solid #eef1ee;
-    overflow-y: auto !important;
+    /* overflow-y: auto !important; */
   }
 }
 </style>

@@ -1,7 +1,12 @@
 <template>
     <div class="collapsable" style="min-height: 5vh; 
      text-align: center;">
-        <h1 v-show="!collapsed" class="text-center display-5 fw-normal" style="padding-top: 3rem;">
+        <label v-if="isSmall" class="text-center fw-normal w-100 fs-5">
+            <span class="font-inter"><b>{{ inter }}</b></span>
+            <span class="font-grace"> {{ grace }}</span>
+            <span class="font-inter"><b>{{ interTwo }}</b></span>
+        </label>
+        <h1 v-else v-show="!collapsed" class="text-center display-5 fw-normal" style="padding-top: 3rem;">
             <span class="font-inter"><b>{{ inter }}</b></span>
             <span class="font-grace"> {{ grace }}</span>
             <span class="font-inter"><b>{{ interTwo }}</b></span>
@@ -37,6 +42,10 @@ defineProps({
     paragraph: {
         type: String,
         default: () => ("")
+    },
+    isSmall: {
+        type: Boolean,
+        default: false
     }
 })
 

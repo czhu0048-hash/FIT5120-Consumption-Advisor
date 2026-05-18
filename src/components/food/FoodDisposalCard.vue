@@ -1,9 +1,9 @@
 <template>
     <div class="card h-100 clickable text-center" v-if="method.source_link" @click="openLink(method.source_link)">
         <div class="card-body d-flex flex-column align-items-center gap-2 p-3">
-            <!-- Icon -->
-            <img :src="icon || defaultIcon" class="mb-1" style="width:48px;height:48px;object-fit:contain;" alt="">
-
+            <span class="material-symbols-outlined fs-1">
+                {{ icon }}
+            </span>
             <!-- Label -->
             <b class="lh-sm">
                 {{ parsed.main }}
@@ -25,12 +25,11 @@
 <script setup>
 import { computed } from 'vue'
 import { parseLabel } from '@/utils/labelParser'
-import defaultIcon from '@/assets/Wel_fridge.png'
 
 const props = defineProps({
     method: { type: Object, required: true },
     streamColor: { type: String, default: 'text-secondary' },
-    icon: { type: String }
+    icon: { type: String, default: 'nest_eco_leaf' }
 })
 
 const parsed = computed(() => parseLabel(props.method.label))

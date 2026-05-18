@@ -5,14 +5,16 @@
     <div class="flex-grow-1 container" style="text-align: center;">
         <div class="d-flex" style="justify-content: center; align-items: center;">
             <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
-            <div v-else-if="filteredMethods.length" class="row row-cols-4 g-3 mt-3">
+            <div v-else-if="filteredMethods.length" class="row row-cols-md-4 g-3 mt-3">
                 <div v-for="(method, index) in filteredMethods" :key="method.id" style="display: block;">
-                    <FoodDisposalCard :method="method" :stream-color="getColorByIndex(index).text" />
+                    <FoodDisposalCard :icon="staticIcons.at(index)" :method="method"
+                        :stream-color="getColorByIndex(index).text" />
                 </div>
             </div>
             <div v-else class="text-center mt-5 text-muted">No disposal methods found.</div>
         </div>
     </div>
+    <p class="mt-5">*Each tab leads to external website</p>
 </template>
 
 <script setup>
@@ -31,6 +33,8 @@ const filteredMethods = computed(() =>
         ? allMethods.value.filter(m => m.food_category === selectedCategory.value)
         : allMethods.value
 );
+
+const staticIcons = ['cookie', 'no_meals', 'dining', 'compost'];
 
 onMounted(async () => {
     allMethods.value = await fetchDisposalMethods();
