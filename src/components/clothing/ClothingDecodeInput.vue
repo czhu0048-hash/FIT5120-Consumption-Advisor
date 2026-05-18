@@ -95,72 +95,40 @@ const handleFileUpload = async (event) => {
   const file = event.target.files[0];
   if (!file) return;
 
-
   if (!file.type.startsWith('image/')) {
-    Swal.fire({
-      title: 'Invalid File',
-      text: 'Please upload an image file (JPG, PNG, or WebP)',
-      icon: 'error',
-      confirmButtonColor: '#009387',
-      background: '#ffffff',
-      color: '#333'
-    });
-    event.target.value = ""; // reset the input
+    Swal.fire({ title: 'Invalid File', text: 'Please upload an image file (JPG, PNG, or WebP)', icon: 'error', confirmButtonColor: '#009387' });
+    event.target.value = "";
     return;
   }
 
-
   previewUrl.value = URL.createObjectURL(file);
-  isScanning.value = true;
-
-  // FormData for the API
-  const formData = new FormData();
-  formData.append('file', file);
-
-  try {
-    // call extraction endpoint
-    // const response = await axios.post('http://127.0.0.1:8000/api/extract', formData); //for local testing
-    const response = await axios.post('https://redusetagdecoder-gbhfdmdddgfaaec2.canadacentral-01.azurewebsites.net/api/extract', formData); //for prod
-
-
-
-    // update form with AI results (if any)
-    const data = response.data;
-    localFormData.brand = data.brand || '';        // store empty string, not 'Unknown'
-    localFormData.composition = data.composition || '';
-    localFormData.madeIn = data.made_in || '';     // store empty string, not 'Unknown'
-    
-    errors.composition = false;
-  } catch (err) {
-    console.error("Scanning failed:", err);
-
-
-    // backend failure handling (stay on photo tab)
-    Swal.fire({
-      title: 'Scan Failed',
-      text: 'The AI couldn\'t read the label. Please try again or enter details manually.',
-      icon: 'warning',
-      confirmButtonColor: '#3D6666'
-    });
-  } finally {
-    isScanning.value = false;
-  }
+  pendingFile.value = file; // store file reference, not calling AI API
 };
 
+const pendingFile = ref(null);
 
 const proceedToConfirm = () => {
-  // validation Rule
-  if (!localFormData.composition || localFormData.composition.trim() === "") {
+  if (!localFormData.composition && !pendingFile.value) {
     errors.composition = true;
     return;
   }
   errors.composition = false;
-  emit('next', {
-    brand: localFormData.brand,
-    composition: localFormData.composition,
-    made_in: localFormData.madeIn
-  });
+
+  if (pendingFile.value) {
+    // photo path - emit file to parent, parent handles extract API and loading page
+    emit('next', { file: pendingFile.value, skipExtract: false });
+  } else {
+    // manual path - skip loading
+    emit('next', {
+      skipExtract: true,
+      brand: localFormData.brand,
+      composition: localFormData.composition,
+      made_in: localFormData.madeIn
+    });
+  }
 };
+
+
 </script>
 
 <style scoped>
