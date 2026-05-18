@@ -51,7 +51,7 @@
 
       <div class="input-group">
         <label>Brand name</label>
-        <input type="text" v-model="localFormData.brand" placeholder="e.g. Zara">
+        <input type="text" v-model="localFormData.brand" placeholder="e.g., Zara">
       </div>
 
       <div class="input-group">
@@ -196,6 +196,7 @@ const proceedToConfirm = () => {
   color: #D93B3B;
   font-size: 0.75rem;
   margin-top: 4px;
+  text-align: left;
 }
 
 .tabs {
