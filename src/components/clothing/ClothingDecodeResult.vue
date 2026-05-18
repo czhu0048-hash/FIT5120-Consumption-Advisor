@@ -73,6 +73,8 @@
         <span v-else class="text-muted">Not available for this composition</span>
       </p>
 
+      <p v-if="lifespanNote" class="lifespan-note">{{ lifespanNote }}</p>
+
       <div v-for="(warn, i) in careWarnings" :key="i" class="warning-box">
         <span class="material-symbols-outlined warn-icon">warning</span>
         <p>{{ warn }}</p>
@@ -142,7 +144,7 @@
           <span class="material-symbols-outlined faq-arrow">chevron_right</span>
         </div>
       </div>
-      <div v-if="activeFaq !== null && analysis?.faqs?.[activeFaq]" class="faq-answer">
+      <div v-if="activeFaq !== null && analysis?.faqs?.[activeFaq]?.answer" class="faq-answer">
         <span class="material-symbols-outlined faq-answer-icon">chat_bubble_outline</span>
         <p>{{ analysis.faqs[activeFaq].answer }}</p>
       </div>
@@ -205,9 +207,16 @@ const showers = computed(() => {
 // error handling for missing/invalid data Lifespan & Care
 const isNA = (v) => !v || String(v).trim().startsWith('N/A') || String(v).trim() === '-';
 
+
 const lifespanValue = computed(() => {
   const v = props.analysis?.estimated_lifespan;
-  return isNA(v) ? null : v;
+  if (isNA(v)) return null;
+  return String(v).replace(/^estimated\s+life\s*:\s*/i, '').trim();
+});
+
+const lifespanNote = computed(() => {
+  const v = props.analysis?.lifespan_note;
+  return isNA(v) ? null : String(v).trim();
 });
 
 const careWarnings = computed(() => {
@@ -216,7 +225,6 @@ const careWarnings = computed(() => {
   if (raw.every(item => isNA(item))) return []; // if all items are N/A, treat as no warnings
   return raw.filter(item => !isNA(item)); // return only valid warnings, filter out any N/A entries
 });
-
 
 
 const brandName = computed(() => props.formData?.brand || null);
@@ -278,8 +286,9 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 
 /* Lifespan */
 /* .accent-left { border-left: 3px solid #90A955; } */
-.lifespan-text { font-size: 0.875rem; color: #3D4F41; text-align: left !important; margin: 8px 0 8px; display: block; max-width: none; white-space: nowrap; }
-.warning-box { background: #FFFBEB; border-radius: 8px; padding: 10px 14px; display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; }
+.lifespan-text { font-size: 0.875rem; color: #3D4F41; text-align: left; margin: 8px 0 12px; display: block; white-space: normal; line-height: 1.5; }
+.lifespan-note { font-size: 0.8rem; color: #6B7280; margin: 0 0 12px; line-height: 1.5;}
+.warning-box { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; }
 .warning-box p { font-size: 0.8rem; margin: 0; color: #92400E; text-align: left; flex: 1; max-width: none;}
 .warn-icon { color: #B45309; font-size: 1.2rem; flex-shrink: 0; }
 
