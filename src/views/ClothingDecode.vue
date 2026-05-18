@@ -106,8 +106,7 @@ const goToConfirm = async (data: Record<string, any>) => {
     return;
   }
 
-  // loading page for AI extraction
-  currentScreen.value = 1.5;
+  currentScreen.value = 1.5;   // loading page for AI extraction
 
   const fd = new FormData();
   fd.append('file', data.file);
@@ -122,17 +121,15 @@ const goToConfirm = async (data: Record<string, any>) => {
     currentScreen.value = 2;
   } catch (err) {
     console.error('Extract failed:', err);
-    currentScreen.value = 1;
+    currentScreen.value = 1; // backend failure handling (back to photo tab)
     Swal.fire({
-      title: 'Extraction Failed',
-      text: 'Could not read the label. Please try again or enter manually.',
-      icon: 'error',
-      confirmButtonColor: '#009387'
+      title: 'Scan Failed',
+      text: 'The AI couldn\'t read the label. Please try again or enter details manually.',
+      icon: 'warning',
+      confirmButtonColor: '##009387'
     });
   }
 };
-
-
 
 
 const onAnalyseRequested = async (confirmedData: Record<string, any>) => {
@@ -140,7 +137,7 @@ const onAnalyseRequested = async (confirmedData: Record<string, any>) => {
   formData.composition = confirmedData.composition || '';
   formData.made_in = confirmedData.made_in || '';
 
-  currentScreen.value = 2.5; // debug checking (dev only)
+  currentScreen.value = 2.5;   // loading page for AI analyze
 
   try {
     const response = await axios.post(
@@ -151,7 +148,7 @@ const onAnalyseRequested = async (confirmedData: Record<string, any>) => {
     currentScreen.value = 3;
   } catch (err) {
     console.error('Analysis failed:', err);
-    currentScreen.value = 2; // back to confirm
+    currentScreen.value = 2; // back to confirm if fail
     Swal.fire({
       title: 'Analysis Failed',
       text: 'Could not analyse this garment. Please try again.',
