@@ -245,11 +245,11 @@ const brandIsUnknown = computed(() => !brandName.value || brandName.value.toLowe
 
 
 const RATING_CONFIG = {
-  'Great':            { color: '#009387', bg: 'rgba(0,147,135,0.12)' },
-  'Good':             { color: '#62a484', bg: 'rgba(98,164,132,0.12)' },
-  "It's a Start":     { color: '#c8853a', bg: 'rgba(200,133,58,0.12)' },
-  'Not Good Enough':  { color: '#c0574a', bg: 'rgba(192,87,74,0.12)' },
-  'We Avoid':         { color: '#8b2e2e', bg: 'rgba(139,46,46,0.12)' },
+  'Great':           { color: '#009387', bg: 'rgba(0,147,135,0.12)',  border: 'rgba(0,147,135,0.25)' },
+  'Good':            { color: '#62a484', bg: 'rgba(98,164,132,0.12)', border: 'rgba(98,164,132,0.25)' },
+  "It's a Start":    { color: '#c8853a', bg: 'rgba(200,133,58,0.12)', border: 'rgba(200,133,58,0.25)' },
+  'Not Good Enough': { color: '#c0574a', bg: 'rgba(192,87,74,0.12)',  border: 'rgba(192,87,74,0.25)' },
+  'We Avoid':        { color: '#8b2e2e', bg: 'rgba(139,46,46,0.12)',  border: 'rgba(139,46,46,0.25)' },
 };
 
 
