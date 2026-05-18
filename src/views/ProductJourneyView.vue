@@ -36,7 +36,10 @@ const search = async (itemName) => {
     const result = await fetchProductJourney(query)
     searching.value = false
     if (result) {
-        router.push({ path: '/household/detailedjourney', state: { journeyData: result } })
+        router.push({
+            path: '/household/detailedjourney',
+            state: { journeyData: result.journey, stale: result.stale, staleMessage: result.message }
+        })
     }
 }
 </script>

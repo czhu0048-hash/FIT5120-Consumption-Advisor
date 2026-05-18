@@ -8,6 +8,8 @@ import journey3 from '@/assets/Journey_3.png';
 import journey4 from '@/assets/journey_4.png';
 const router = useRouter();
 const journey = ref(null);
+const stale = ref(false);
+const staleMessage = ref('');
 
 const chapterColors = [
     { bg: 'bg-success-subtle', text: 'text-success', circle: '#198754' },
@@ -38,6 +40,8 @@ onMounted(() => {
     const state = window.history.state;
     if (state?.journeyData) {
         journey.value = state.journeyData;
+        stale.value = state.stale === true;
+        staleMessage.value = state.staleMessage || '';
     }
 });
 
@@ -57,6 +61,12 @@ const goBack = () => router.push('/household/journey');
         </div>
 
         <div v-else>
+            <!-- Stale cache warning banner -->
+            <div v-if="stale" class="alert alert-warning d-flex align-items-center gap-2 mb-4" role="alert">
+                <i class="pi pi-exclamation-triangle"></i>
+                <span>{{ staleMessage || 'Showing cached results. Live data may be temporarily unavailable.' }}</span>
+            </div>
+
             <!-- Hero Section -->
             <div class="text-center mb-5">
                 <RedUseHeader :paragraph="journey.heroSubtitle" inter="The hidden journey of "
@@ -153,7 +163,7 @@ const goBack = () => router.push('/household/journey');
                             <div>
                                 <h5 class="fw-bold mb-2">{{ journey.summaryPanel.title }}</h5>
                                 <label class="text-secondary mb-4 col-md-7 mx-auto">{{ journey.summaryPanel.text
-                                    }}</label>
+                                }}</label>
                             </div>
 
                             <div class="row">
