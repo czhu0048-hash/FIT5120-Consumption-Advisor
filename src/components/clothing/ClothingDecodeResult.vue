@@ -108,11 +108,6 @@
         <p>Brand not detected or unknown? Search on <a href="https://goodonyou.eco" target="_blank"
             rel="noopener noreferrer">Good On You</a>.</p>
       </div>
-      <div class="take-back-row">
-        <span class="material-symbols-outlined take-back-icon">cycle</span>
-        <span class="take-back-label">AU Take-back Available</span>
-        <a href="#" class="view-link">View Scheme</a>
-      </div>
     </div>
 
     <!-- End-of-Life Pathway -->
@@ -174,6 +169,10 @@
 import { ref, computed } from 'vue';
 
 const props = defineProps({ formData: Object, analysis: Object });
+console.log('analysis prop:', props.analysis); // debug log to check analysis data structure
+console.log('formData prop:', props.formData); // debug log to check analysis data structure
+
+
 const activeFaq = ref(null);
 const COLORS = ['#009387', '#62a484', '#96b28d', '#bfc1a4', '#ded3c4', '#f2e7e4'];
 
@@ -351,7 +350,7 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .pathway-hero { background: #007f70; padding: 24px; border-radius: 16px; }
 .pathway-header { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: white !important; margin-bottom: 12px; }
 .pathway-header span { color: white !important; }
-.recommend-pill { display: inline-block; font-size: 0.65rem; font-weight: 800; background: white; color: white !important; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+.recommend-pill { display: inline-block; font-size: 0.65rem; font-weight: 800; background: rgba(255,255,255,0.2); color: white !important; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
 .pathway-title { color: white !important; font-size: 1.4rem; font-weight: 700; text-align: left; margin: 8px 0 0; }
 .pathway-reason { font-size: 0.82rem; color: white !important; text-align: justify; margin: 8px 0 0; line-height: 1.5; max-width: none; width: 100%; }
 .btn-pathway { width: 100%; background: white; color: #3D4F41; border: none; padding: 14px; border-radius: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; margin-top: 16px;text-decoration: none; }
