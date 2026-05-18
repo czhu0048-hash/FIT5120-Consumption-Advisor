@@ -51,17 +51,15 @@
 										alt="Fridge Icon" />
 									<div :class="$style.div11">
 										<b :class="$style.sectionTitle1">Food Wisdom</b>
-										<div :class="$style.sectionDescription">Explore recipes, professional storage
-											and disposal tips for common food categories.</div>
+										<div :class="$style.sectionDescription">Use up your fridge before it goes bad. Find recipes built around what you've got, then dispose of scraps responsibly with category-filtered guidance.</div>
 									</div>
 								</div>
 								<div :class="$style.divNode003">
 									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_closet.png"
 										alt="Closet Icon" />
 									<div :class="$style.div12">
-										<b :class="$style.sectionTitle2">Conscious Clothing</b>
-										<div :class="$style.sectionDescription2">Find ethical donation points or second
-											hands shops, learn how to repair it and browse sustainable washing guides.
+										<b :class="$style.sectionTitle2">Mindful Wardrobe Hub</b>
+										<div :class="$style.sectionDescription2">Know the real cost of what you wear. Scan pieces for their footprint and ethical rating, calculate cost-per-wear, vet purchases before you buy, and find local recycling options, all backed by global textile waste data.
 										</div>
 									</div>
 								</div>
@@ -70,8 +68,7 @@
 										alt="Devices Icon" />
 									<div :class="$style.div13">
 										<b :class="$style.sectionTitle3">Smart Households</b>
-										<div :class="$style.sectionDescription3">Locate E-waste recycling bins, battery
-											disposal points, local tool libraries for shared equipment info and donation
+										<div :class="$style.sectionDescription3">Locate Scan every room to catch waste hotspots, get quick fixes that actually make sense for your space, and see the full lifecycle of the stuff you own.
 											site.</div>
 									</div>
 								</div>
@@ -348,6 +345,7 @@
 	font-size: 28px;
 	margin-bottom: 15px;
 	display: block;
+	text-align: center;
 }
 
 .works {
