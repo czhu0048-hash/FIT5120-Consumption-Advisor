@@ -2,6 +2,7 @@
   <div class="d-flex flex-column" style="min-height: 100vh;">
     <div class="container mt-5 flex-grow-1">
 
+      <!-- Screen 1 header -->
       <div v-if="currentScreen === 1" class="text-center mb-4">
         <h1 class="display-5 fw-normal">
           <span class="font-inter"><b>Decode</b></span>
@@ -11,6 +12,26 @@
           Check any label to uncover the environmental cost and life of your clothes.
         </p>
       </div>
+
+      <!-- Screen 2 header -->
+      <div v-if="currentScreen === 2" class="text-center mb-4">
+        <h1 class="display-5 fw-normal">
+          <span class="font-inter"><b>Does this</b></span>
+          <span class="font-grace"> look right?</span>
+        </h1>
+        <p class="text-secondary fs-8">Take a quick look and correct anything before running the analysis.</p>
+      </div>
+
+      <!-- Screen 3 header -->
+      <div v-if="currentScreen === 3" class="text-center mb-4">
+        <h1 class="display-5 fw-normal">
+          <span class="font-grace">The tea </span>
+          <span class="font-inter"><b>on you garment</b></span>
+        </h1>
+        <p class="text-secondary fs-8">Here's everything we found about your garment. Straight up, no fluff.</p>
+      </div>
+
+
 
       <DecodeInput v-if="currentScreen === 1" @next="goToConfirm" />
       <DecodeLoading v-if="currentScreen === 1.5" mode="extract" />
@@ -88,7 +109,7 @@ const testCases: Record<string, any> = {
 
 // test data for dev env only; empty state in prod
 const IS_DEV = import.meta.env.DEV;
-const currentScreen = ref(IS_DEV ? 3 : 1);
+const currentScreen = ref(IS_DEV ? 2 : 1); // dev debug lock page
 const formData = reactive(IS_DEV ? testCases[DEV_TEST_CASE].formData : { brand: '', composition: '', made_in: '' });
 const analysisResult = ref(IS_DEV ? testCases[DEV_TEST_CASE].analysis : null);
 
