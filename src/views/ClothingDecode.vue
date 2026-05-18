@@ -41,8 +41,10 @@
       <DecodeResult v-if="currentScreen === 3" :formData="formData" :analysis="analysisResult"
         @back="currentScreen = 2" />
 
-      <RedUseAIAcknowledgement style="max-width: 560px; margin: 0 auto;" context-one-label="AI Ussage"
-        context-one=" We use Gemini AI to extract fabric details from your labels." context-two-label="Your Privacy:"
+      <RedUseAIAcknowledgement v-if="currentScreen === 1" style="max-width: 560px; margin: 0 auto;"
+        context-one-label="AI Usage: "
+        context-one="We use AI to extract fabric details from your labels and to analyze your garment."
+        context-two-label="Your Privacy: "
         context-two="We do not store your photos. Images are processed and then discarded."></RedUseAIAcknowledgement>
 
     </div>
