@@ -110,10 +110,8 @@
             <WasteHotspodAuditStatus :completed="completed" @open-room="openRoom"></WasteHotspodAuditStatus>
             <!-- Impact Preview -->
             <div style="padding:0.875rem 1.125rem;">
-              <p
-                style="font-size:0.4375rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#9ca3af; margin:0 0 0.2rem;">
-                Your Impact Preview</p>
-              <p style="font-size:0.625rem; color:#9ca3af; margin:0 0 0.75rem; line-height:1.5;">{{ completed.size > 0 ?
+              <p style="font-size: 75%;">Your Impact Preview</p>
+              <p style="font-size:60%;">{{ completed.size > 0 ?
                 'Estimated based on your audit so far.' : 'Complete your audit to unlock your potential impact.' }}</p>
             </div>
 
@@ -129,8 +127,9 @@
 
         <!-- ─ SUBMITTED: choice screen ─ -->
         <template v-else-if="panelMode === 'submitted' && activeRoom">
-          <WasteHotspodAuditChoice :active-room="activeRoom" :completed="completed" :panelMode="panelMode"
-            :nextRoom="nextRoom" @continueFromSubmitted="continueFromSubmitted" @updatePanelMode="updatePanelMode">
+          <WasteHotspodAuditChoice @closePanel="closePanel" :active-room="activeRoom" :completed="completed"
+            :panelMode="panelMode" :nextRoom="nextRoom" @continueFromSubmitted="continueFromSubmitted"
+            @updatePanelMode="updatePanelMode">
           </WasteHotspodAuditChoice>
         </template>
 

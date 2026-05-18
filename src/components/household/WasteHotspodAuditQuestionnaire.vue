@@ -133,6 +133,8 @@
 <script setup>
 import { HOTSPOT_CATEGORIES } from '@/utils/householdHotspotStaticData';
 
+defineEmits(['closePanel', 'selectAnswer', 'submitAnswers']);
+
 defineProps({
     activeRoom: {
         type: Object,

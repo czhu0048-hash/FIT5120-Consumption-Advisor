@@ -21,7 +21,7 @@
                 style="background:#fff1f1;border:1.5px solid #fecaca;border-radius:14px;padding:1rem;margin-bottom:0.5rem;">
                 <div style="display:flex;align-items:flex-start;gap:0.625rem;margin-bottom:0.5rem;">
                     <span style="font-size:1.5rem;flex-shrink:0;line-height:1;margin-top:2px;">{{ hotspotRanking[0].icon
-                    }}</span>
+                        }}</span>
                     <div style="flex:1;min-width:0;">
                         <div style="display:flex;align-items:center;gap:0.375rem;margin-bottom:2px;">
                             <span
@@ -33,7 +33,7 @@
                     <div
                         style="background:white;border:1px solid #fecaca;border-radius:9999px;padding:3px 8px;flex-shrink:0;">
                         <span style="font-size:0.5625rem;font-weight:800;color:#dc2626;">{{ hotspotRanking[0].score
-                        }}<span style="color:#fca5a5;">/{{ hotspotRanking[0].maxScore }}</span></span>
+                            }}<span style="color:#fca5a5;">/{{ hotspotRanking[0].maxScore }}</span></span>
                     </div>
                 </div>
                 <p class="w-100 text-black" style="font-size: 75%;">{{ hotspotRanking[0].band.body }}</p>
@@ -53,7 +53,7 @@
                 <div style="display:flex;align-items:flex-start;gap:0.5rem;margin-bottom:0.375rem;">
                     <span style="font-size:1.125rem;flex-shrink:0;line-height:1;margin-top:2px;">{{
                         hotspotRanking[1].icon
-                    }}</span>
+                        }}</span>
                     <div style="flex:1;min-width:0;">
                         <div style="margin-bottom:2px;">
                             <span
@@ -66,7 +66,7 @@
                     <div
                         style="background:white;border:1px solid #fde68a;border-radius:9999px;padding:3px 8px;flex-shrink:0;">
                         <span style="font-size:0.5625rem;font-weight:800;color:#d97706;">{{ hotspotRanking[1].score
-                        }}<span style="color:#fbbf24;">/{{ hotspotRanking[1].maxScore }}</span></span>
+                            }}<span style="color:#fbbf24;">/{{ hotspotRanking[1].maxScore }}</span></span>
                     </div>
                 </div>
                 <p class="text-black w-100" style="font-size: 75%;">{{
@@ -97,7 +97,7 @@
                     :style="{ background: SCORE_CFG[cat.level].bg, border: `1px solid ${SCORE_CFG[cat.level].color}44`, borderRadius: '9999px', padding: '2px 8px', flexShrink: 0 }">
                     <span :style="{ fontSize: '0.4375rem', fontWeight: 700, color: SCORE_CFG[cat.level].color }">{{
                         cat.score
-                    }}/{{ cat.maxScore }}</span>
+                        }}/{{ cat.maxScore }}</span>
                 </div>
             </div>
 
@@ -114,6 +114,8 @@
 
 <script setup>
 import { SCORE_CFG } from '@/utils/householdHotspotStaticData';
+
+defineEmits(['closePanel', 'reset']);
 
 defineProps({
     summaryMsg: { type: String, required: true },
