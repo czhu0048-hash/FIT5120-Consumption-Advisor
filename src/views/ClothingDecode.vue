@@ -66,7 +66,7 @@ import RedUseAIAcknowledgement from '@/components/misc/RedUseAIAcknowledgement.v
 
 // ===== DEV TESTING ==========================================================
 const USE_RESULT_TEST_MODE = false;
-const DEV_TEST_CASE = 'naErrors'; // change to: allNatural | syntheticBlend | naErrors | unknownBrand
+const DEV_TEST_CASE = 'allNatural'; // change to: allNatural | syntheticBlend | naErrors | unknownBrand
 
 const testCases: Record<string, any> = {
   allNatural: {
@@ -116,7 +116,7 @@ const testCases: Record<string, any> = {
 
 // test data for dev env only; empty state in prod
 const IS_DEV = import.meta.env.DEV;
-const currentScreen = ref(IS_DEV ? 2 : 1); // dev debug lock page
+const currentScreen = ref(IS_DEV ? 3 : 1); // dev debug lock page
 const formData = reactive(IS_DEV ? testCases[DEV_TEST_CASE].formData : { brand: '', composition: '', made_in: '' });
 const analysisResult = ref(IS_DEV ? testCases[DEV_TEST_CASE].analysis : null);
 
@@ -172,7 +172,9 @@ const onAnalyseRequested = async (confirmedData: Record<string, any>) => {
       'https://redusetagdecoder-gbhfdmdddgfaaec2.canadacentral-01.azurewebsites.net/api/decode',
       { composition: formData.composition, brand: formData.brand || null }
     );
-    analysisResult.value = response.data;
+    const raw = response.data;
+    analysisResult.value = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    
     currentScreen.value = 3;
   } catch (err) {
     console.error('Analysis failed:', err);
