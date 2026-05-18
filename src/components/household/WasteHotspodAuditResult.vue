@@ -50,12 +50,15 @@
 
 <script setup>
 import { ROOM_ORDER } from '@/utils/householdRoomVisualizationStaticData';
+
+defineEmits(['closePanel', 'handleBack', 'retakeRoom']);
+
 defineProps({
     activeRoom: { type: Object },
     completed: { type: Set },
     roomResult: { type: Object },
     topRoomHotspot: { type: Object },
-    scoreLevel: { type: Number }
+    scoreLevel: { type: String }
 })
 </script>
 

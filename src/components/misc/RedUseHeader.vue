@@ -1,17 +1,17 @@
 <template>
-    <div class="collapsable" style="min-height: 5vh; 
+    <div style="min-height: 5vh; 
      text-align: center;">
         <label v-if="isSmall" class="text-center fw-normal w-100 fs-5">
             <span class="font-inter"><b>{{ inter }}</b></span>
             <span class="font-grace"> {{ grace }}</span>
             <span class="font-inter"><b>{{ interTwo }}</b></span>
         </label>
-        <h1 v-else v-show="!collapsed" class="text-center display-5 fw-normal" style="padding-top: 3rem;">
+        <h1 v-else class="text-center display-5 fw-normal" style="padding-top: 3rem;">
             <span class="font-inter"><b>{{ inter }}</b></span>
             <span class="font-grace"> {{ grace }}</span>
             <span class="font-inter"><b>{{ interTwo }}</b></span>
         </h1>
-        <p v-show="!collapsed">
+        <p>
             {{ paragraph }}
         </p>
 
@@ -24,8 +24,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
 defineProps({
     inter: {
         type: String,
@@ -48,20 +46,4 @@ defineProps({
         default: false
     }
 })
-
-const collapsed = ref(false)
-
-// const toggleCollapse = () => {
-//     collapsed.value = !collapsed.value;
-// }
 </script>
-
-<style scoped>
-.collapsable {
-    transition-duration: 1ms;
-}
-
-/* .collapsable:hover {
-    background-color: rgba(255, 255, 255, 0.598);
-} */
-</style>

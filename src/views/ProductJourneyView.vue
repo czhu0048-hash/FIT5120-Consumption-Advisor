@@ -80,9 +80,11 @@ const onEnter = () => {
     <!-- Popular items to explore -->
     <div class="card p-4 mb-4">
         <h5 class="fw-bold mb-3">Popular items to explore</h5>
-        <div class="row g-3 gap-5">
-            <MainFunctionButton v-for="item in popularItems" :key="item.name" :feature-name="item.name"
-                :icon-name="item.icon" col-class="col-12 col-md-2" @card-funtion="search(item.name)" />
+        <div class="row g-4 justify-content-center">
+            <div v-for="item in popularItems" :key="item.name" class="col-6 col-md-2">
+                <MainFunctionButton :feature-name="item.name" :icon-name="item.icon" col-class=""
+                    @card-funtion="search(item.name)" />
+            </div>
         </div>
     </div>
 

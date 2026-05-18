@@ -8,7 +8,7 @@
                 {{ activeRoom.icon }}</div>
             <div style="flex:1;min-width:0;">
                 <p style="font-size:0.875rem;font-weight:800;color:#111827;margin:0;line-height:1.2;">{{ activeRoom.name
-                    }} complete</p>
+                }} complete</p>
                 <p style="font-size:0.5625rem;color:#9ca3af;margin:0;">{{ completed.size }} of {{ ROOM_ORDER.length }}
                     rooms audited</p>
             </div>
@@ -60,10 +60,8 @@
                 style="display:flex;align-items:center;gap:0.5rem;background:#f8faf8;border:1px solid #eef1ee;border-radius:10px;padding:0.5625rem 0.75rem;width:100%;box-sizing:border-box;">
                 <span style="font-size:1.125rem;flex-shrink:0;">{{ ROOMS[nextRoom].icon }}</span>
                 <div style="flex:1;min-width:0;">
-                    <p
-                        style="font-size:0.4375rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#9ca3af;margin:0 0 2px;">
-                        Up next</p>
-                    <p style="font-size:0.8125rem;font-weight:700;color:#111827;margin:0;">{{ ROOMS[nextRoom].name }}
+                    <p style="font-size: 75%;">Up next</p>
+                    <p style="font-size: 60%;">{{ ROOMS[nextRoom].name }}
                     </p>
                 </div>
                 <span
@@ -98,6 +96,8 @@
 <script setup>
 import { ROOM_ORDER } from '@/utils/householdRoomVisualizationStaticData';
 import { ROOMS } from '@/utils/householdQuestionnaireStaticData';
+
+defineEmits(['closePanel', 'continueFromSubmitted', 'updatePanelMode']);
 
 defineProps({
     activeRoom: { type: Object },
