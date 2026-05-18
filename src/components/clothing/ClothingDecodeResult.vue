@@ -155,11 +155,11 @@
 
 
     <!-- Next Step -->
-    <div class="next-step-link">
+    <div class="next-step-link" @click="goToBeforeYouBuy" style="cursor: pointer;">
       <p class="next-step-label">NEXT STEP</p>
-      <a href="#" class="big-nav-link">
+      <span class="big-nav-link">
         Is it worth keeping? <span class="material-symbols-outlined">arrow_forward</span>
-      </a>
+      </span>
     </div>
 
   </div>
@@ -169,8 +169,8 @@
 import { ref, computed } from 'vue';
 
 const props = defineProps({ formData: Object, analysis: Object });
-console.log('analysis prop:', props.analysis); // debug log to check analysis data structure
-console.log('formData prop:', props.formData); // debug log to check analysis data structure
+// console.log('analysis prop:', props.analysis); // debug log to check analysis data structure
+// console.log('formData prop:', props.formData); // debug log to check analysis data structure
 
 
 const activeFaq = ref(null);
@@ -262,6 +262,17 @@ const ratingStyle = computed(() => {
 
 
 const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; };
+
+
+import { useRouter } from 'vue-router';
+import { resetQuestionaire } from '@/utils/questionaireController';
+
+const router = useRouter();
+
+const goToBeforeYouBuy = () => {
+  resetQuestionaire();
+  router.push('/clothing/questionaire');
+};
 
 
 </script>
@@ -376,6 +387,7 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .next-step-link { background: #009387; border-radius: 16px; padding: 20px 24px; text-align: center; }
 .next-step-label { font-size: 0.7rem; color: white; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
 .big-nav-link { display: inline-flex; align-items: center; gap: 8px; font-size: 1.1rem; font-weight: 700; color: white; text-decoration: none; }
+.big-nav-link .material-symbols-outlined { color: white; }
 
 /* Utilities */
 .text-xs { font-size: 0.75rem; }
