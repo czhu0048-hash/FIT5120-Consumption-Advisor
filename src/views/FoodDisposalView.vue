@@ -2,10 +2,10 @@
     <RedUseHeader paragraph="Pick your food waste type and stop guessing. Green bin, recycling,
             or
             general waste, we got you." inter="Bin it " grace="Smart"></RedUseHeader>
+    <RedUseLoader :loading="loading" />
     <div class="flex-grow-1 container" style="text-align: center;">
         <div class="d-flex" style="justify-content: center; align-items: center;">
-            <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
-            <div v-else-if="filteredMethods.length" class="row row-cols-md-4 g-3 mt-3">
+            <div v-if="filteredMethods.length" class="row row-cols-md-4 g-3 mt-3">
                 <div v-for="(method, index) in filteredMethods" :key="method.id" style="display: block;">
                     <FoodDisposalCard :icon="staticIcons.at(index)" :method="method"
                         :stream-color="getColorByIndex(index).text" />
@@ -22,6 +22,7 @@ import FoodDisposalCard from '@/components/food/FoodDisposalCard.vue';
 import { onMounted, ref, computed } from 'vue';
 import { fetchDisposalMethods } from '@/utils/disposalmethodFetcher';
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
+import RedUseLoader from '@/components/misc/RedUseLoader.vue';
 import { getColorByIndex } from '@/utils/colorPalette';
 
 const allMethods = ref([]);

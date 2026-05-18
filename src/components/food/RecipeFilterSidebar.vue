@@ -10,7 +10,7 @@
                     <!-- Duration -->
                     <div class="flex-grow-1">
                         <input type="number" class="form-control form-control-sm" placeholder="Min" min="0"
-                            :value="recipeFilters.minTime ?? ''"
+                            :class="{ 'is-invalid': isTimeRangeInvalid }" :value="recipeFilters.minTime ?? ''"
                             @input="recipeFilters.minTime = toNum($event.target.value)" />
                         <div v-if="recipeFilters.minTime !== null && recipeFilters.minTime !== ''"
                             class="text-muted extra-small-duration mt-1 px-1">
@@ -20,13 +20,16 @@
 
                     <div class="flex-grow-1">
                         <input type="number" class="form-control form-control-sm" placeholder="Max" min="0"
-                            :value="recipeFilters.maxTime ?? ''"
+                            :class="{ 'is-invalid': isTimeRangeInvalid }" :value="recipeFilters.maxTime ?? ''"
                             @input="recipeFilters.maxTime = toNum($event.target.value)" />
                         <div v-if="recipeFilters.maxTime !== null && recipeFilters.maxTime !== ''"
                             class="text-muted extra-small-duration mt-1 px-1">
                             Max
                         </div>
                     </div>
+                </div>
+                <div v-if="isTimeRangeInvalid" class="text-danger extra-small-duration mt-1">
+                    Min must be less than or equal to Max.
                 </div>
             </div>
 
@@ -72,7 +75,14 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { recipeFilters } from '@/utils/recipeFilterInstance'
+
+const isTimeRangeInvalid = computed(() => {
+    const min = recipeFilters.value.minTime
+    const max = recipeFilters.value.maxTime
+    return min !== null && max !== null && min > max
+})
 
 const difficulties = ['Easy', 'Medium', 'Hard']
 const proteinLevels = ['Low Protein', 'Moderate Protein', 'High Protein']

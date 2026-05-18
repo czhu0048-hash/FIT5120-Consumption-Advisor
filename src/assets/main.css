@@ -104,6 +104,11 @@ button {
   color: black
 }
 
+
+.font-main {
+  color: #009387;
+}
+
 .font-grace {
   font-family: 'Covered By Your Grace';
   color: #009387;

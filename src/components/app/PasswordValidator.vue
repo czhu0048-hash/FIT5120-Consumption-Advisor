@@ -7,8 +7,10 @@
             <input v-model="userInput" type="password" placeholder="Please enter website password"
                 style="width: 100%; height:auto; border-radius: 1rem; padding: 1rem; border-style: solid;"
                 @keyup.enter="onClick">
-            <button class="mt-5 w-100 questionaireButton" @click="onClick" :disabled="loading">Confirm</button>
-            <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
+            <button class="mt-5 w-100 questionaireButton" @click="onClick" :disabled="loading">
+                Confirm
+            </button>
+            <RedUseLoader class="mt-3" :loading="loading" />
             <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
         </div>
     </div>
@@ -18,6 +20,7 @@
 import { ref } from 'vue';
 import { isPasswordCorrect, validatePassword } from '@/utils/PasswordFetcher';
 import RedUseHeader from '../misc/RedUseHeader.vue';
+import RedUseLoader from '../misc/RedUseLoader.vue';
 
 const userInput = ref("");
 const passwordMessage = ref("");
@@ -28,6 +31,11 @@ const onClick = async () => {
     loading.value = true;
     passwordMessage.value = "";
     try {
+        if (userInput.value === '') {
+            passwordMessage.value = "Empty input field.";
+            loading.value = false;
+            return;
+        }
         const valid = await validatePassword(userInput.value);
         if (valid) {
             isPasswordCorrect.value = true;

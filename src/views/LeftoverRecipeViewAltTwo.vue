@@ -25,7 +25,8 @@
                     </div>
                     <div class="col-12 col-md-2">
                         <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
-                            <i class="pi pi-search me-2"></i>Search
+                            <RedUseLoader :loading="searching || modalLoading" :imbeded="true" />
+                            <i v-if="!searching" class="pi pi-search me-2"></i>Search
                         </button>
                     </div>
                     <div class="col-12 col-md-2">
@@ -48,8 +49,6 @@
             </div>
 
             <div class="text-center my-3">
-                <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner"
-                    style="font-size: 2rem; color: green;"></i>
                 <div v-if="errormsg" class="alert alert-danger d-inline-block py-2 px-4 mt-2">
                     {{ errormsg }}
                 </div>
@@ -108,6 +107,7 @@ import RecipeFilterSidebar from '@/components/food/RecipeFilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
 import { passesFilters } from '@/utils/recipeFilterInstance';
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
+import RedUseLoader from '@/components/misc/RedUseLoader.vue';
 
 const errormsg = ref("");
 const searching = ref(false);

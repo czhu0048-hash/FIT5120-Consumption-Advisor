@@ -5,6 +5,7 @@
 import MainFunctionButton from '@/components/misc/MainFunctionButton.vue';
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 import StepsIndicator from '@/components/misc/StepsIndicator.vue';
+import RedUseLoader from '@/components/misc/RedUseLoader.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { fetchProductJourney } from '@/utils/productjourneyFetcher';
@@ -55,8 +56,8 @@ const search = async (itemName) => {
                     @keyup.enter="search()" :disabled="searching">
             </div>
             <button class="btn btn-success fw-bold col-auto" @click="search()" :disabled="searching">
-                <i v-if="searching" class="pi pi-spin pi-spinner me-2"></i>
-                <i v-else class="pi pi-search me-2"></i>
+                <RedUseLoader :loading="searching" :imbeded="true" />
+                <i v-if="!searching" class="pi pi-search me-2"></i>
                 {{ searching ? 'Searching...' : 'Explore journey' }}
             </button>
         </div>

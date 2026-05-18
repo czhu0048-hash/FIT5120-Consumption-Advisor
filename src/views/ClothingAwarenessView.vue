@@ -3,11 +3,9 @@
         <RedUseHeader inter="The " grace="Story behind " inter-two="our wardrobes" paragraph="Australia sends 100,000+ tonnes of textiles to landfill every year. Here's
             what
             the numbers actually look like."></RedUseHeader>
-
-
-        <div v-if="loading" class="status-message">Loading data...</div>
-        <div v-else-if="error" class="status-message error">Failed to load data. Please try again.</div>
-        <div v-else class="charts-column">
+        <RedUseLoader :loading="loading" />
+        <div v-if="error && !loading" class="status-message error">Failed to load data. Please try again.</div>
+        <div v-if="!error && !loading" class="charts-column">
             <div class="card" style="padding: 5%;">
                 <ClothingAwarenessCard title="Key insight"
                     description="Over 200,000 tonnes of textile waste are still sent to landfill each year — significantly more than any other pathway."
@@ -52,6 +50,7 @@ import ClothingAwarenessChartMaterials from '@/components/clothing/ClothingAware
 import ClothingAwarenessChartSectors from '@/components/clothing/ClothingAwarenessChartSectors.vue'
 import { fetchTextileYears, fetchTextileMaterials, fetchTextileDetails } from '@/utils/clothingAwarenessStasticsFetcher'
 import RedUseHeader from '@/components/misc/RedUseHeader.vue'
+import RedUseLoader from '@/components/misc/RedUseLoader.vue'
 import ClothingAwarenessCard from '@/components/clothing/ClothingAwarenessCard.vue'
 
 const textileData = ref([])

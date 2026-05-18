@@ -4,7 +4,6 @@ import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import ClothingAwarenessView from '@/views/ClothingAwarenessView.vue'
 import ClothingQuestionaireView from '@/views/ClothingQuestionaireView.vue'
-import ClothingImpactDashboard from '@/views/ClothingImpactDashboard.vue'
 import ClothingDecode from '@/views/ClothingDecode.vue'
 import ProductJourneyView from '@/views/ProductJourneyView.vue'
 import ProductJourneyDetailedView from '@/views/ProductJourneyDetailedView.vue'
@@ -36,11 +35,6 @@ const routes = [
         path: '/clothing/questionaire',
         name: 'Clothing Questionaire',
         component: ClothingQuestionaireView
-    },
-    {
-        path: '/clothing/calculator',
-        name: 'Clothing Calculator',
-        component: ClothingImpactDashboard
     },
     {
         path: '/clothing/textiledecode',

@@ -1,6 +1,6 @@
 <template>
   <div v-if="isOpen"
-    style="position:fixed; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem;"
+    style="position:fixed; margin-top: 3rem; inset:0; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem;"
     @click.self="$emit('close')">
     <div
       style="background:white; border-radius:1.5rem; box-shadow:0 25px 60px rgba(0,0,0,0.3); max-width:72rem; width:100%; height:90vh; display:flex; flex-direction:column; overflow:hidden;">
@@ -8,11 +8,6 @@
       <!-- Header -->
       <div
         style="border-bottom:1px solid #f3f4f6; padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
-        <div>
-          <h2 style="font-size:1.5rem; font-weight:700; color:#111827; margin:0 0 0.25rem;">Analyze Lifetime Value</h2>
-          <p style="font-size:0.875rem; color:#6b7280; margin:0;">Add details about your clothing item and care habits
-            to get a personalized value score.</p>
-        </div>
         <button @click="$emit('close')"
           style="background:none; border:none; cursor:pointer; padding:0.5rem; border-radius:0.5rem; color:#9ca3af; transition:background 0.2s;"
           onmouseover="this.style.background='#f3f4f6'; this.style.color='#374151'"
@@ -24,11 +19,9 @@
       </div>
 
       <!-- Split Layout -->
-      <div style="display:grid; grid-template-columns:40% 60%; flex:1; overflow:hidden;">
-
+      <div class="analyzer-split" style="display:grid; grid-template-columns:40% 60%; overflow:auto;">
         <!-- LEFT PANEL -->
-        <div
-          style="background:#f9fafb; padding:2rem; overflow-y:auto; display:flex; flex-direction:column; gap:1.5rem;">
+        <div style="background:#f9fafb; padding:2rem;  display:flex; flex-direction:column; gap:1.5rem;">
 
           <!-- Item Details -->
           <div
@@ -107,12 +100,12 @@
               <div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
                   <label style="font-size:0.875rem; font-weight:500; color:#374151;">Wears per Month</label>
-                  <span style="font-size:1.25rem; font-weight:700; color:#16a34a;">{{ wearsPerMonth }}x</span>
+                  <span class="font-main" style="font-size:1.25rem; font-weight:700;">{{ wearsPerMonth }}x</span>
                 </div>
                 <input type="range" min="1" max="30" v-model.number="wearsPerMonth"
                   style="width:100%; height:0.5rem; border-radius:9999px; appearance:none; cursor:pointer; outline:none;"
-                  :style="`background: linear-gradient(to right, #16a34a 0%, #16a34a ${(wearsPerMonth / 30) * 100}%, #e5e7eb ${(wearsPerMonth / 30) * 100}%, #e5e7eb 100%)`" />
-                <p style="font-size:0.75rem; color:#9ca3af; margin:0.375rem 0 0;">{{ usageLabel }}</p>
+                  :style="`background: linear-gradient(to right, #009387 0%, #009387 ${(wearsPerMonth / 30) * 100}%, #e5e7eb ${(wearsPerMonth / 30) * 100}%, #e5e7eb 100%)`" />
+                <p style="font-size:0.75rem; margin:0.375rem 0 0;">{{ usageLabel }}</p>
               </div>
             </div>
           </div>
@@ -127,12 +120,12 @@
               <div>
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
                   <label style="font-size:0.875rem; font-weight:500; color:#374151;">Washes per Month</label>
-                  <span style="font-size:1.25rem; font-weight:700; color:#16a34a;">{{ washFrequency }}x</span>
+                  <span class="font-main" style="font-size:1.25rem; font-weight:700;">{{ washFrequency }}x</span>
                 </div>
                 <input type="range" min="0" max="20" v-model.number="washFrequency"
                   style="width:100%; height:0.5rem; border-radius:9999px; appearance:none; cursor:pointer; outline:none;"
-                  :style="`background: linear-gradient(to right, #16a34a 0%, #16a34a ${(washFrequency / 20) * 100}%, #e5e7eb ${(washFrequency / 20) * 100}%, #e5e7eb 100%)`" />
-                <p style="font-size:0.75rem; color:#9ca3af; margin:0.375rem 0 0;">{{ washLabel }}</p>
+                  :style="`background: linear-gradient(to right, #009387 0%, #009387 ${(washFrequency / 20) * 100}%, #e5e7eb ${(washFrequency / 20) * 100}%, #e5e7eb 100%)`" />
+                <p style="font-size:0.75rem; margin:0.375rem 0 0;">{{ washLabel }}</p>
               </div>
               <div
                 style="display:flex; align-items:center; justify-content:space-between; padding-top:0.5rem; border-top:1px solid #f3f4f6;">
@@ -140,8 +133,7 @@
                   <label style="font-size:0.875rem; font-weight:500; color:#374151; display:block;">Tumble Dry</label>
                   <span style="font-size:0.75rem; color:#9ca3af;">Reduces fabric lifespan significantly</span>
                 </div>
-                <button @click="tumbleDry = !tumbleDry"
-                  :style="tumbleDry ? 'background:#16a34a;' : 'background:#d1d5db;'"
+                <button @click="tumbleDry = !tumbleDry" :class="tumbleDry ? 'bg_main' : 'bg_sub'"
                   style="position:relative; width:3.5rem; height:1.75rem; border-radius:9999px; border:none; cursor:pointer; transition:background 0.2s; flex-shrink:0;">
                   <span :style="tumbleDry ? 'transform:translateX(1.75rem);' : 'transform:translateX(0.125rem);'"
                     style="position:absolute; top:0.125rem; width:1.5rem; height:1.5rem; background:white; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:transform 0.2s; display:block;" />
@@ -154,8 +146,7 @@
                     Storage</label>
                   <span style="font-size:0.75rem; color:#9ca3af;">Hanging, folded correctly, climate-controlled</span>
                 </div>
-                <button @click="properStorage = !properStorage"
-                  :style="properStorage ? 'background:#16a34a;' : 'background:#d1d5db;'"
+                <button @click="properStorage = !properStorage" :class="properStorage ? 'bg_main' : 'bg_sub'"
                   style="position:relative; width:3.5rem; height:1.75rem; border-radius:9999px; border:none; cursor:pointer; transition:background 0.2s; flex-shrink:0;">
                   <span :style="properStorage ? 'transform:translateX(1.75rem);' : 'transform:translateX(0.125rem);'"
                     style="position:absolute; top:0.125rem; width:1.5rem; height:1.5rem; background:white; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.2); transition:transform 0.2s; display:block;" />
@@ -165,8 +156,8 @@
           </div>
 
           <!-- Analyze Button -->
-          <button @click="handleAnalyze" :disabled="isAnalyzing || !canAnalyze"
-            style="width:100%; background:linear-gradient(to right, #16a34a, #059669); color:white; padding:1rem; border-radius:0.75rem; font-weight:700; font-size:1rem; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:opacity 0.2s, transform 0.2s; margin-top:0.5rem;"
+          <button class="bg_main" @click="handleAnalyze" :disabled="isAnalyzing || !canAnalyze"
+            style="width:100%; color:white; padding:1rem; border-radius:0.75rem; font-weight:700; font-size:1rem; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; transition:opacity 0.2s, transform 0.2s; margin-top:0.5rem;"
             :style="(isAnalyzing || !canAnalyze) ? 'opacity:0.45; cursor:not-allowed;' : ''"
             onmouseover="if(!this.disabled) { this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 20px rgba(22,163,74,0.4)' }"
             onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
@@ -179,13 +170,14 @@
               Analyzing...
             </template>
             <template v-else>
-              ✨ Analyze Lifetime Value
+              Analyze Lifetime Value
             </template>
           </button>
         </div>
 
+
         <!-- RIGHT PANEL -->
-        <div style="background:white; padding:2rem; overflow-y:auto;">
+        <div style="background:white; padding:2rem;">
 
           <!-- LIVE PREVIEW (before analysis) -->
           <div v-if="!showResults">
@@ -224,7 +216,8 @@
                   <div style="font-size:0.875rem; color:#9ca3af;">/100</div>
                 </div>
               </div>
-              <p :style="{ fontSize: '1.25rem', fontWeight: '700', color: scoreTextColor, margin: '0' }">{{ valueLabel }}
+              <p :style="{ fontSize: '1.25rem', fontWeight: '700', color: scoreTextColor }">{{ valueLabel
+              }}
               </p>
             </div>
 
@@ -286,7 +279,9 @@
                 <div>
                   <h4 style="font-weight:600; color:#111827; margin:0 0 0.375rem; font-size:0.9375rem;">Quick Insight
                   </h4>
-                  <p style="font-size:0.875rem; color:#374151; line-height:1.6; margin:0;">{{ calc.insight }}</p>
+                  <p style="width: 100%; text-align: start; font-size:0.875rem; color:#374151; line-height:1.6;">{{
+                    calc.insight
+                    }}</p>
                 </div>
               </div>
             </div>
@@ -678,6 +673,14 @@ function animateScore() {
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .analyzer-split {
+    grid-template-columns: 1fr !important;
+    overflow-y: auto !important;
+    overflow-x: hidden;
   }
 }
 </style>
