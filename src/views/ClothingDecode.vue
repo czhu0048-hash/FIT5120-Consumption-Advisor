@@ -31,15 +31,19 @@
         <p class="text-secondary fs-8">Here's everything we found about your garment. Straight up, no fluff.</p>
       </div>
 
-
-
       <DecodeInput v-if="currentScreen === 1" @next="goToConfirm" />
       <DecodeLoading v-if="currentScreen === 1.5" mode="extract" />
 
-      <DecodeConfirm v-if="currentScreen === 2" :formData="formData" @back="currentScreen = 1" @analyse="onAnalyseRequested" />
+      <DecodeConfirm v-if="currentScreen === 2" :formData="formData" @back="currentScreen = 1"
+        @analyse="onAnalyseRequested" />
       <DecodeLoading v-if="currentScreen === 2.5" mode="analyse" />
-      
-      <DecodeResult v-if="currentScreen === 3" :formData="formData" :analysis="analysisResult" @back="currentScreen = 2" />
+
+      <DecodeResult v-if="currentScreen === 3" :formData="formData" :analysis="analysisResult"
+        @back="currentScreen = 2" />
+
+      <RedUseAIAcknowledgement style="max-width: 560px; margin: 0 auto;" context-one-label="AI Ussage"
+        context-one=" We use Gemini AI to extract fabric details from your labels." context-two-label="Your Privacy:"
+        context-two="We do not store your photos. Images are processed and then discarded."></RedUseAIAcknowledgement>
 
     </div>
   </div>
@@ -55,6 +59,7 @@ import DecodeInput from '@/components/clothing/ClothingDecodeInput.vue';
 import DecodeConfirm from '@/components/clothing/ClothingDecodeConfirm.vue';
 import DecodeLoading from '@/components/clothing/ClothingDecodeLoading.vue';
 import DecodeResult from '@/components/clothing/ClothingDecodeResult.vue';
+import RedUseAIAcknowledgement from '@/components/misc/RedUseAIAcknowledgement.vue';
 
 
 // ===== DEV TESTING ==========================================================
@@ -186,6 +191,7 @@ const onAnalyseRequested = async (confirmedData: Record<string, any>) => {
   overflow-x: hidden;
   color: black;
 }
+
 .font-grace {
   font-family: 'Covered By Your Grace';
   color: #009387;

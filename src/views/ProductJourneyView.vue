@@ -10,6 +10,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { fetchProductJourney } from '@/utils/productjourneyFetcher';
 import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue';
+import RedUseAIAcknowledgement from '@/components/misc/RedUseAIAcknowledgement.vue';
 
 const router = useRouter();
 
@@ -94,4 +95,8 @@ const onEnter = () => {
             </div>
         </div>
     </div>
+    <RedUseAIAcknowledgement class="mb-5" style="max-width: 560px; margin: 0 auto;" context-one-label="AI Ussage"
+        context-one=" We use Gemini AI to create hidden journies for items" context-two-label="Your Privacy:"
+        context-two="We do not store your personal information, we simply cache user inputs to reduce token cost.">
+    </RedUseAIAcknowledgement>
 </template>

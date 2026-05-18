@@ -27,66 +27,71 @@
     <!-- ══ BODY: responsive layout ══ -->
     <div class="d-flex flex-column flex-lg-row" style="min-height:0;">
 
-      <!-- ── Left: HOUSE ── -->
-      <div class="house-center bg-white d-flex align-items-center justify-content-center" style="min-width:0;">
-        <div style="position:relative; height:100%; aspect-ratio:4/3; max-width:100%;">
+      <!-- House Wrapper -->
+      <div class="bg-white d-flex align-items-center justify-content-center house-wrapper">
+        <!-- ── Left: HOUSE ── -->
+        <div class="house-center bg-white d-flex align-items-center justify-content-center" style="min-width:0;">
+          <div style="position:relative; height:100%; aspect-ratio:4/3; max-width:100%;">
 
-          <img :src="houseImg" alt="House"
-            style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply;" />
+            <img :src="houseImg" alt="House"
+              style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply;" />
 
-          <!-- SVG: invisible hit areas only (no visual rendering) -->
-          <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:5;" viewBox="0 0 100 75"
-            preserveAspectRatio="none">
-            <template v-if="DEBUG_ROOM_MASKS">
-              <g v-for="id in ROOM_ORDER" :key="id">
-                <path :d="ROOM_PATHS[id]" :fill="DEBUG_ROOM_COLORS[id]" fill-opacity="0.34"
-                  :stroke="DEBUG_ROOM_STROKES[id]" stroke-width="0.9" stroke-linejoin="round" class="room-debug-mask" />
-                <g v-for="(pt, pi) in ROOM_POINTS[id]" :key="`${id}-pt-${pi}`">
-                  <circle :cx="pt[0]" :cy="pt[1]" r="0.86" fill="#fff" :stroke="DEBUG_ROOM_STROKES[id]"
-                    stroke-width="0.45" style="pointer-events:none;" />
-                  <text :x="pt[0] + 0.9" :y="pt[1] - 0.9" font-size="1.65" font-family="Inter,sans-serif"
-                    font-weight="800" :fill="DEBUG_ROOM_STROKES[id]"
-                    style="paint-order:stroke;stroke:#fff;stroke-width:0.45;pointer-events:none;">{{ pi + 1 }}</text>
+            <!-- SVG: invisible hit areas only (no visual rendering) -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%;z-index:5;" viewBox="0 0 100 75"
+              preserveAspectRatio="none">
+              <template v-if="DEBUG_ROOM_MASKS">
+                <g v-for="id in ROOM_ORDER" :key="id">
+                  <path :d="ROOM_PATHS[id]" :fill="DEBUG_ROOM_COLORS[id]" fill-opacity="0.34"
+                    :stroke="DEBUG_ROOM_STROKES[id]" stroke-width="0.9" stroke-linejoin="round"
+                    class="room-debug-mask" />
+                  <g v-for="(pt, pi) in ROOM_POINTS[id]" :key="`${id}-pt-${pi}`">
+                    <circle :cx="pt[0]" :cy="pt[1]" r="0.86" fill="#fff" :stroke="DEBUG_ROOM_STROKES[id]"
+                      stroke-width="0.45" style="pointer-events:none;" />
+                    <text :x="pt[0] + 0.9" :y="pt[1] - 0.9" font-size="1.65" font-family="Inter,sans-serif"
+                      font-weight="800" :fill="DEBUG_ROOM_STROKES[id]"
+                      style="paint-order:stroke;stroke:#fff;stroke-width:0.45;pointer-events:none;">{{ pi + 1 }}</text>
+                  </g>
                 </g>
-              </g>
-            </template>
-            <path v-for="id in ROOM_ORDER" :key="id" :d="ROOM_PATHS[id]" class="room-hit-area" @click="openRoom(id)"
-              @mouseenter="hovered = id" @mouseleave="hovered = null" />
-          </svg>
+              </template>
+              <path v-for="id in ROOM_ORDER" :key="id" :d="ROOM_PATHS[id]" class="room-hit-area" @click="openRoom(id)"
+                @mouseenter="hovered = id" @mouseleave="hovered = null" />
+            </svg>
 
-          <!-- Room label pills — glow lives here -->
-          <div v-for="id in ROOM_ORDER" :key="'p-' + id" :style="{
-            position: 'absolute', left: CALLOUTS[id].lx + '%', top: CALLOUTS[id].ly + '%',
-            transform: `translate(-50%,-50%) scale(${statusOf(id) === 'active' ? 1.08 : statusOf(id) === 'hovered' ? 1.04 : 1})`,
-            background: statusOf(id) === 'active'
-              ? 'rgba(10,15,20,0.92)'
-              : statusOf(id) === 'done'
-                ? 'rgba(6,40,26,0.88)'
-                : statusOf(id) === 'hovered'
-                  ? 'rgba(10,15,20,0.82)'
-                  : 'rgba(255,255,255,0.82)',
-            backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
-            border: 'none',
-            borderRadius: '20px', padding: '4px 10px', cursor: 'pointer',
-            boxShadow: statusOf(id) === 'active'
-              ? '0 0 8px rgba(52,211,153,0.9), 0 0 22px rgba(52,211,153,0.55), 0 0 48px rgba(16,185,129,0.28), 0 0 80px rgba(16,185,129,0.1)'
-              : statusOf(id) === 'hovered'
-                ? '0 0 6px rgba(52,211,153,0.65), 0 0 16px rgba(52,211,153,0.38), 0 0 36px rgba(16,185,129,0.18)'
+            <!-- Room label pills — glow lives here -->
+            <div v-for="id in ROOM_ORDER" :key="'p-' + id" :style="{
+              position: 'absolute', left: CALLOUTS[id].lx + '%', top: CALLOUTS[id].ly + '%',
+              transform: `translate(-50%,-50%) scale(${statusOf(id) === 'active' ? 1.08 : statusOf(id) === 'hovered' ? 1.04 : 1})`,
+              background: statusOf(id) === 'active'
+                ? 'rgba(10,15,20,0.92)'
                 : statusOf(id) === 'done'
-                  ? '0 0 5px rgba(52,211,153,0.5), 0 0 14px rgba(52,211,153,0.28), 0 0 28px rgba(16,185,129,0.12)'
-                  : '0 1px 6px rgba(0,0,0,0.08)',
-            transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)', zIndex: 10,
-            display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap',
-          }" @click="openRoom(id)" @mouseenter="hovered = id" @mouseleave="hovered = null">
-            <span style="font-size:8.5px;line-height:1;">{{ statusOf(id) === 'done' ? '✓' : ROOMS[id].icon }}</span>
-            <span
-              :style="{ fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.01em', fontFamily: 'Inter,sans-serif', color: (statusOf(id) === 'done' || statusOf(id) === 'active' || statusOf(id) === 'hovered') ? '#fff' : '#1f2937' }">{{
-                ROOMS[id].name }}</span>
-            <span v-if="statusOf(id) === 'active'"
-              style="font-size:7.5px; color:rgba(110,231,183,0.9); font-weight:600; letter-spacing:0.02em;">●</span>
-          </div>
+                  ? 'rgba(6,40,26,0.88)'
+                  : statusOf(id) === 'hovered'
+                    ? 'rgba(10,15,20,0.82)'
+                    : 'rgba(255,255,255,0.82)',
+              backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)',
+              border: 'none',
+              borderRadius: '20px', padding: '4px 10px', cursor: 'pointer',
+              boxShadow: statusOf(id) === 'active'
+                ? '0 0 8px rgba(52,211,153,0.9), 0 0 22px rgba(52,211,153,0.55), 0 0 48px rgba(16,185,129,0.28), 0 0 80px rgba(16,185,129,0.1)'
+                : statusOf(id) === 'hovered'
+                  ? '0 0 6px rgba(52,211,153,0.65), 0 0 16px rgba(52,211,153,0.38), 0 0 36px rgba(16,185,129,0.18)'
+                  : statusOf(id) === 'done'
+                    ? '0 0 5px rgba(52,211,153,0.5), 0 0 14px rgba(52,211,153,0.28), 0 0 28px rgba(16,185,129,0.12)'
+                    : '0 1px 6px rgba(0,0,0,0.08)',
+              transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)', zIndex: 10,
+              display: 'flex', alignItems: 'center', gap: '4px', whiteSpace: 'nowrap',
+            }" @click="openRoom(id)" @mouseenter="hovered = id" @mouseleave="hovered = null">
+              <span style="font-size:8.5px;line-height:1;">{{ statusOf(id) === 'done' ? '✓' : ROOMS[id].icon }}</span>
+              <span
+                :style="{ fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.01em', fontFamily: 'Inter,sans-serif', color: (statusOf(id) === 'done' || statusOf(id) === 'active' || statusOf(id) === 'hovered') ? '#fff' : '#1f2937' }">{{
+                  ROOMS[id].name }}</span>
+              <span v-if="statusOf(id) === 'active'"
+                style="font-size:7.5px; color:rgba(110,231,183,0.9); font-weight:600; letter-spacing:0.02em;">●</span>
+            </div>
 
+          </div>
         </div>
+
       </div>
 
       <!-- ── RIGHT PANEL ── -->
@@ -400,7 +405,6 @@ function reset() {
   flex: 1 1 auto;
   height: 80vh;
   min-width: 0;
-  max-width: 50%;
 }
 
 .audit-panel {
@@ -422,6 +426,10 @@ function reset() {
     min-height: 500px !important;
     border-left: none !important;
     /* overflow-y: auto !important; */
+  }
+
+  .house-wrapper {
+    width: 100% !important;
   }
 }
 </style>

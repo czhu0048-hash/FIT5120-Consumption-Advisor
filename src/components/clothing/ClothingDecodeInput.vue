@@ -65,15 +65,6 @@
       <button @click="proceedToConfirm" class="btn btn-primary mt-4 w-100"><b>Next step</b></button>
     </div>
 
-    <div class="section-separator mt-5 animate-in">
-      <div class="tip-toggle">
-        <span class="material-symbols-outlined icon-xs">shield_lock</span><b> Transparency & Privacy</b>
-      </div>
-      <div class="tip-content mt-2">
-        <p class="mb-2"><strong>AI Usage:</strong> We use Gemini AI to extract fabric details from your labels.</p>
-        <p><strong>Your Privacy:</strong> We do not store your photos. Images are processed and then discarded.</p>
-      </div>
-    </div>
   </div>
 </template>
 
