@@ -136,19 +136,20 @@
     </div>
 
     <!-- FAQ -->
-    <div class="faq-section">
+    <div v-if="analysis?.faqs?.length" class="faq-section">
       <h3 class="section-title">Ask about this item</h3>
       <div class="faq-list">
-        <div v-for="(faq, index) in analysis?.faqs ?? []" :key="index" class="faq-row" @click="toggleFaq(index)">
+        <div v-for="(faq, index) in analysis.faqs" :key="index" class="faq-row" @click="toggleFaq(index)">
           <span class="faq-question">{{ faq.question }}</span>
           <span class="material-symbols-outlined faq-arrow">chevron_right</span>
         </div>
       </div>
-      <div v-if="activeFaq !== null && analysis?.faqs?.[activeFaq]?.answer" class="faq-answer">
+      <div v-if="activeFaq !== null && analysis.faqs[activeFaq]?.answer" class="faq-answer">
         <span class="material-symbols-outlined faq-answer-icon">chat_bubble_outline</span>
         <p>{{ analysis.faqs[activeFaq].answer }}</p>
       </div>
     </div>
+
 
     <!-- Next Step -->
     <div class="next-step-link">
@@ -205,7 +206,11 @@ const showers = computed(() => {
 
 
 // error handling for missing/invalid data Lifespan & Care
-const isNA = (v) => !v || String(v).trim().startsWith('N/A') || String(v).trim() === '-';
+const isNA = (v) => {
+  if (!v) return true;
+  const s = String(v).trim().toLowerCase();
+  return s === '-' || s.startsWith('n/a') || s.includes('not available') || s.includes('knowledge base');
+};
 
 
 const lifespanValue = computed(() => {
@@ -320,7 +325,7 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .pathway-header span { color: white !important; }
 .recommend-pill { display: inline-block; font-size: 0.65rem; font-weight: 800; background: rgba(255,255,255,0.2); color: white !important; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
 .pathway-title { color: white !important; font-size: 1.4rem; font-weight: 700; text-align: left; margin: 8px 0 0; }
-.pathway-reason { font-size: 0.82rem; color: white !important; text-align: left !important; margin: 8px 0 0; line-height: 1.5; max-width: none; width: 100%;}
+.pathway-reason { font-size: 0.82rem; color: white !important; text-align: justify; margin: 8px 0 0; line-height: 1.5; max-width: none; width: 100%; }
 .btn-pathway { width: 100%; background: white; color: #3D4F41; border: none; padding: 14px; border-radius: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; margin-top: 16px;text-decoration: none; }
 .btn-pathway:hover { background: #f0f0f0; }
 
