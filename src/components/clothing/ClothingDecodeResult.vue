@@ -128,7 +128,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        Find nearest location
+        Book a Clothing Recycling Collection
         <span class="material-symbols-outlined">arrow_forward</span>
       </a>
     </div>
