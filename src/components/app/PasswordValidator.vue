@@ -1,17 +1,23 @@
 <template>
-    <div
-        style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 0.75rem;">
-        <input v-model="userInput" type="password" placeholder="Please enter website password" style="width: 100vh;"
-            @keyup.enter="onClick">
-        <button @click="onClick" :disabled="loading">Confirm</button>
-        <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
-        <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
+    <div class="validator-body bg_sub">
+        <div class="card validator-card col-12 col-md-4 p-5">
+            <img src="@/assets/Icon_reduse.png" alt="RedUse Logo" class="validator-logo" />
+            <RedUseHeader :is-small="true" inter="Red" grace="Use"></RedUseHeader>
+            <h1 class="mb-5 fw-bold" style="text-align: center;">This website is password protected</h1>
+            <input v-model="userInput" type="password" placeholder="Please enter website password"
+                style="width: 100%; height:auto; border-radius: 1rem; padding: 1rem; border-style: solid;"
+                @keyup.enter="onClick">
+            <button class="mt-5 w-100 questionaireButton" @click="onClick" :disabled="loading">Confirm</button>
+            <i v-if="loading" class="pi pi-spin pi-spinner" style="font-size: 2rem; color: green;"></i>
+            <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { isPasswordCorrect, validatePassword } from '@/utils/PasswordFetcher';
+import RedUseHeader from '../misc/RedUseHeader.vue';
 
 const userInput = ref("");
 const passwordMessage = ref("");
@@ -35,3 +41,33 @@ const onClick = async () => {
     }
 };
 </script>
+
+<style scoped>
+.validator-body {
+    border: black;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    display: flex;
+}
+
+.validator-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+}
+
+.validator-logo {
+    width: clamp(48px, 10vw, 96px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 991.98px) {
+    .validator-card {
+        height: 100vh;
+    }
+}
+</style>
