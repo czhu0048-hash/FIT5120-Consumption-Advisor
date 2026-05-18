@@ -64,7 +64,8 @@ const goBack = () => router.push('/household/journey');
             <!-- Stale cache warning banner -->
             <div v-if="stale" class="alert alert-warning d-flex align-items-center gap-2 mb-4" role="alert">
                 <i class="pi pi-exclamation-triangle"></i>
-                <span>{{ staleMessage || 'Showing cached results. Live data may be temporarily unavailable.' }}</span>
+                <span>{{ staleMessage || 'Sorry, live results are temporarily unavailable. Please try again later'
+                }}</span>
             </div>
 
             <!-- Hero Section -->
@@ -137,7 +138,7 @@ const goBack = () => router.push('/household/journey');
                                     <div class="rounded col-md-4 col-12"
                                         :class="chapterColors[i % chapterColors.length].bg"
                                         style="text-align: center; height: 35vh;">
-                                        <p class="mb-5" style="font-size: 110%; width: 100%;"
+                                        <p class="mb-3 mt-5" style="font-size: 110%; width: 100%;"
                                             :class="chapterColors[i % chapterColors.length].text">
                                             <i class="pi pi-bolt me-1"></i>{{ chapter.impactTitle }}
                                         </p>

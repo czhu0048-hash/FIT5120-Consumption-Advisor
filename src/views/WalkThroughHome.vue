@@ -27,7 +27,7 @@
     <!-- ══ BODY: responsive layout ══ -->
     <div class="d-flex flex-column flex-lg-row" style="min-height:0;">
 
-      <!-- ── CENTER: HOUSE ── -->
+      <!-- ── Left: HOUSE ── -->
       <div class="house-center bg-white d-flex align-items-center justify-content-center" style="min-width:0;">
         <div style="position:relative; height:100%; aspect-ratio:4/3; max-width:100%;">
 
@@ -90,7 +90,7 @@
       </div>
 
       <!-- ── RIGHT PANEL ── -->
-      <div class="audit-panel bg-white d-flex" :style="{
+      <div class="audit-panel bg-white" :style="{
         borderLeft: '1px solid #eef1ee',
         transition: 'flex 0.38s cubic-bezier(0.4,0,0.2,1)'
       }">
@@ -399,6 +399,11 @@ function reset() {
 .house-center {
   flex: 1 1 auto;
   min-width: 0;
+  max-width: 50%;
+}
+
+.audit-panel {
+  width: 50%;
 }
 
 @media (max-width: 991.98px) {
@@ -406,7 +411,7 @@ function reset() {
     flex: 0 0 42vh !important;
     min-height: 180px;
     max-height: 0px;
-    min-width: unset !important;
+    max-width: 100% !important;
   }
 
   .audit-panel {
