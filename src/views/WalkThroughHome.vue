@@ -398,6 +398,7 @@ function reset() {
 /* ── Responsive layout ── */
 .house-center {
   flex: 1 1 auto;
+  height: 80vh;
   min-width: 0;
   max-width: 50%;
 }
