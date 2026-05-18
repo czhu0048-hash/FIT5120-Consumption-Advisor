@@ -244,16 +244,13 @@ const brandName = computed(() => props.formData?.brand || null);
 const brandIsUnknown = computed(() => !brandName.value || brandName.value.toLowerCase() === 'unknown');
 
 
-const ratingColor = computed(() => {
-  const colors = {
-    'Great': 'green',
-    'Good': 'teal',
-    "It's a Start": 'orange',
-    'Not Good Enough': 'red',
-    'We Avoid': 'darkred',
-  };
-  return colors[analysis?.brand_rating] ?? 'gray';
-});
+const RATING_CONFIG = {
+  'Great':            { color: '#009387', bg: 'rgba(0,147,135,0.12)' },
+  'Good':             { color: '#62a484', bg: 'rgba(98,164,132,0.12)' },
+  "It's a Start":     { color: '#c8853a', bg: 'rgba(200,133,58,0.12)' },
+  'Not Good Enough':  { color: '#c0574a', bg: 'rgba(192,87,74,0.12)' },
+  'We Avoid':         { color: '#8b2e2e', bg: 'rgba(139,46,46,0.12)' },
+};
 
 
 const brandRating = computed(() => props.analysis?.brand_rating ?? null);
