@@ -135,14 +135,26 @@
     <div v-if="analysis?.faqs?.length" class="faq-section">
       <h3 class="section-title">Ask about this item</h3>
       <div class="faq-list">
-        <div v-for="(faq, index) in analysis.faqs" :key="index" class="faq-row" @click="toggleFaq(index)">
-          <span class="faq-question">{{ faq.question }}</span>
-          <span class="material-symbols-outlined faq-arrow">chevron_right</span>
+        <div
+          v-for="(faq, index) in analysis.faqs"
+          :key="index"
+          class="faq-item"
+        >
+          <!-- Question row -->
+          <div class="faq-row" @click="toggleFaq(index)">
+            <span class="faq-question">{{ faq.question }}</span>
+            <span
+              class="material-symbols-outlined faq-arrow"
+              :class="{ 'faq-arrow-open': activeFaq === index }"
+            >chevron_right</span>
+          </div>
+
+          <!-- Answer row -->
+          <div v-if="activeFaq === index && faq.answer" class="faq-answer">
+            <span class="material-symbols-outlined faq-answer-icon">chat_bubble_outline</span>
+            <p>{{ faq.answer }}</p>
+          </div>
         </div>
-      </div>
-      <div v-if="activeFaq !== null && analysis.faqs[activeFaq]?.answer" class="faq-answer">
-        <span class="material-symbols-outlined faq-answer-icon">chat_bubble_outline</span>
-        <p>{{ analysis.faqs[activeFaq].answer }}</p>
       </div>
     </div>
 
@@ -352,13 +364,17 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .faq-section { background: white; border-radius: 16px; padding: 20px; border: 1px solid #E5E5DF; }
 .section-title { font-size: 1rem; font-weight: 700; color: #1A1A1A; margin-bottom: 16px; text-align: left; }
 .faq-list { display: flex; flex-direction: column; border-top: 1px solid #E5E5DF; }
-.faq-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #E5E5DF; cursor: pointer; transition: padding-left 0.2s; }
+.faq-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; cursor: pointer; transition: padding-left 0.2s; border-bottom: none; }
 .faq-row:hover { padding-left: 6px; }
 .faq-question { font-size: 0.85rem; color: #3D4F41; font-weight: 500; flex: 1; padding-right: 12px; text-align: left; }
-.faq-arrow { color: #BDBDBD; font-size: 1.2rem; flex-shrink: 0; }
-.faq-answer { display: flex; gap: 10px; align-items: flex-start; background: #F8FAF8; border-radius: 10px; padding: 12px 14px; margin-top: 12px; }
+.faq-arrow { color: #BDBDBD; font-size: 1.2rem; flex-shrink: 0; transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.faq-arrow-open { transform: rotate(90deg); color: #009387; }
+.faq-answer { display: flex; gap: 10px; align-items: flex-start; background: #F8FAF8; border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; }
 .faq-answer p { font-size: 0.82rem; color: #3D4F41; margin: 0; text-align: left; flex: 1; line-height: 1.5; }
 .faq-answer-icon { color: #009387; font-size: 1.1rem; flex-shrink: 0; }
+.faq-item { border-bottom: 1px solid #E5E5DF; }
+.faq-item:last-child { border-bottom: none; }
+
 
 /* Next Step */
 .next-step-link { background: #009387; border-radius: 16px; padding: 20px 24px; text-align: center; }
