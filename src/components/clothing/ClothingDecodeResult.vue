@@ -330,7 +330,7 @@ const goToBeforeYouBuy = () => {
 /* Lifespan */
 /* .accent-left { border-left: 3px solid #90A955; } */
 .lifespan-text { font-size: 0.875rem; color: #3D4F41; text-align: left; margin: 8px 0 12px; display: block; white-space: normal; line-height: 1.5; }
-.lifespan-note { font-size: 0.8rem; color: #6B7280; margin: 0 0 12px; line-height: 1.5;}
+.lifespan-note { font-size: 0.8rem; color: #6B7280; margin: 0 0 12px; line-height: 1.5; max-width: none; width: 100%; text-align: left }
 .warning-box { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px; padding: 12px 14px; display: flex; gap: 10px; align-items: flex-start; margin-top: 10px; }
 .warning-box p { font-size: 0.8rem; margin: 0; color: #92400E; text-align: left; flex: 1; max-width: none;}
 .warn-icon { color: #B45309; font-size: 1.2rem; flex-shrink: 0; }
