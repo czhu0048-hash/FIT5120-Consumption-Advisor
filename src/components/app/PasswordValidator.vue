@@ -3,7 +3,7 @@
         <div class="card validator-card col-12 col-md-4 p-5">
             <img src="@/assets/Icon_reduse.png" alt="RedUse Logo" class="validator-logo" />
             <RedUseHeader :is-small="true" inter="Red" grace="Use"></RedUseHeader>
-            <h1 class="mb-5 fw-bold" style="text-align: center;">This website is password protected</h1>
+            <h5 class="mb-5 fw-bold" style="text-align: center;">This website is password protected</h5>
             <input v-model="userInput" type="password" placeholder="Please enter website password"
                 style="width: 100%; height:auto; border-radius: 1rem; padding: 1rem; border-style: solid;"
                 @keyup.enter="onClick">
