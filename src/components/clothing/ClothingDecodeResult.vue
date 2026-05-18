@@ -27,7 +27,8 @@
         </div>
       </div>
       <div class="chip-row">
-        <span v-for="badge in analysis?.badges ?? []" :key="badge" class="badge badge-outline">{{ badge.toUpperCase() }}</span>
+        <span v-for="badge in analysis?.badges ?? []" :key="badge" class="badge badge-outline">{{ badge.toUpperCase()
+          }}</span>
         <span v-if="formData?.made_in" class="badge badge-light">MADE IN {{ formData.made_in.toUpperCase() }}</span>
       </div>
     </div>
@@ -89,12 +90,7 @@
           <h3>Brand Ethics</h3>
         </div>
 
-        <a
-          href="https://goodonyou.eco"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="brand-header-link"
-        >
+        <a href="https://goodonyou.eco" target="_blank" rel="noopener noreferrer" class="brand-header-link">
           Good On You Rating
         </a>
       </div>
@@ -102,11 +98,15 @@
         <div>
           <h4 class="brand-name">{{ brandIsUnknown ? 'Unknown Brand' : brandName }}</h4>
         </div>
-        <span v-if="!brandIsUnknown" class="rating-badge">{{ analysis?.brand_rating ?? 'Check Rating' }}</span>
+        <span v-if="!brandIsUnknown" class="rating-badge" :style="ratingStyle">
+          {{ brandRating ?? 'Check Rating' }}
+        </span>
+
       </div>
       <div v-if="brandIsUnknown" class="unknown-brand-tip">
         <span class="material-symbols-outlined tip-icon">info</span>
-        <p>Brand not detected or unknown? Search on <a href="https://goodonyou.eco" target="_blank" rel="noopener noreferrer">Good On You</a>.</p>
+        <p>Brand not detected or unknown? Search on <a href="https://goodonyou.eco" target="_blank"
+            rel="noopener noreferrer">Good On You</a>.</p>
       </div>
       <div class="take-back-row">
         <span class="material-symbols-outlined take-back-icon">cycle</span>
@@ -124,12 +124,8 @@
       <span class="recommend-pill">RECOMMENDED</span>
       <h3 class="pathway-title">{{ analysis?.end_of_life_recommendation?.option ?? 'Recycling' }}</h3>
       <p class="pathway-reason">{{ analysis?.end_of_life_recommendation?.reason ?? '' }}</p>
-      <a
-        class="btn-pathway"
-        href="https://upparel.com.au/clothing-recycling/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="btn-pathway" href="https://upparel.com.au/clothing-recycling/" target="_blank"
+        rel="noopener noreferrer">
         Book a Clothing Recycling Collection
         <span class="material-symbols-outlined">arrow_forward</span>
       </a>
@@ -167,7 +163,7 @@ import { ref, computed } from 'vue';
 
 const props = defineProps({ formData: Object, analysis: Object });
 const activeFaq = ref(null);
-const COLORS = ['#009387','#62a484','#96b28d','#bfc1a4','#ded3c4','#f2e7e4'];
+const COLORS = ['#009387', '#62a484', '#96b28d', '#bfc1a4', '#ded3c4', '#f2e7e4'];
 
 const materials = computed(() =>
   (props.analysis?.materials ?? []).map((m, i) => ({ ...m, color: COLORS[i % COLORS.length] }))
@@ -234,6 +230,29 @@ const careWarnings = computed(() => {
 
 const brandName = computed(() => props.formData?.brand || null);
 const brandIsUnknown = computed(() => !brandName.value || brandName.value.toLowerCase() === 'unknown');
+
+
+const ratingColor = computed(() => {
+  const colors = {
+    'Great': 'green',
+    'Good': 'teal',
+    "It's a Start": 'orange',
+    'Not Good Enough': 'red',
+    'We Avoid': 'darkred',
+  };
+  return colors[analysis?.brand_rating] ?? 'gray';
+});
+
+
+const brandRating = computed(() => props.analysis?.brand_rating ?? null);
+
+const ratingStyle = computed(() => {
+  const cfg = brandRating.value ? RATING_CONFIG[brandRating.value] : null;
+  if (!cfg) return {};
+  return { color: cfg.color, background: cfg.bg, borderColor: cfg.border };
+});
+
+
 const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; };
 
 
@@ -302,7 +321,7 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .brand-info-row > div { flex: 1; min-width: 0; }
 .brand-name { font-size: 1.1rem; font-weight: 700; margin: 0 0 2px; text-align: left; }
 .brand-info-row p { text-align: left; margin: 0; }
-.rating-badge { background: #FEF3C7; color: #92400E; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+.rating-badge { padding: 5px 14px; border-radius: 20px; border: 1px solid #FCD34D;  background: #FEF3C7;color: #92400E; font-size: 0.8rem; font-weight: 700; white-space: nowrap; flex-shrink: 0; transition: color 0.2s, background 0.2s, border-color 0.2s;}
 
 .unknown-brand-tip { display: flex; gap: 10px; align-items: flex-start; background: #F0F4FF; border-radius: 8px; padding: 10px 14px; margin-top: 12px;}
 .unknown-brand-tip p { font-size: 0.8rem; color: #3D4F41; margin: 0; text-align: left; flex: 1; min-width: 0;}
@@ -323,7 +342,7 @@ const toggleFaq = (i) => { activeFaq.value = activeFaq.value === i ? null : i; }
 .pathway-hero { background: #007f70; padding: 24px; border-radius: 16px; }
 .pathway-header { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: white !important; margin-bottom: 12px; }
 .pathway-header span { color: white !important; }
-.recommend-pill { display: inline-block; font-size: 0.65rem; font-weight: 800; background: rgba(255,255,255,0.2); color: white !important; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+.recommend-pill { display: inline-block; font-size: 0.65rem; font-weight: 800; background: white; color: white !important; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
 .pathway-title { color: white !important; font-size: 1.4rem; font-weight: 700; text-align: left; margin: 8px 0 0; }
 .pathway-reason { font-size: 0.82rem; color: white !important; text-align: justify; margin: 8px 0 0; line-height: 1.5; max-width: none; width: 100%; }
 .btn-pathway { width: 100%; background: white; color: #3D4F41; border: none; padding: 14px; border-radius: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; margin-top: 16px;text-decoration: none; }
