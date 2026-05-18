@@ -9,6 +9,7 @@ import RedUseLoader from '@/components/misc/RedUseLoader.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { fetchProductJourney } from '@/utils/productjourneyFetcher';
+import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue';
 
 const router = useRouter();
 
@@ -27,6 +28,7 @@ const steps = [
 ]
 
 const searchedItem = ref("")
+const errormsg = ref("")
 const searching = ref(false)
 
 const search = async (itemName) => {
@@ -40,6 +42,13 @@ const search = async (itemName) => {
             path: '/household/detailedjourney',
             state: { journeyData: result.journey, stale: result.stale, staleMessage: result.message }
         })
+    }
+}
+
+const onEnter = () => {
+    errormsg.value = "";
+    if (searchedItem.value.length > 20) {
+        errormsg.value = "This input is too long."
     }
 }
 </script>
@@ -56,14 +65,15 @@ const search = async (itemName) => {
         <div class="col-12 row gap-1 justify-content-center">
             <div class="col-md-3 col-12">
                 <input class="form-control" type="text" placeholder="e.g. chair, desk fan" v-model="searchedItem"
-                    @keyup.enter="search()" :disabled="searching">
+                    @input="onEnter()" @keyup.enter="search()" :disabled="searching">
             </div>
-            <button class="btn btn-success fw-bold col-auto" @click="search()" :disabled="searching">
+            <button class="btn btn-success fw-bold col-auto" @click="search()" :disabled="searching || errormsg != ''">
                 <RedUseLoader :loading="searching" :imbeded="true" />
                 <i v-if="!searching" class="pi pi-search me-2"></i>
                 {{ searching ? 'Searching...' : 'Explore journey' }}
             </button>
         </div>
+        <RedUseErrorMessage class="mt-3" :msg="errormsg"></RedUseErrorMessage>
     </div>
 
     <!-- Popular items to explore -->

@@ -11,7 +11,7 @@
                 Confirm
             </button>
             <RedUseLoader class="mt-3" :loading="loading" />
-            <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
+            <RedUseErrorMessage class="mt-1" v-if="passwordMessage" :msg="passwordMessage"></RedUseErrorMessage>
         </div>
     </div>
 </template>
@@ -21,6 +21,7 @@ import { ref } from 'vue';
 import { isPasswordCorrect, validatePassword } from '@/utils/PasswordFetcher';
 import RedUseHeader from '../misc/RedUseHeader.vue';
 import RedUseLoader from '../misc/RedUseLoader.vue';
+import RedUseErrorMessage from '../misc/RedUseErrorMessage.vue';
 
 const userInput = ref("");
 const passwordMessage = ref("");

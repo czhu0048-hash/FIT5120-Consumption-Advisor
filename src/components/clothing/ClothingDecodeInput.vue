@@ -21,9 +21,11 @@
           <span class="text-sm font-medium">Take photo (Mobile)</span>
         </div>
 
-        <input type="file" ref="cameraInput" accept="image/jpeg, image/png, image/webp" capture="environment" class="hidden" @change="handleFileUpload">
-        
-        <input type="file" ref="fileInput" accept="image/jpeg, image/png, image/webp" class="hidden" @change="handleFileUpload">
+        <input type="file" ref="cameraInput" accept="image/jpeg, image/png, image/webp" capture="environment"
+          class="hidden" @change="handleFileUpload">
+
+        <input type="file" ref="fileInput" accept="image/jpeg, image/png, image/webp" class="hidden"
+          @change="handleFileUpload">
       </div>
 
       <div v-else>
@@ -39,24 +41,25 @@
     <div v-if="activeTab === 'manual'" :key="'manual'" class="animate-in">
       <div class="input-group">
         <label>Fibre composition <span style="color: #D93B3B">*</span></label>
-        <input 
-          type="text" 
-          v-model="localFormData.composition" 
-          placeholder="e.g., Polyester 65%, Cotton 35%"
-          :class="{ 'border-danger': errors.composition }"
-        >
-        <small class="text-muted mt-1 d-block">Separate different materials with a comma (,)</small>
-        <p v-if="errors.composition" class="error-text">Please enter the composition to proceed.</p>
+        <input type="text" v-model="localFormData.composition" placeholder="e.g., Polyester 65%, Cotton 35%"
+          :class="{ 'border-danger': errors.composition }" @input="validateComposition">
+        <small class="text-muted mt-1 d-block">Separate different materials with a comma (,) · max 200
+          characters</small>
+        <RedUseErrorMessage v-if="errors.composition" :msg="errors.composition" />
       </div>
 
       <div class="input-group">
         <label>Brand name</label>
-        <input type="text" v-model="localFormData.brand" placeholder="e.g., Zara">
+        <input type="text" v-model="localFormData.brand" placeholder="e.g., Zara"
+          :class="{ 'border-danger': errors.brand }" @input="validateBrand">
+        <RedUseErrorMessage v-if="errors.brand" :msg="errors.brand" />
       </div>
 
       <div class="input-group">
         <label>Made in</label>
-        <input type="text" v-model="localFormData.madeIn" placeholder="e.g., China">
+        <input type="text" v-model="localFormData.madeIn" placeholder="e.g., China"
+          :class="{ 'border-danger': errors.madeIn }" @input="validateMadeIn">
+        <RedUseErrorMessage v-if="errors.madeIn" :msg="errors.madeIn" />
       </div>
 
       <button @click="proceedToConfirm" class="btn btn-primary mt-4 w-100"><b>Next step</b></button>
@@ -76,6 +79,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
+import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue';
 import axios from 'axios';
 import Swal from 'sweetalert2'; //error handling
 
@@ -83,7 +87,35 @@ const emit = defineEmits(['next']);
 const activeTab = ref('photo');
 const previewUrl = ref(null);
 const isScanning = ref(false); // loading state
-const errors = reactive({ composition: false });
+const errors = reactive({ composition: '', brand: '', madeIn: '' });
+
+const validateComposition = () => {
+  if (!localFormData.composition) { errors.composition = ''; return; }
+  if (localFormData.composition.length > 200)
+    errors.composition = 'Composition must be 200 characters or fewer.';
+  else
+    errors.composition = '';
+};
+
+const validateBrand = () => {
+  if (!localFormData.brand) { errors.brand = ''; return; }
+  if (localFormData.brand.length > 50)
+    errors.brand = 'Brand name must be 50 characters or fewer.';
+  else if (!/^[a-zA-Z0-9\s\-&'.]+$/.test(localFormData.brand))
+    errors.brand = 'Brand name contains invalid characters.';
+  else
+    errors.brand = '';
+};
+
+const validateMadeIn = () => {
+  if (!localFormData.madeIn) { errors.madeIn = ''; return; }
+  if (localFormData.madeIn.length > 50)
+    errors.madeIn = '"Made in" must be 50 characters or fewer.';
+  else if (!/^[a-zA-Z\s\-,]+$/.test(localFormData.madeIn))
+    errors.madeIn = '"Made in" should only contain letters.';
+  else
+    errors.madeIn = '';
+};
 
 const localFormData = reactive({
   brand: '',
@@ -109,10 +141,13 @@ const pendingFile = ref(null);
 
 const proceedToConfirm = () => {
   if (!localFormData.composition && !pendingFile.value) {
-    errors.composition = true;
+    errors.composition = 'Please enter the composition to proceed.';
     return;
   }
-  errors.composition = false;
+  validateComposition();
+  validateBrand();
+  validateMadeIn();
+  if (errors.composition || errors.brand || errors.madeIn) return;
 
   if (pendingFile.value) {
     // photo path - emit file to parent, parent handles extract API and loading page
@@ -133,7 +168,7 @@ const proceedToConfirm = () => {
 
 <style scoped>
 .form-container {
-  max-width: 560px; 
+  max-width: 560px;
   margin: 0 auto;
   width: 100%;
 }
@@ -242,10 +277,17 @@ const proceedToConfirm = () => {
   gap: 10px;
 }
 
-.btn-primary:hover { background-color: #007a70; }
-.btn-primary:active { background-color: #00665e !important; }
+.btn-primary:hover {
+  background-color: #007a70;
+}
 
-.w-100 { width: 100%; }
+.btn-primary:active {
+  background-color: #00665e !important;
+}
+
+.w-100 {
+  width: 100%;
+}
 
 .icon-white {
   color: white !important;
@@ -286,7 +328,7 @@ const proceedToConfirm = () => {
   width: 100%;
 }
 
-.tip-content p  {
+.tip-content p {
   text-align: left;
   width: 100%;
   max-width: 100%;
@@ -311,5 +353,7 @@ const proceedToConfirm = () => {
   }
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 </style>

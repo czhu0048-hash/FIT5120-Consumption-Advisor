@@ -4,7 +4,7 @@
             what
             the numbers actually look like."></RedUseHeader>
         <RedUseLoader :loading="loading" />
-        <div v-if="error && !loading" class="status-message error">Failed to load data. Please try again.</div>
+        <RedUseErrorMessage v-if="error && !loading" msg="Failed to load data. Please try again." />
         <div v-if="!error && !loading" class="charts-column">
             <div class="card" style="padding: 5%;">
                 <ClothingAwarenessCard title="Key insight"
@@ -51,6 +51,7 @@ import ClothingAwarenessChartSectors from '@/components/clothing/ClothingAwarene
 import { fetchTextileYears, fetchTextileMaterials, fetchTextileDetails } from '@/utils/clothingAwarenessStasticsFetcher'
 import RedUseHeader from '@/components/misc/RedUseHeader.vue'
 import RedUseLoader from '@/components/misc/RedUseLoader.vue'
+import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue'
 import ClothingAwarenessCard from '@/components/clothing/ClothingAwarenessCard.vue'
 
 const textileData = ref([])
@@ -94,16 +95,5 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-
-.status-message {
-    text-align: center;
-    padding: 2rem;
-    font-size: 1rem;
-    color: #555;
-}
-
-.status-message.error {
-    color: #c62828;
 }
 </style>

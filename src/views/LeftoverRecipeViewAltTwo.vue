@@ -49,9 +49,7 @@
             </div>
 
             <div class="text-center my-3">
-                <div v-if="errormsg" class="alert alert-danger d-inline-block py-2 px-4 mt-2">
-                    {{ errormsg }}
-                </div>
+                <RedUseErrorMessage v-if="errormsg" :msg="errormsg" />
             </div>
 
             <Teleport to="body">
@@ -107,7 +105,8 @@ import RecipeFilterSidebar from '@/components/food/RecipeFilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
 import { passesFilters } from '@/utils/recipeFilterInstance';
 import RedUseHeader from '@/components/misc/RedUseHeader.vue';
-import RedUseLoader from '@/components/misc/RedUseLoader.vue';
+import RedUseLoader from '@/components/misc/RedUseLoader.vue'
+import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue';
 
 const errormsg = ref("");
 const searching = ref(false);
@@ -176,7 +175,10 @@ const pageRange = computed(() => {
 const onInputStringChanged = () => {
     if (isInvalidFormat(ingredientInputString.value)) {
         errormsg.value = "Please separate ingredients with a comma";
-    } else {
+    } else if (/\d/.test(ingredientInputString.value)) {
+        errormsg.value = "Input filed cannot contain numbers";
+    }
+    else {
         errormsg.value = "";
     }
 };
