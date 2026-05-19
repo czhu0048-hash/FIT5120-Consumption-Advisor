@@ -21,8 +21,7 @@
 										</span>
 									</div>
 									<div :class="$style.div5">
-										<div :class="$style.heroDescription">A platform built for Australian shared
-											communities to manage consumption responsibility and connect with others.
+										<div :class="$style.heroDescription">A platform built for Australian households to build more responsible consumption habits across food, clothing, and everyday household choices.
 										</div>
 										<!-- <div :class="$style.div6">
 											<div :class="$style.a">
