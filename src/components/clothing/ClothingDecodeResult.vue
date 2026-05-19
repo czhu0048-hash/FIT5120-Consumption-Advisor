@@ -91,7 +91,8 @@
         </div>
 
         <a href="https://goodonyou.eco" target="_blank" rel="noopener noreferrer" class="brand-header-link">
-          Good On You Rating
+          Good On You Rating 
+          <i class="pi pi-external-link"></i>
         </a>
       </div>
       <div class="brand-info-row">
@@ -122,7 +123,7 @@
       <a class="btn-pathway" href="https://upparel.com.au/clothing-recycling/" target="_blank"
         rel="noopener noreferrer">
         Book a Clothing Recycling Collection
-        <span class="material-symbols-outlined">arrow_forward</span>
+        <i class="pi pi-external-link"></i>
       </a>
     </div>
 
@@ -302,8 +303,12 @@ const goToBeforeYouBuy = () => {
 .header-icon { font-size: 1.2rem; }
 
 .brand-header-left { display: flex; align-items: center; gap: 8px; }
-.brand-header-link { margin-left: auto; font-size: 0.8rem; font-weight: 600; color: #009387; text-decoration: none;  }
+.brand-header-link { margin-left: auto; font-size: 0.8rem; font-weight: 600; color: #009387; text-decoration: none; }
+.brand-header-link .pi-external-link { font-size: 0.8em; line-height: 1; }
 .brand-header-link:hover { text-decoration: underline; }
+
+
+
 
 /* Composition */
 .composition-container { display: flex; align-items: center; gap: 32px; margin-top: 16px; }
