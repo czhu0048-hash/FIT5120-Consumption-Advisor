@@ -87,24 +87,21 @@
 									<div :class="$style.stepNumber">01</div>
 									<div :class="$style.div21">
 										<b :class="$style.stepTitle">Explore</b>
-										<div :class="$style.stepDescription">Surf in this All-In-One Info Hubs for Food,
-											Textiles and Household goods.</div>
+										<div :class="$style.stepDescription">Audit rooms, search fridge-based recipes, and scan garments to see the real cost of your everyday choices.</div>
 									</div>
 								</div>
 								<div :class="$style.divNode012">
 									<div :class="$style.stepNumber">02</div>
 									<div :class="$style.div21">
-										<b :class="$style.stepTitle">Learn & Act</b>
-										<div :class="$style.stepDescription">Follow step-by-step guides on daily life
-											hacks, storage repair and ethical disposal</div>
+										<b :class="$style.stepTitle">Learn & Reflect</b>
+										<div :class="$style.stepDescription">Waste patterns, pre-buy pulse checks, carbon and water data, actually understand what your daily habits cost the planet.</div>
 									</div>
 								</div>
 								<div :class="$style.divNode013">
 									<div :class="$style.stepNumber">03</div>
 									<div :class="$style.div33">
-										<b :class="$style.stepTitle">Connect & Share</b>
-										<div :class="$style.stepDescription3">Find verified links to recycling hubs &
-											community services</div>
+										<b :class="$style.stepTitle">Act Sustainably</b>
+										<div :class="$style.stepDescription">Turn insights into action with quick-win habit changes, smarter purchase decisions, and local recycling options built around your lifestyle.</div>
 									</div>
 								</div>
 							</div>
@@ -399,6 +396,7 @@
 	font-family: 'Covered By Your Grace';
 	font-size: 48px;
 	color: #009387;
+	transform: translateY(-10px);
 }
 
 .stepTitle {
