@@ -125,9 +125,8 @@ const goBack = () => router.push('/household/journey');
 
                                         <!-- Micro facts -->
                                         <div class="row gap-2" style="justify-content: center;">
-                                            <span v-for="fact in chapter.microFacts" :key="fact"
-                                                class="badge rounded-pill col-auto"
-                                                :class="[chapterColors[i % chapterColors.length].bg, chapterColors[i % chapterColors.length].text]"
+                                            <span v-for="fact in chapter.microFacts" :key="fact" class="col-auto"
+                                                :class="[chapterColors[i % chapterColors.length].text]"
                                                 style="font-size: 0.8rem; padding: 0.4em 0.9em;">
                                                 {{ fact }}
                                             </span>

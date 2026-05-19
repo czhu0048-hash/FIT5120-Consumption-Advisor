@@ -14,7 +14,6 @@
             <div v-else class="text-center mt-5 text-muted">No disposal methods found.</div>
         </div>
     </div>
-    <p class="mt-5">*Each tab leads to external website</p>
 </template>
 
 <script setup>
