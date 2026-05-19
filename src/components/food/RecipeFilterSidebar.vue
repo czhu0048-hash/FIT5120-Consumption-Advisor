@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div v-if="isTimeRangeInvalid" class="text-danger extra-small-duration mt-1">
-                    Min must be less than or equal to Max.
+                    Time range is invalid!
                 </div>
             </div>
 
@@ -81,7 +81,7 @@ import { recipeFilters } from '@/utils/recipeFilterInstance'
 const isTimeRangeInvalid = computed(() => {
     const min = recipeFilters.value.minTime
     const max = recipeFilters.value.maxTime
-    return min !== null && max !== null && min > max
+    return (min !== null && max !== null && min > max) || min > 1500
 })
 
 const difficulties = ['Easy', 'Medium', 'Hard']

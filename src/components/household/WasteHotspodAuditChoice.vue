@@ -7,9 +7,11 @@
                 style="width:1.875rem;height:1.875rem;border-radius:8px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-size:0.9375rem;flex-shrink:0;">
                 {{ activeRoom.icon }}</div>
             <div style="flex:1;min-width:0;">
-                <p style="font-size:0.875rem;font-weight:800;color:#111827;margin:0;line-height:1.2;">{{ activeRoom.name
+                <p style="width: 100%; font-size:0.875rem;font-weight:800;color:#111827;margin:0;line-height:1.2;">{{
+                    activeRoom.name
                 }} complete</p>
-                <p style="font-size:0.5625rem;color:#9ca3af;margin:0;">{{ completed.size }} of {{ ROOM_ORDER.length }}
+                <p style="width: 100%; font-size:0.5625rem;color:#9ca3af;margin:0;">{{ completed.size }} of {{
+                    ROOM_ORDER.length }}
                     rooms audited</p>
             </div>
             <button @click="$emit('closePanel')"
@@ -33,7 +35,7 @@
                 <p class="text-black">
                     {{ completed.size === ROOM_ORDER.length ? 'All rooms complete!' : 'Room audited!' }}
                 </p>
-                <p style="font-size: 75%;">
+                <p style="font-size: 75%; width: 100%;">
                     {{ completed.size === ROOM_ORDER.length
                         ? 'Your full waste hotspot profile is ready to view.'
                         : `${ROOM_ORDER.length - completed.size} room${ROOM_ORDER.length - completed.size > 1 ? 's' : ''}
@@ -54,21 +56,6 @@
                         :style="{ width: '0.625rem', height: '1.5px', borderRadius: '9999px', background: completed.has(id) ? '#4ade80' : '#e5e7eb', transition: 'background 0.4s' }" />
                 </template>
             </div>
-
-            <!-- Next room preview (if not last) -->
-            <div v-if="completed.size < ROOM_ORDER.length"
-                style="display:flex;align-items:center;gap:0.5rem;background:#f8faf8;border:1px solid #eef1ee;border-radius:10px;padding:0.5625rem 0.75rem;width:100%;box-sizing:border-box;">
-                <span style="font-size:1.125rem;flex-shrink:0;">{{ ROOMS[nextRoom].icon }}</span>
-                <div style="flex:1;min-width:0;">
-                    <p style="font-size: 75%;">Up next</p>
-                    <p style="font-size: 60%;">{{ ROOMS[nextRoom].name }}
-                    </p>
-                </div>
-                <span
-                    style="font-size:0.5625rem;color:#9ca3af;background:#f0f0f0;border-radius:9999px;padding:2px 7px;font-weight:600;">{{
-                        ROOMS[nextRoom].questions.length }} questions</span>
-            </div>
-
         </div>
 
         <!-- Two action buttons -->
@@ -79,7 +66,7 @@
             <button @click="$emit('continueFromSubmitted')" class="questionaireButton">
                 <span>{{ completed.size === ROOM_ORDER.length ? 'See Full Hotspot Profile' : `Next:
                     ${ROOMS[nextRoom].name}`
-                    }}</span>
+                }}</span>
                 <span style="opacity:0.85;">→</span>
             </button>
 

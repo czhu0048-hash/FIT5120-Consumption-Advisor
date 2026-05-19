@@ -1,5 +1,5 @@
 <template>
-    <div class="card h-100 clickable text-center" v-if="method.source_link" @click="openLink(method.source_link)">
+    <div class="card h-100 text-center" v-if="method.source_link">
         <div class="card-body d-flex flex-column align-items-center gap-2 p-3">
             <span class="material-symbols-outlined fs-1">
                 {{ icon }}
@@ -18,7 +18,12 @@
 
             <!-- Notes -->
             <span v-if="method.notes" class="text-muted small fst-italic">~ {{ method.notes }}</span>
+
         </div>
+        <!-- Links -->
+        <span class="clickable mb-1" @click="openLink(method.source_link)"
+            style="text-decoration: underline; font-size: 75%; color: #009387;">Learn More
+            <i class="pi pi-external-link" style="font-size: 75%; color: #009387;"></i></span>
     </div>
 </template>
 
