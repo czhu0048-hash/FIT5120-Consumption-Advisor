@@ -8,7 +8,7 @@ import ClothingDecode from '@/views/ClothingDecode.vue'
 import ProductJourneyView from '@/views/ProductJourneyView.vue'
 import ProductJourneyDetailedView from '@/views/ProductJourneyDetailedView.vue'
 import WalkThroughHome from '@/views/WalkThroughHome.vue'
-import ClothingImpactDashboard from '@/views/ClothingImpactDashboard.vue'
+
 import LifetimeValueAnalyzerView from '@/views/LifetimeValueAnalyzerView.vue'
 
 const routes = [
@@ -43,11 +43,7 @@ const routes = [
         name: 'Clothing Decode',
         component: ClothingDecode
     },
-    {
-        path: '/clothing/calculator',
-        name: 'Clothing Calculator',
-        component: ClothingImpactDashboard
-    },
+
     {
         path: '/clothing/analyzer',
         name: 'Lifetime Value Analyzer',

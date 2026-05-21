@@ -116,9 +116,9 @@ const testCases: Record<string, any> = {
 
 // test data for dev env only; empty state in prod
 const IS_DEV = import.meta.env.DEV;
-const currentScreen = ref(IS_DEV ? 3 : 1); // dev debug lock page
-const formData = reactive(IS_DEV ? testCases[DEV_TEST_CASE].formData : { brand: '', composition: '', made_in: '' });
-const analysisResult = ref(IS_DEV ? testCases[DEV_TEST_CASE].analysis : null);
+const currentScreen = ref(IS_DEV && USE_RESULT_TEST_MODE ? 3 : 1);
+const formData = reactive(IS_DEV && USE_RESULT_TEST_MODE ? testCases[DEV_TEST_CASE].formData : { brand: '', composition: '', made_in: '' });
+const analysisResult = ref(IS_DEV && USE_RESULT_TEST_MODE ? testCases[DEV_TEST_CASE].analysis : null);
 
 // ===== END DEV TESTING ======================================================
 
