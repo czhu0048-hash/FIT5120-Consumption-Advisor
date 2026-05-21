@@ -45,15 +45,7 @@
 								</div>
 							</div>
 							<div :class="$style.div10">
-								<div :class="$style.divNode002">
-									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_fridge.png"
-										alt="Fridge Icon" />
-									<div :class="$style.div11">
-										<b :class="$style.sectionTitle1">Food Wisdom</b>
-										<div :class="$style.sectionDescription">Use up your fridge before it goes bad. Find recipes built around what you have got, then dispose of scraps responsibly with category-filtered guidance.</div>
-									</div>
-								</div>
-								<div :class="$style.divNode003">
+																<div :class="$style.divNode003">
 									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_closet.png"
 										alt="Closet Icon" />
 									<div :class="$style.div12">
@@ -69,6 +61,14 @@
 										<b :class="$style.sectionTitle3">Smart Households</b>
 										<div :class="$style.sectionDescription3">Audit your household waste habits, uncover your biggest waste hotspots, and explore the hidden journey of everyday items you use at home.
 										</div>
+									</div>
+								</div>
+								<div :class="$style.divNode002">
+									<img :class="$style.WelFridgeIcon" src="@/assets/Wel_fridge.png"
+										alt="Fridge Icon" />
+									<div :class="$style.div11">
+										<b :class="$style.sectionTitle1">Food Wisdom</b>
+										<div :class="$style.sectionDescription">Use up your fridge before it goes bad. Find recipes built around what you have got, then dispose of scraps responsibly with category-filtered guidance.</div>
 									</div>
 								</div>
 							</div>
@@ -121,15 +121,7 @@
 						</div>
 
 						<div :class="$style.div37">
-							<div :class="$style.divNode005">
-								<b :class="$style.statNumber">7.6 M tonnes</b>
-								<b :class="$style.statTitle">Annual Food Waste</b>
-								<a href="https://www.dcceew.gov.au/environment/protection/waste/national-waste-reports"
-									target="_blank" rel="noopener noreferrer" :class="$style.sourceExt">
-									Source: DCCEEW National Waste Strategy
-								</a>
-							</div>
-
+							
 							<div :class="$style.divNode006">
 								<b :class="$style.statNumber">&gt; 200, 000 tonnes</b>
 								<b :class="$style.statTitle">Clothing to Landfill</b>
@@ -147,6 +139,16 @@
 									Source: National waste and resource recovery report 2024
 								</a>
 							</div>
+
+							<div :class="$style.divNode005">
+								<b :class="$style.statNumber">7.6 M tonnes</b>
+								<b :class="$style.statTitle">Annual Food Waste</b>
+								<a href="https://www.dcceew.gov.au/environment/protection/waste/national-waste-reports"
+									target="_blank" rel="noopener noreferrer" :class="$style.sourceExt">
+									Source: DCCEEW National Waste Strategy
+								</a>
+							</div>
+
 						</div>
 					</div>
 				</div>
