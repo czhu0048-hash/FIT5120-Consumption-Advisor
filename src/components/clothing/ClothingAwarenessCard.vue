@@ -1,10 +1,10 @@
 <template>
-    <div class="d-flex align-items-stretch gap-3">
-        <div class="flex-grow-1 min-w-0">
+    <div class="row gap-2">
+        <div class="col-md-8">
             <slot></slot>
         </div>
 
-        <div class="rounded-4 p-4 text-start shadow-sm" style="min-width:230px;max-width:280px;" :style="auraColor">
+        <div class="col-md-3 p-3 rounded-4 text-start shadow-sm" :style="auraColor">
             <!-- Header -->
             <div class="d-flex align-items-center gap-2 mb-3">
                 <span class="d-inline-flex align-items-center justify-content-center rounded-2 p-2">
