@@ -2,7 +2,7 @@
 import { ref, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { getQuestionIndex } from '@/utils/questionaireController';
-import ClothingQuestionaireCard from '@/components/ClothingQuestionaireCard.vue';
+import ClothingQuestionaireCard from '@/components/clothing/ClothingQuestionaireCard.vue';
 import CQLandingHero from '@/components/CQLandingHero.vue';
 import CQLandingCards from '@/components/CQLandingCards.vue';
 import CQStatsStrip from '@/components/CQStatsStrip.vue';
