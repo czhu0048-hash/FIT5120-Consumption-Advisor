@@ -70,9 +70,9 @@ const navItems = [
 
 onMounted(() => {
   // Skip password validation on mounted
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    isPasswordCorrect.value = true;
-  }
+  isPasswordCorrect.value = true;
+  // if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  // }
 });
 </script>
 
