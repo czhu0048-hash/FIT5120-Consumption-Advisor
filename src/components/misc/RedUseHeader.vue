@@ -15,11 +15,11 @@
             {{ paragraph }}
         </p>
 
-        <div class="mt-5" v-show="!collapsed">
+        <div class="mt-5">
             <slot></slot>
         </div>
 
-        <i v-if="collapsed" class="pi pi-angle-down"></i>
+        <i class="pi pi-angle-down"></i>
     </div>
 </template>
 

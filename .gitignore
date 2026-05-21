@@ -60,3 +60,17 @@ dist/
 # python cache files
 __pycache__/
 *.pyc
+
+# Python backend (not part of static site build)
+requirements.txt
+
+# Raw data files not used by the Vite build
+recipes.csv
+
+# Krita design source / autosave files
+*.kra
+
+# Windows OS artifacts
+Thumbs.db
+ehthumbs.db
+desktop.ini
