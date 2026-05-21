@@ -7,7 +7,7 @@ import ClothingQuestionaireView from '@/views/ClothingQuestionaireView.vue'
 import ClothingDecode from '@/views/ClothingDecode.vue'
 import ProductJourneyView from '@/views/ProductJourneyView.vue'
 import ProductJourneyDetailedView from '@/views/ProductJourneyDetailedView.vue'
-import WalkThroughHome from '@/views/WalkThroughHome.vue'
+import WalkThroughHome from '@/views/WasteAuditView.vue'
 import ClothingImpactDashboard from '@/views/ClothingImpactDashboard.vue'
 import LifetimeValueAnalyzerView from '@/views/LifetimeValueAnalyzerView.vue'
 
