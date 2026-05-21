@@ -18,8 +18,6 @@
         <div class="mt-5">
             <slot></slot>
         </div>
-
-        <i class="pi pi-angle-down"></i>
     </div>
 </template>
 
