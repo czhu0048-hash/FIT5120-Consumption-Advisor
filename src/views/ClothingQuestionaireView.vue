@@ -1,10 +1,11 @@
 <script setup>
-import ClothingQuestionaireCard from '@/components/ClothingQuestionaireCard.vue';
-import ClothingActionCard from '@/components/ClothingActionCard.vue';
-import LifetimeValueAnalyzer from '@/components/LifetimeValueAnalyzer.vue';
+import ClothingQuestionaireCard from '@/components/clothing/ClothingQuestionaireCard.vue';
+import ClothingActionCard from '@/components/clothing/ClothingActionCard.vue';
+import LifetimeValueAnalyzer from '@/components/clothing/LifetimeValueAnalyzer.vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getQuestionIndex } from '@/utils/questionaireController';
+import RedUseHeader from '@/components/misc/RedUseHeader.vue';
 
 const router = useRouter();
 const calculatorOpen = ref(false);
@@ -15,12 +16,12 @@ const seeData = () => router.push('/clothing/awareness');
 <template>
     <div style="align-items: center;
     justify-content: center;">
-        <h1 v-if="getQuestionIndex === -1" style="text-align: center; margin-top: 5rem;">Cart can wait, <span>wardrobe
-                can't</span></h1>
-        <p v-if="getQuestionIndex === -1">Aussies buy 27kg of new clothes a year and toss most of it. Before you add to
+        <RedUseHeader v-if="getQuestionIndex === -1" paragraph="Aussies buy 27kg of new clothes a year and toss most of it.
+            Before you add to
             that pile, just 6 quick
             questions.
-            No judgment, no pressure.</p>
+            No judgment, no pressure." inter="Your Cart Can Wait," grace="wardrobe can't"></RedUseHeader>
+
         <div class="row justify-content-center align-items-stretch g-4" style="margin: 0;">
             <div :class="getQuestionIndex === -1 ? 'col-12 col-lg-5' : 'col-12'">
                 <ClothingQuestionaireCard title="About to tap &quot;buy&quot;?"

@@ -1,37 +1,27 @@
 <template>
     <div class="d-flex" style="min-height: 100vh;">
-        <div class="flex-grow-1 container mt-5">
+        <div class="flex-grow-1 container">
 
-            <div class="text-center mb-4">
-                <h1 class="display-5 fw-normal">
-                    <span class="font-inter"><b>Cook with what </b></span>
-                    <span class="font-grace">you've got</span>
-                </h1>
-                <p class="text-secondary fs-8">Add what's in your fridge. We'll do the matching.</p>
-            </div>
+            <RedUseHeader paragraph="Add what's in your fridge. We'll do the matching." inter="Cook with what "
+                grace="you've got"></RedUseHeader>
 
 
             <div class="search-bar-container p-4 rounded shadow-sm bg-white mb-4">
                 <div class="row g-2 align-items-end">
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-5">
                         <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-check-circle me-2"
                                 style="color: #6b705c;"></i>
                             Ingredients to Include</label>
                         <input class="form-control" type="text" placeholder="e.g. Tomato, Apple"
                             v-model="ingredientInputString" @input="onInputStringChanged" @keyup.enter="applyFilters">
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-5">
                         <label class="form-label fw-bold d-flex align-items-center"><i class="pi pi-times-circle me-2"
                                 style="color: #6b705c;"></i>
                             Ingredients to Exclude</label>
                         <input class="form-control" type="text" placeholder="e.g. Nuts, Milk"
                             v-model="ingredientInputStringExclusive" @input="onInputStringExclusiveChanged"
                             @keyup.enter="applyFilters">
-                    </div>
-                    <div class="col-12 col-md-2">
-                        <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
-                            <i class="pi pi-search me-2"></i>Search
-                        </button>
                     </div>
                     <div class="col-12 col-md-2">
                         <button class="btn btn-outline-secondary w-100 fw-bold" @click="resetSearch">
@@ -46,18 +36,20 @@
                         {{ showFilters ? 'Show Fewer Options ▲' : 'Show More Options ▼' }}
                     </a>
                 </div>
-
                 <div v-show="showFilters" class="mt-4 pt-3 border-top">
                     <RecipeFilterSidebar />
                 </div>
             </div>
+            <!-- Search Button -->
+            <div class="col-12">
+                <button class="btn btn-success w-100 fw-bold" @click="applyFilters" :disabled="searching">
+                    <RedUseLoader :loading="searching || modalLoading" :imbeded="true" />
+                    <i v-if="!searching" class="pi pi-search me-2"></i>Explore recipes
+                </button>
+            </div>
 
             <div class="text-center my-3">
-                <i v-if="searching || modalLoading" class="pi pi-spin pi-spinner"
-                    style="font-size: 2rem; color: green;"></i>
-                <div v-if="errormsg" class="alert alert-danger d-inline-block py-2 px-4 mt-2">
-                    {{ errormsg }}
-                </div>
+                <RedUseErrorMessage v-if="errormsg" :msg="errormsg" />
             </div>
 
             <Teleport to="body">
@@ -107,11 +99,14 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-import RecipeCardOverview from '@/components/RecipeCardOverview.vue';
-import RecipeCardDetailed from '@/components/RecipeCardDetailed.vue';
-import RecipeFilterSidebar from '@/components/RecipeFilterSidebar.vue';
+import RecipeCardOverview from '@/components/food/RecipeCardOverview.vue';
+import RecipeCardDetailed from '@/components/food/RecipeCardDetailed.vue';
+import RecipeFilterSidebar from '@/components/food/RecipeFilterSidebar.vue';
 import { fetchRecipeOverview, fetchRecipeDetailed } from '@/utils/recipeFetcher';
 import { passesFilters } from '@/utils/recipeFilterInstance';
+import RedUseHeader from '@/components/misc/RedUseHeader.vue';
+import RedUseLoader from '@/components/misc/RedUseLoader.vue'
+import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue';
 
 const errormsg = ref("");
 const searching = ref(false);
@@ -180,7 +175,10 @@ const pageRange = computed(() => {
 const onInputStringChanged = () => {
     if (isInvalidFormat(ingredientInputString.value)) {
         errormsg.value = "Please separate ingredients with a comma";
-    } else {
+    } else if (/\d/.test(ingredientInputString.value)) {
+        errormsg.value = "Input filed cannot contain numbers";
+    }
+    else {
         errormsg.value = "";
     }
 };
@@ -234,22 +232,6 @@ async function applyFilters() {
 </script>
 
 <style scoped>
-.font-inter {
-    font-family: 'Inter', sans-serif;
-    color: black;
-    overflow-x: hidden;
-}
-
-
-.font-grace {
-    font-family: 'Covered By Your Grace';
-    color: #009387;
-    font-size: clamp(24px, 5vw, 60px);
-    margin-bottom: 20px;
-    word-spacing: -7px;
-}
-
-
 .search-bar-container {
     background: rgba(255, 255, 255, 0.9) !important;
     border-radius: 15px;
@@ -266,15 +248,7 @@ async function applyFilters() {
     margin-bottom: 4px;
 }
 
-.btn-success {
-    background-color: #009387 !important;
-    border: none;
-    height: 38px;
-}
 
-.btn-success:hover {
-    background-color: #007f70 !important;
-}
 
 .recipe-modal-backdrop {
     position: fixed;

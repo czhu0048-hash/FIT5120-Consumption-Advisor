@@ -1,16 +1,15 @@
 <script setup>
 import Menubar from 'primevue/menubar'
 import { useRouter } from 'vue-router'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import { resetQuestionaire } from './utils/questionaireController'
+import { isPasswordCorrect } from './utils/PasswordFetcher'
+import PasswordValidator from './components/app/PasswordValidator.vue'
 // import { fetchTextileDetails } from './utils/clothingAwarenessStasticsFetcher'
 
 const router = useRouter()
 const go = (path) => router.push(path)
-const passwordCorrect = ref(false);
-const userInput = ref("");
-const passwordTemp = "Fit5120@Ta38";
-const passwordMessage = ref("")
+
 
 const navItems = [
   {
@@ -22,11 +21,11 @@ const navItems = [
     items: [
       {
         label: 'Kitchen-raid Recipes',
-        command: () => go('/food1'),
+        command: () => go('/food/recipes'),
       },
       {
         label: 'Food Disposal',
-        command: () => go('/food2'),
+        command: () => go('/food/disposal'),
       },
     ],
   },
@@ -44,37 +43,39 @@ const navItems = [
           resetQuestionaire();
         },
       },
-      // {
-      //   label: 'Calculator',
-      //   command: () => go('/clothing/calculator'),
-      // },
+      {
+        label: 'Textile Decode',
+        command: () => go('/clothing/textiledecode'),
+      },
     ],
+  },
+  {
+    label: 'Household Guidance',
+    items: [
+      {
+        label: 'Waste Hotspot Audit',
+        command: () => go('/household/audit')
+      },
+      {
+        label: 'Product Journey Reveal',
+        command: () => go('/household/journey')
+      }
+    ]
   }
 ]
 
-const onClick = () => {
-  if (userInput.value === passwordTemp) {
-    passwordCorrect.value = true;
-    return;
-  }
-  passwordMessage.value = "Password Incorrect"
-}
+
 onMounted(() => {
   // Skip password validation on mounted
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    passwordCorrect.value = true;
+    isPasswordCorrect.value = true;
   }
 });
 </script>
 
 <template>
-  <div v-if="!passwordCorrect"
-    style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; gap: 0.75rem;">
-    <input v-model="userInput" type="password" placeholder="Please enter website password" style="width: 100vh;">
-    <button @click="onClick">Confirm</button>
-    <label for="" v-if="passwordMessage" style="color: red;">{{ passwordMessage }}</label>
-  </div>
-  <div class="d-flex flex-column min-vh-100" v-else-if="passwordCorrect">
+  <PasswordValidator v-if="!isPasswordCorrect" />
+  <div class="d-flex flex-column min-vh-100" v-else-if="isPasswordCorrect">
     <Menubar :model="navItems" class="app-menubar">
       <template #start>
         <img src="@/assets/Icon_reduse.png" alt="RedUse Logo" class="nav-logo" />

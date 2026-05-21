@@ -4,7 +4,10 @@ import LeftoverRecipeViewAltTwo from '@/views/LeftoverRecipeViewAltTwo.vue'
 import WelcomeView from '@/views/WelcomeView.vue'
 import ClothingAwarenessView from '@/views/ClothingAwarenessView.vue'
 import ClothingQuestionaireView from '@/views/ClothingQuestionaireView.vue'
-import ClothingImpactDashboard from '@/views/ClothingImpactDashboard.vue'
+import ClothingDecode from '@/views/ClothingDecode.vue'
+import ProductJourneyView from '@/views/ProductJourneyView.vue'
+import ProductJourneyDetailedView from '@/views/ProductJourneyDetailedView.vue'
+import WalkThroughHome from '@/views/WalkThroughHome.vue'
 
 const routes = [
     {
@@ -13,12 +16,12 @@ const routes = [
         component: WelcomeView
     },
     {
-        path: '/food1',
+        path: '/food/recipes',
         name: 'Leftover Recipe',
         component: LeftoverRecipeViewAltTwo
     },
     {
-        path: '/food2',
+        path: '/food/disposal',
         name: 'Leftover Disposal',
         component: FoodDisposalView
     },
@@ -34,9 +37,24 @@ const routes = [
         component: ClothingQuestionaireView
     },
     {
-        path: '/clothing/calculator',
-        name: 'Clothing Calculator',
-        component: ClothingImpactDashboard
+        path: '/clothing/textiledecode',
+        name: 'Clothing Decode',
+        component: ClothingDecode
+    },
+    {
+        path: '/household/audit',
+        name: 'Household Waste Audit',
+        component: WalkThroughHome
+    },
+    {
+        path: '/household/journey',
+        name: 'Product Journey',
+        component: ProductJourneyView
+    },
+    {
+        path: '/household/detailedjourney',
+        name: 'Product Journey Detailed',
+        component: ProductJourneyDetailedView
     }
 ]
 

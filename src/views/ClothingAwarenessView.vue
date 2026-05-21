@@ -1,28 +1,43 @@
 <template>
     <div class="clothing-awareness-view">
-        <h1 class="display-5 fw-normal">
-            <span class="font-inter"><b>The</b></span>
-            <span class="font-grace"> Story behind </span>
-            <span class="font-inter"><b>our wardrobes</b></span>
-        </h1>
-        <p class="text-secondary fs-8">Australia sends 100,000+ tonnes of textiles to landfill every year. Here's what
-            the numbers actually look like.</p>
-
-
-
-        <div v-if="loading" class="status-message">Loading data...</div>
-        <div v-else-if="error" class="status-message error">Failed to load data. Please try again.</div>
-        <div v-else class="charts-column">
+        <RedUseHeader inter="The " grace="Story behind " inter-two="our wardrobes" paragraph="Australia sends 100,000+ tonnes of textiles to landfill every year. Here's
+            what
+            the numbers actually look like."></RedUseHeader>
+        <RedUseLoader :loading="loading" />
+        <RedUseErrorMessage v-if="error && !loading" msg="Failed to load data. Please try again." />
+        <div v-if="!error && !loading" class="charts-column">
+            <div class="card" style="padding: 5%;">
+                <ClothingAwarenessCard title="Key insight"
+                    description="Over 200,000 tonnes of textile waste are still sent to landfill each year — significantly more than any other pathway."
+                    insights="Landfill remains the dominant disposal pathway"
+                    badge=">3× more than the next largest pathway" badge-icon="pi pi-arrow-up-right"
+                    color="color:#c2185b" aura-color="background-color:#fff0f6"
+                    badge-aura-color="background-color:#eee0e6">
+                    <ClothingAwarenessChartDisposal :data="textileData" />
+                </ClothingAwarenessCard>
+            </div>
             <div class="card" style="padding: 5%;">
                 <div class="row gap-5" style="justify-content: center; align-items: center;">
-                    <label for="" style="width: auto;">Group by:</label>
-                    <button @click="textileDataIndex = 0">Disposal Type</button>
-                    <button @click="textileDataIndex = 1">Material</button>
-                    <button @click="textileDataIndex = 2">Source Sector</button>
+                    <div class="tabs">
+                        <button class="tab" :class="{ active: textileDataIndex === 0 }"
+                            @click="textileDataIndex = 0">Material</button>
+                        <button class="tab" :class="{ active: textileDataIndex === 1 }"
+                            @click="textileDataIndex = 1">Source Sector</button>
+                    </div>
                 </div>
-                <ClothingAwarenessChartDisposal v-if="textileDataIndex == 0" :data="textileData" />
-                <ClothingAwarenessChartMaterials v-else-if="textileDataIndex == 1" :data="materialsData" />
-                <ClothingAwarenessChartSectors v-else :data="detailsData" />
+                <ClothingAwarenessCard v-if="textileDataIndex == 0" title="key insight"
+                    description="Clothing makes up the largest share of textile waste"
+                    insights="clothing waste is consistently higher than other txtiles, peaking at 120,000 tons in 2019-2020"
+                    badge="~55% of total textile waste is clothing" color="color:#2e7d32"
+                    aura-color="background-color:#f1fff3">
+                    <ClothingAwarenessChartMaterials :data="materialsData" />
+                </ClothingAwarenessCard>
+                <ClothingAwarenessCard v-else title="key insight"
+                    description="Municipal waste is the biggest source of textile waste" insights="textile waste from municipal solid waste is the highest across all sectors, 
+                    contributing more than half of the total" badge=">50% of textile waste comes from municiple waste"
+                    color="color:#e65100" aura-color="background-color:#fff8f0">
+                    <ClothingAwarenessChartSectors :data="detailsData" />
+                </ClothingAwarenessCard>
             </div>
         </div>
     </div>
@@ -30,10 +45,14 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import ClothingAwarenessChartDisposal from '@/components/ClothingAwarenessChartDisposal.vue'
-import ClothingAwarenessChartMaterials from '@/components/ClothingAwarenessChartMaterials.vue'
-import ClothingAwarenessChartSectors from '@/components/ClothingAwarenessChartSectors.vue'
+import ClothingAwarenessChartDisposal from '@/components/clothing/ClothingAwarenessChartDisposal.vue'
+import ClothingAwarenessChartMaterials from '@/components/clothing/ClothingAwarenessChartMaterials.vue'
+import ClothingAwarenessChartSectors from '@/components/clothing/ClothingAwarenessChartSectors.vue'
 import { fetchTextileYears, fetchTextileMaterials, fetchTextileDetails } from '@/utils/clothingAwarenessStasticsFetcher'
+import RedUseHeader from '@/components/misc/RedUseHeader.vue'
+import RedUseLoader from '@/components/misc/RedUseLoader.vue'
+import RedUseErrorMessage from '@/components/misc/RedUseErrorMessage.vue'
+import ClothingAwarenessCard from '@/components/clothing/ClothingAwarenessCard.vue'
 
 const textileData = ref([])
 const materialsData = ref([])
@@ -48,7 +67,7 @@ onMounted(async () => {
         fetchTextileMaterials(),
         fetchTextileDetails(),
     ])
-    if (!yearly?.length && !materials?.length && !details?.length) {
+    if (!yearly?.length || !materials?.length || !details?.length) {
         error.value = true
     } else {
         textileData.value = yearly ?? []
@@ -61,7 +80,7 @@ onMounted(async () => {
 
 <style scoped>
 .clothing-awareness-view {
-    padding: 2rem;
+    /* padding: 2rem; */
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
@@ -76,51 +95,5 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-}
-
-.status-message {
-    text-align: center;
-    padding: 2rem;
-    font-size: 1rem;
-    color: #555;
-}
-
-.status-message.error {
-    color: #c62828;
-}
-
-button {
-    width: auto;
-    border-radius: 5rem;
-    border-color: black;
-    border-style: solid;
-    background-color: transparent;
-    transition: all 0.2s;
-}
-
-button:hover {
-    border-color: transparent;
-    background-color: darkgray;
-    color: white;
-}
-
-button:focus {
-    color: white;
-    background-color: darkgreen;
-}
-
-
-.font-inter {
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-}
-
-
-.font-grace {
-    font-family: 'Covered By Your Grace';
-    color: #009387;
-    font-size: clamp(24px, 5vw, 60px);
-    margin-bottom: 20px;
-    word-spacing: -7px;
 }
 </style>
