@@ -36,19 +36,7 @@ const navItems = [
       },
     ],
   },
-  {
-    label: 'Food Guidance',
-    items: [
-      {
-        label: 'Kitchen-raid Recipes',
-        command: () => go('/food/recipes'),
-      },
-      {
-        label: 'Food Disposal',
-        command: () => go('/food/disposal'),
-      },
-    ],
-  },
+
 
   {
     label: 'Household Guidance',
@@ -62,7 +50,21 @@ const navItems = [
         command: () => go('/household/journey')
       }
     ]
-  }
+  },
+
+  {
+    label: 'Food Guidance',
+    items: [
+      {
+        label: 'Kitchen-raid Recipes',
+        command: () => go('/food/recipes'),
+      },
+      {
+        label: 'Food Disposal',
+        command: () => go('/food/disposal'),
+      },
+    ],
+  },
 ]
 
 
