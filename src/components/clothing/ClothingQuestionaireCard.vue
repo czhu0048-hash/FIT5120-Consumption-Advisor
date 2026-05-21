@@ -25,11 +25,12 @@ import ClothingQuestionaireResultCard from '@/components/clothing/ClothingQuesti
 
 const router = useRouter()
 
-defineProps({
+const props = defineProps({
     title: { type: String, required: true },
     description: { type: String },
     confirmLabel: { type: String, required: true },
     skipLabel: { type: String, required: true },
+    skipIntro: { type: Boolean, default: false },
 })
 
 defineEmits(['openCalculator'])
@@ -39,8 +40,8 @@ const resultsData = ref(null)
 const questionIndex = getQuestionIndex
 
 onMounted(async () => {
-    // Fetch questionaire json data
     resetQuestionaire()
+    if (props.skipIntro) moveToNextQuestion()
     const base = import.meta.env.BASE_URL
     const [qRes, rRes] = await Promise.all([
         fetch(base + 'questions.json', { cache: 'no-store' }),
